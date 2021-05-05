@@ -14,6 +14,7 @@ const initialState = {
   romanceMovies: [], // Indicates the romance movies data
   loading: false, // Indicates the loading state
   movie: null,
+  movieCredits: null,
 };
 
 /************** STATE SLICE **************/
@@ -48,8 +49,11 @@ const moviesSlice = createSlice({
     moviesSetLoading(state, action) {
       state.loading = action.payload;
     },
-    setMovie(state, action) {
+    setMovieDetails(state, action) {
       state.movie = action.payload;
+    },
+    setMovieCredits(state, action) {
+      state.movieCredits = action.payload;
     },
   },
 });
@@ -66,7 +70,8 @@ export const {
   moviesSetHorrorMovies,
   moviesSetRomanceMovies,
   moviesSetLoading,
-  setMovie,
+  setMovieDetails,
+  setMovieCredits,
 } = moviesSlice.actions;
 
 /************** THUNKS **************/
@@ -75,7 +80,6 @@ export const getTrendingMovies = () => {
     axios
       .get(requests.tmdb_requests.fetchTrending)
       .then((movies) => {
-        console.log(movies.data.results);
         dispatch(moviesSetTrendingMovies(movies.data.results));
       })
       .catch((error) => console.log(error));
@@ -164,7 +168,23 @@ export const getMovieById = ({ id }) => {
     axios
       .get(requests.fetchMovieById(id))
       .then((result) => {
-        dispatch(setMovie(result.data));
+        dispatch(setMovieDetails(result.data));
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          window.location.href = "/404";
+          return;
+        }
+      });
+  };
+};
+
+export const getMovieCredits = ({ id }) => {
+  return (dispatch) => {
+    axios
+      .get(requests.fetchMovieCredits(id))
+      .then((result) => {
+        dispatch(setMovieCredits(result.data));
       })
       .catch((error) => {
         if (error.response.status === 404) {

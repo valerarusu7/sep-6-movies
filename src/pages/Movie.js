@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getMovieById } from "../store/reducers/movieReducer";
+import VerticalList from "../components/VerticalList";
+import { getMovieById, getMovieCredits } from "../store/reducers/movieReducer";
 
 const Movie = () => {
-  const { movie } = useSelector((state) => state.movies);
+  const { movie, movieCredits } = useSelector((state) => state.movies);
   const dispatch = useDispatch();
   const { id } = useParams();
   useEffect(() => {
     dispatch(getMovieById({ id }));
+    dispatch(getMovieCredits({ id }));
   }, []);
 
   return (
@@ -20,6 +22,7 @@ const Movie = () => {
         width={260}
         height={380}
       />
+      <VerticalList list={movieCredits.crew} />
     </div>
   );
 };
