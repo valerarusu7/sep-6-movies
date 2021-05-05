@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Favorite from "./pages/Favorite";
 import { Route, Switch } from "react-router";
 import Movie from "./pages/Movie";
+import NotFound from "./pages/404";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/favorite-movies" component={Favorite} />
             <Route path="/movie/:id" component={Movie} />
+            <Route path="/*" component={NotFound} />
           </Switch>
         </Layout>
       ) : (

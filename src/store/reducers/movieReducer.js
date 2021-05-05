@@ -166,6 +166,11 @@ export const getMovieById = ({ id }) => {
       .then((result) => {
         dispatch(setMovie(result.data));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        if (error.response.status === 404) {
+          window.location.href = "/404";
+          return;
+        }
+      });
   };
 };

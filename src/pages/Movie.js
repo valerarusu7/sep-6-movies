@@ -11,7 +11,17 @@ const Movie = () => {
     dispatch(getMovieById({ id }));
   }, []);
 
-  return <div>{movie.original_title + movie.popularity}</div>;
+  return (
+    <div>
+      <h1>{movie.title}</h1>
+      <img
+        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+        alt={movie.title}
+        width={260}
+        height={380}
+      />
+    </div>
+  );
 };
 
 export default Movie;
