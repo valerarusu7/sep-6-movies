@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Favorite from "./pages/Favorite";
 import { Route, Switch } from "react-router";
+import Movie from "./pages/Movie";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -18,6 +19,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/favorite-movies" component={Favorite} />
+            <Route path="/movie/:id" component={Movie} />
           </Switch>
         </Layout>
       ) : (

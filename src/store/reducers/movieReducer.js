@@ -13,6 +13,7 @@ const initialState = {
   horrorMovies: [], // Indicates the horror movies data
   romanceMovies: [], // Indicates the romance movies data
   loading: false, // Indicates the loading state
+  movie: null,
 };
 
 /************** STATE SLICE **************/
@@ -47,6 +48,9 @@ const moviesSlice = createSlice({
     moviesSetLoading(state, action) {
       state.loading = action.payload;
     },
+    setMovie(state, action) {
+      state.movie = action.payload;
+    },
   },
 });
 
@@ -62,13 +66,14 @@ export const {
   moviesSetHorrorMovies,
   moviesSetRomanceMovies,
   moviesSetLoading,
+  setMovie,
 } = moviesSlice.actions;
 
 /************** THUNKS **************/
 export const getTrendingMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.fetchTrending)
+      .get(requests.tmdb_requests.fetchTrending)
       .then((movies) => {
         console.log(movies.data.results);
         dispatch(moviesSetTrendingMovies(movies.data.results));
@@ -80,7 +85,7 @@ export const getTrendingMovies = () => {
 export const getTopRatedMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.fetchTopRated)
+      .get(requests.tmdb_requests.fetchTopRated)
       .then((movies) => {
         dispatch(moviesSetTopRatedMovies(movies.data.results));
       })
@@ -91,7 +96,7 @@ export const getTopRatedMovies = () => {
 export const getNetflixMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.fetchNetflixOriginals)
+      .get(requests.tmdb_requests.fetchNetflixOriginals)
       .then((movies) => {
         dispatch(moviesSetNetflixMovies(movies.data.results));
       })
@@ -102,7 +107,7 @@ export const getNetflixMovies = () => {
 export const getActionMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.fetchActionMovies)
+      .get(requests.tmdb_requests.fetchActionMovies)
       .then((movies) => {
         dispatch(moviesSetActionMovies(movies.data.results));
       })
@@ -113,7 +118,7 @@ export const getActionMovies = () => {
 export const getComedyMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.fetchComedyMovies)
+      .get(requests.tmdb_requests.fetchComedyMovies)
       .then((movies) => {
         dispatch(moviesSetComedyMovies(movies.data.results));
       })
@@ -124,7 +129,7 @@ export const getComedyMovies = () => {
 export const getRomanceMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.fetchRomanceMovies)
+      .get(requests.tmdb_requests.fetchRomanceMovies)
       .then((movies) => {
         dispatch(moviesSetRomanceMovies(movies.data.results));
       })
@@ -135,7 +140,7 @@ export const getRomanceMovies = () => {
 export const getHorrorMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.fetchHorrorMovies)
+      .get(requests.tmdb_requests.fetchHorrorMovies)
       .then((movies) => {
         dispatch(moviesSetHorrorMovies(movies.data.results));
       })
@@ -146,9 +151,20 @@ export const getHorrorMovies = () => {
 export const getDocumentariesMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.fetchDocumentaries)
+      .get(requests.tmdb_requests.fetchDocumentaries)
       .then((movies) => {
         dispatch(moviesSetDocumentariesMovies(movies.data.results));
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+export const getMovieById = (id) => {
+  return (dispatch) => {
+    axios
+      .get(requests.fetchMovieById(id))
+      .then((result) => {
+        dispatch(setMovie(result.data));
       })
       .catch((error) => console.log(error));
   };
