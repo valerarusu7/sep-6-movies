@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { auth, provider } from "../firebase";
 import * as Sentry from "@sentry/react";
+import { auth, provider } from "../../firebase/firebase";
 
 /************** STATE **************/
 const initialState = {

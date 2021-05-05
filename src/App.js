@@ -3,6 +3,9 @@ import Login from "./components/Login/Login";
 import { signOut } from "./store/reducers/authReducer";
 import * as Sentry from "@sentry/react";
 import Avatar from "@material-ui/core/Avatar";
+import Layout from "./components/Layout/Layout";
+import Home from "./components/Home/Home";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -11,13 +14,10 @@ function App() {
   return (
     <div>
       {user != null ? (
-        <div>
-          <div>email: {user.email}</div>
-          <div>name: {user.displayName}</div>
-          <div>id: {user.uid}</div>
-          <Avatar src={user.photoURL} alt={user.displayName} />
-          <button onClick={() => dispatch(signOut())}>Sign out</button>
-        </div>
+        <Layout>
+          <Navbar />
+          <Home />
+        </Layout>
       ) : (
         <Login />
       )}
