@@ -11,7 +11,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
   auth: authReducer,
-  movie: movieReducer,
+  movies: movieReducer,
 });
 
 export default persistReducer(persistConfig, reducers);

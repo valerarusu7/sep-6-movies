@@ -4,14 +4,14 @@ import requests from "../requests/requests";
 
 /************** STATE **************/
 const initialState = {
-  documentariesMovies: null, // Indicates the documentaries movies data
-  trendingMovies: null, // Indicates the trending movies data
-  netflixOriginalsMovies: null, // Indicates the netflix movies data
-  topRatedMovies: null, // Indicates the top rated movies data
-  actionMovies: null, // Indicates the action movies data
-  comedyMovies: null, // Indicates the comedy movies data
-  horrorMovies: null, // Indicates the horror movies data
-  romanceMovies: null, // Indicates the romance movies data
+  documentariesMovies: [], // Indicates the documentaries movies data
+  trendingMovies: [], // Indicates the trending movies data
+  netflixOriginalsMovies: [], // Indicates the netflix movies data
+  topRatedMovies: [], // Indicates the top rated movies data
+  actionMovies: [], // Indicates the action movies data
+  comedyMovies: [], // Indicates the comedy movies data
+  horrorMovies: [], // Indicates the horror movies data
+  romanceMovies: [], // Indicates the romance movies data
   loading: false, // Indicates the loading state
 };
 
@@ -68,9 +68,10 @@ export const {
 export const getTrendingMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.server_requests.trending)
-      .then((result) => {
-        dispatch(moviesSetTrendingMovies(result.data.trending));
+      .get(requests.fetchTrending)
+      .then((movies) => {
+        console.log(movies.data.results);
+        dispatch(moviesSetTrendingMovies(movies.data.results));
       })
       .catch((error) => console.log(error));
   };
@@ -79,9 +80,9 @@ export const getTrendingMovies = () => {
 export const getTopRatedMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.server_requests.topRated)
-      .then((result) => {
-        dispatch(moviesSetTopRatedMovies(result.data.top_rated));
+      .get(requests.fetchTopRated)
+      .then((movies) => {
+        dispatch(moviesSetTopRatedMovies(movies.data.results));
       })
       .catch((error) => console.log(error));
   };
@@ -90,9 +91,9 @@ export const getTopRatedMovies = () => {
 export const getNetflixMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.server_requests.netflix)
-      .then((result) => {
-        dispatch(moviesSetNetflixMovies(result.data.netflix));
+      .get(requests.fetchNetflixOriginals)
+      .then((movies) => {
+        dispatch(moviesSetNetflixMovies(movies.data.results));
       })
       .catch((error) => console.log(error));
   };
@@ -101,9 +102,9 @@ export const getNetflixMovies = () => {
 export const getActionMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.server_requests.action)
-      .then((result) => {
-        dispatch(moviesSetActionMovies(result.data.action));
+      .get(requests.fetchActionMovies)
+      .then((movies) => {
+        dispatch(moviesSetActionMovies(movies.data.results));
       })
       .catch((error) => console.log(error));
   };
@@ -112,9 +113,9 @@ export const getActionMovies = () => {
 export const getComedyMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.server_requests.comedy)
-      .then((result) => {
-        dispatch(moviesSetComedyMovies(result.data.comedy));
+      .get(requests.fetchComedyMovies)
+      .then((movies) => {
+        dispatch(moviesSetComedyMovies(movies.data.results));
       })
       .catch((error) => console.log(error));
   };
@@ -123,9 +124,9 @@ export const getComedyMovies = () => {
 export const getRomanceMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.server_requests.romance)
-      .then((result) => {
-        dispatch(moviesSetRomanceMovies(result.data.romance));
+      .get(requests.fetchRomanceMovies)
+      .then((movies) => {
+        dispatch(moviesSetRomanceMovies(movies.data.results));
       })
       .catch((error) => console.log(error));
   };
@@ -134,9 +135,9 @@ export const getRomanceMovies = () => {
 export const getHorrorMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.server_requests.horror)
-      .then((result) => {
-        dispatch(moviesSetHorrorMovies(result.data.horror));
+      .get(requests.fetchHorrorMovies)
+      .then((movies) => {
+        dispatch(moviesSetHorrorMovies(movies.data.results));
       })
       .catch((error) => console.log(error));
   };
@@ -145,9 +146,9 @@ export const getHorrorMovies = () => {
 export const getDocumentariesMovies = () => {
   return (dispatch) => {
     axios
-      .get(requests.server_requests.documentaries)
-      .then((result) => {
-        dispatch(moviesSetDocumentariesMovies(result.data.documentaries));
+      .get(requests.fetchDocumentaries)
+      .then((movies) => {
+        dispatch(moviesSetDocumentariesMovies(movies.data.results));
       })
       .catch((error) => console.log(error));
   };

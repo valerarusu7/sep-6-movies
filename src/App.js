@@ -1,15 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import Login from "./components/Login/Login";
-import { signOut } from "./store/reducers/authReducer";
+import { useSelector } from "react-redux";
+import Login from "./pages/Login";
 import * as Sentry from "@sentry/react";
-import Avatar from "@material-ui/core/Avatar";
-import Layout from "./components/Layout/Layout";
-import Home from "./components/Home/Home";
+import Layout from "./pages/Layout/Layout";
+import Home from "./pages/Home";
 import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
 
   return (
     <div>
