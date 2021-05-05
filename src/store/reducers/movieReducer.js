@@ -159,7 +159,7 @@ export const getDocumentariesMovies = () => {
   };
 };
 
-export const getMovieById = (id) => {
+export const getMovieById = ({ id }) => {
   return (dispatch) => {
     axios
       .get(requests.fetchMovieById(id))

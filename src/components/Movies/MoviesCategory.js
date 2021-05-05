@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import styles from "../../styles/MoviesCategory.module.css";
 import Carousel from "react-multi-carousel";
-import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import "react-multi-carousel/lib/styles.css";
-import { getMovieById } from "../../store/reducers/movieReducer";
 
 const MoviesCategory = ({ movies, categoryTitle }) => {
-  const dispatch = useDispatch();
   useEffect(() => {}, []);
 
   const responsive = {
@@ -38,10 +36,10 @@ const MoviesCategory = ({ movies, categoryTitle }) => {
       >
         {movies !== null ? (
           movies.map((movie) => (
-            <div
+            <Link
               key={movie.id}
               className={styles.poster}
-              onClick={dispatch(getMovieById(movie.id))}
+              to={`/movie/${movie.id}`}
             >
               <img
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -49,7 +47,7 @@ const MoviesCategory = ({ movies, categoryTitle }) => {
                 width={260}
                 height={380}
               />
-            </div>
+            </Link>
           ))
         ) : (
           <div></div>
