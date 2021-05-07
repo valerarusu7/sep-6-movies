@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../../styles/Navbar.module.css";
+import linkStyles from "../../styles/Navbar.module.css";
 import { Avatar } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../../store/reducers/authReducer";
@@ -12,12 +13,19 @@ const Navbar = () => {
 
   return user != null ? (
     <div className={styles.nav}>
-      <Link to="/">Home</Link>
-      <Avatar src={user.photoURL} alt={user.displayName} />
-      <button onClick={() => history.push("/favorite-movies")}>
-        favorite movies
-      </button>
-      <button onClick={() => dispatch(signOut())}>Sign out</button>
+      <div>
+        <Link to="/" className={linkStyles.link}>
+          Home
+        </Link>
+      </div>
+      <div className={styles.nav__right}>
+        <Link to="/favorite-movies" className={linkStyles.link}>
+          Favorite Movies
+        </Link>
+        <Avatar src={user.photoURL} alt={user.displayName} />
+
+        <button onClick={() => dispatch(signOut())}>Sign out</button>
+      </div>
     </div>
   ) : null;
 };

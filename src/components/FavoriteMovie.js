@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { store } from "../store/store";
 import { removeFavoriteMovie } from "../firebase/utils";
 import { moviesSetFavoriteMovies } from "../store/reducers/movieReducer";
+import { Link } from "react-router-dom";
+import linkStyles from "../styles/Navbar.module.css";
 
 const FavoriteMovie = ({ item, index }) => {
   const { user } = useSelector((state) => state.auth);
@@ -28,17 +30,19 @@ const FavoriteMovie = ({ item, index }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <div className={styles.container}>
-            <MdDragHandle size={25} />
-            <div className={styles.position}> {index + 1}</div>
-            <img
-              src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-              alt={item.title}
-              className={styles.img}
-            />
-            <div> {item.title}</div>
-            <button onClick={() => removeMovie()}>Remove</button>
-          </div>
+          <Link to={`/movie/${item.id}`} className={linkStyles.link}>
+            <div className={styles.container}>
+              <MdDragHandle size={25} />
+              <div className={styles.position}> {index + 1}</div>
+              <img
+                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                alt={item.title}
+                className={styles.img}
+              />
+              <div> {item.title}</div>
+              <button onClick={() => removeMovie()}>Remove</button>
+            </div>
+          </Link>
         </div>
       )}
     </Draggable>

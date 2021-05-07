@@ -7,7 +7,7 @@
   padding: 10px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   background: rgb(35, 37, 38);
   background: linear-gradient(
     90deg,
@@ -16,4 +16,17 @@
   );
   transition-timing-function: ease-in;
   transition: all 0.5s;
+}
+
+.link {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.nav__right {
+  display: flex;
+  align-items: center;
+  width: 20%;
+  justify-content: space-evenly;
 }

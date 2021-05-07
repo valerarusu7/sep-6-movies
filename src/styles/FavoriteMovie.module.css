@@ -8,6 +8,7 @@
   margin: 5px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .position {

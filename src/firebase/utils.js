@@ -20,6 +20,6 @@ export function updateOrderMovie(user, movie) {
   const ref = db
     .ref("users/" + user.uid)
     .child(movie.id)
-    .child("index")
-    .set(movie.index);
+    .child("index");
+  ref.set(movie.index);
 }
