@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import db from "../../firebase/firebase";
 import axios from "../requests/axios";
 import requests from "../requests/requests";
 
@@ -14,6 +15,8 @@ const initialState = {
   romanceMovies: [], // Indicates the romance movies data
   loading: false, // Indicates the loading state
   movie: null,
+  favoriteMovies: [], // Indicates the favorite movies
+  isFavorite: false, // Indicates if the fetched movie is favorite
 };
 
 /************** STATE SLICE **************/
@@ -51,6 +54,12 @@ const moviesSlice = createSlice({
     setMovie(state, action) {
       state.movie = action.payload;
     },
+    moviesSetFavoriteMovies(state, action) {
+      state.favoriteMovies = action.payload;
+    },
+    moviesSetIsFavorite(state, action) {
+      state.isFavorite = action.payload;
+    },
   },
 });
 
@@ -67,6 +76,8 @@ export const {
   moviesSetRomanceMovies,
   moviesSetLoading,
   setMovie,
+  moviesSetFavoriteMovies,
+  moviesSetIsFavorite,
 } = moviesSlice.actions;
 
 /************** THUNKS **************/
@@ -75,7 +86,6 @@ export const getTrendingMovies = () => {
     axios
       .get(requests.tmdb_requests.fetchTrending)
       .then((movies) => {
-        console.log(movies.data.results);
         dispatch(moviesSetTrendingMovies(movies.data.results));
       })
       .catch((error) => console.log(error));
@@ -159,13 +169,48 @@ export const getDocumentariesMovies = () => {
   };
 };
 
-export const getMovieById = ({ id }) => {
+export const getMovieById = (id) => {
   return (dispatch) => {
     axios
       .get(requests.fetchMovieById(id))
       .then((result) => {
         dispatch(setMovie(result.data));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
+
+export const isFavoriteMovie = (favoriteMovies, id) => {
+  return (dispatch) => {
+    dispatch(moviesSetIsFavorite(false));
+    if (favoriteMovies.length !== 0) {
+      favoriteMovies.map((movie) => {
+        if (movie.id == id) {
+          dispatch(moviesSetIsFavorite(true));
+        } else {
+          dispatch(moviesSetIsFavorite(false));
+        }
+      });
+    }
+  };
+};
+export const getFavoriteMovies = (uid) => {
+  return (dispatch) => {
+    const ref = db.ref("users/" + uid);
+    ref.on(
+      "value",
+      function (snapshot) {
+        let data = [];
+        snapshot.forEach((item) => {
+          data.push(item.val());
+        });
+        dispatch(moviesSetFavoriteMovies(data));
+      },
+      function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      }
+    );
   };
 };

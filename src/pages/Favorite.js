@@ -3,16 +3,17 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import FavoriteMovie from "../components/FavoriteMovie";
 import {
-  getNetflixMovies,
-  moviesSetNetflixMovies,
+  getFavoriteMovies,
+  moviesSetFavoriteMovies,
 } from "../store/reducers/movieReducer";
 
 const Favorite = () => {
-  const { netflixOriginalsMovies } = useSelector((state) => state.movies);
+  const { user } = useSelector((state) => state.auth);
+  const { favoriteMovies } = useSelector((state) => state.movies);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getNetflixMovies());
+    dispatch(getFavoriteMovies(user.uid));
   }, []);
 
   // a little function to help us with reordering the result
@@ -31,12 +32,12 @@ const Favorite = () => {
     }
 
     const newMovies = reorder(
-      netflixOriginalsMovies,
+      favoriteMovies,
       result.source.index,
       result.destination.index
     );
 
-    dispatch(moviesSetNetflixMovies(newMovies));
+    dispatch(moviesSetFavoriteMovies(newMovies));
   }
 
   return (
@@ -51,8 +52,8 @@ const Favorite = () => {
         <Droppable droppableId="droppable">
           {(provided) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
-              {netflixOriginalsMovies !== []
-                ? netflixOriginalsMovies.map((item, index) => (
+              {favoriteMovies !== [] || undefined
+                ? favoriteMovies.map((item, index) => (
                     <FavoriteMovie item={item} index={index} key={item.id} />
                   ))
                 : null}

@@ -1,10 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import styles from "../styles/FavoriteMovie.module.css";
 import { MdDragHandle } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { store } from "../store/store";
+import { removeFavoriteMovie } from "../firebase/utils";
+import { moviesSetFavoriteMovies } from "../store/reducers/movieReducer";
 
 const FavoriteMovie = ({ item, index }) => {
-  useEffect(() => {}, []);
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  function removeMovie() {
+    removeFavoriteMovie(user, item);
+    let state = store.getState();
+    let newMovies = [...state.movies.favoriteMovies];
+    newMovies.splice(item.id, 1);
+    dispatch(moviesSetFavoriteMovies(newMovies));
+  }
 
   return (
     <Draggable draggableId={item.id.toString()} index={index}>
@@ -24,6 +37,7 @@ const FavoriteMovie = ({ item, index }) => {
               className={styles.img}
             />
             <div> {item.title}</div>
+            <button onClick={() => removeMovie()}>Remove</button>
           </div>
         </div>
       )}

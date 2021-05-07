@@ -31,7 +31,7 @@ export const signIn = () => {
         console.log(result);
         dispatch(authSetUser(result.user));
       })
-      .catch((error) => Sentry.captureException(error));
+      .catch((error) => console.log(error));
   };
 };
 
@@ -42,6 +42,6 @@ export const signOut = () => {
       .then(() => {
         dispatch(authSetUser(null));
       })
-      .catch((error) => Sentry.captureException(error));
+      .catch((error) => console.log(error));
   };
 };
