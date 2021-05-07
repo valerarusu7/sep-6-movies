@@ -22,9 +22,21 @@ const Movie = () => {
 
   function addMovie() {
     dispatch(moviesSetIsFavorite(true));
-    addFavoriteMovie(user, movie);
     let data = [...store.getState().movies.favoriteMovies];
-    data.push(movie);
+    let size = favoriteMovies.length;
+    let index = 1;
+    if (size !== 0) {
+      index = size + 1;
+    }
+    let favoriteMovie = {
+      index: index,
+      id: movie.id,
+      poster_path: movie.poster_path,
+      title: movie.title,
+      overview: movie.overview,
+    };
+    data.push(favoriteMovie);
+    addFavoriteMovie(user, movie, index);
     setIsFavorite(true);
   }
 

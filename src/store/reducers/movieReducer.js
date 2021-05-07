@@ -198,7 +198,7 @@ export const isFavoriteMovie = (favoriteMovies, id) => {
 };
 export const getFavoriteMovies = (uid) => {
   return (dispatch) => {
-    const ref = db.ref("users/" + uid);
+    const ref = db.ref("users/" + uid).orderByChild("index");
     ref.on(
       "value",
       function (snapshot) {
