@@ -19,7 +19,7 @@ const initialState = {
   loading: false, // Indicates the loading state
   movie: null,
   favoriteMovies: [], // Indicates the favorite movies
-  isFavorite: false, // Indicates if the fetched movie is favorite
+  networks: [], // Indicates the fetched networks providers (ex. Netflix)
 };
 
 /************** STATE SLICE **************/
@@ -63,14 +63,14 @@ const moviesSlice = createSlice({
     moviesSetLoading(state, action) {
       state.loading = action.payload;
     },
+    moviesAddNetwork(state, action) {
+      state.networks.push(action.payload);
+    },
     setMovie(state, action) {
       state.movie = action.payload;
     },
     moviesSetFavoriteMovies(state, action) {
       state.favoriteMovies = action.payload;
-    },
-    moviesSetIsFavorite(state, action) {
-      state.isFavorite = action.payload;
     },
   },
 });
@@ -90,9 +90,9 @@ export const {
   moviesSetFantasyMovies,
   moviesSetMysteryMovies,
   moviesSetLoading,
+  moviesAddNetwork,
   setMovie,
   moviesSetFavoriteMovies,
-  moviesSetIsFavorite,
 } = moviesSlice.actions;
 
 /************** THUNKS **************/
@@ -230,20 +230,19 @@ export const getMovieById = (id) => {
   };
 };
 
-export const isFavoriteMovie = (favoriteMovies, id) => {
+export const addNetwork = (id) => {
   return (dispatch) => {
-    dispatch(moviesSetIsFavorite(false));
-    if (favoriteMovies.length !== 0) {
-      favoriteMovies.map((movie) => {
-        if (movie.id == id) {
-          dispatch(moviesSetIsFavorite(true));
-        } else {
-          dispatch(moviesSetIsFavorite(false));
-        }
+    axios
+      .get(requests.fetchNetworkCompanies(id))
+      .then((result) => {
+        console.log(result.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    }
   };
 };
+
 export const getFavoriteMovies = (uid) => {
   return (dispatch) => {
     const ref = db.ref("users/" + uid).orderByChild("index");

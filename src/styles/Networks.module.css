@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.networks {
+  width: 100%;
+  margin-top: 0;
+  margin-right: auto;
+  margin-bottom: 0;
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.network {
+  border: white;
+  margin: 30px;
+  display: flex;
+  object-fit: contain;
+  background-color: #1f2030;
+  border-radius: 20px;
+  padding: 50px;
+  height: 300px;
+  justify-content: center;
+  place-items: center;
+  box-shadow: 2px 2px 2px 2px black;
+  transition: box-shadow 1ms;
+  cursor: pointer;
+}
+
+.network:hover {
+  box-shadow: 5px 5px 5px 5px black;
+  transition: box-shadow 300ms;
+}

@@ -23,7 +23,11 @@ function fetchMovieCredits(id) {
 }
 
 function fetchNetworkCompanies(id) {
-  return `/company/${id}?api_key=${API_KEY}`;
+  return `/network/${id}?api_key=${API_KEY}`;
+}
+
+function fetchNetworkMovies(id) {
+  return `/discover/tv?api_key=${API_KEY}&with_networks=${id}`;
 }
 
 const requests = {
@@ -31,6 +35,7 @@ const requests = {
   fetchMovieById,
   fetchMovieCredits,
   fetchNetworkCompanies,
+  fetchNetworkMovies,
 };
 
 export default requests;

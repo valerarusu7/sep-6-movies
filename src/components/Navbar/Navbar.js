@@ -50,6 +50,9 @@ const Navbar = () => {
         <NavLink to="/genre/documentaries" className={linkStyles.link}>
           Documentaries
         </NavLink>
+        <NavLink to="/networks" className={linkStyles.link}>
+          Networks
+        </NavLink>
       </div>
       <div className={styles.nav__right}>
         <NavLink to="/favorite-movies" className={linkStyles.link__favorite}>
