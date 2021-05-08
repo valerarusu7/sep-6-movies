@@ -13,6 +13,9 @@ const initialState = {
   comedyMovies: [], // Indicates the comedy movies data
   horrorMovies: [], // Indicates the horror movies data
   romanceMovies: [], // Indicates the romance movies data
+  dramaMovies: [], // Indicates the drama movies data
+  fantasyMovies: [], // Indicates the fantasy movies data
+  mysteryMovies: [], // Indicates the mystery movies data
   loading: false, // Indicates the loading state
   movie: null,
   favoriteMovies: [], // Indicates the favorite movies
@@ -48,6 +51,15 @@ const moviesSlice = createSlice({
     moviesSetRomanceMovies(state, action) {
       state.romanceMovies = action.payload;
     },
+    moviesSetDramaMovies(state, action) {
+      state.dramaMovies = action.payload;
+    },
+    moviesSetMysteryMovies(state, action) {
+      state.mysteryMovies = action.payload;
+    },
+    moviesSetFantasyMovies(state, action) {
+      state.fantasyMovies = action.payload;
+    },
     moviesSetLoading(state, action) {
       state.loading = action.payload;
     },
@@ -74,6 +86,9 @@ export const {
   moviesSetComedyMovies,
   moviesSetHorrorMovies,
   moviesSetRomanceMovies,
+  moviesSetDramaMovies,
+  moviesSetFantasyMovies,
+  moviesSetMysteryMovies,
   moviesSetLoading,
   setMovie,
   moviesSetFavoriteMovies,
@@ -153,6 +168,39 @@ export const getHorrorMovies = () => {
       .get(requests.tmdb_requests.fetchHorrorMovies)
       .then((movies) => {
         dispatch(moviesSetHorrorMovies(movies.data.results));
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+export const getDramaMovies = () => {
+  return (dispatch) => {
+    axios
+      .get(requests.tmdb_requests.fetchDrama)
+      .then((movies) => {
+        dispatch(moviesSetDramaMovies(movies.data.results));
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+export const getMysteryMovies = () => {
+  return (dispatch) => {
+    axios
+      .get(requests.tmdb_requests.fetchMystery)
+      .then((movies) => {
+        dispatch(moviesSetMysteryMovies(movies.data.results));
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+export const getFantasyMovies = () => {
+  return (dispatch) => {
+    axios
+      .get(requests.tmdb_requests.fetchFantasy)
+      .then((movies) => {
+        dispatch(moviesSetFantasyMovies(movies.data.results));
       })
       .catch((error) => console.log(error));
   };
