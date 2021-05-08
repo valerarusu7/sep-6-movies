@@ -9,6 +9,9 @@ const tmdb_requests = {
   fetchHorrorMovies: `/discover/movie?api_key=${API_KEY}&with_genres=27`,
   fetchRomanceMovies: `/discover/movie?api_key=${API_KEY}&with_genres=10749`,
   fetchDocumentaries: `/discover/movie?api_key=${API_KEY}&with_genres=99`,
+  fetchDrama: `/discover/movie?api_key=${API_KEY}&with_genres=18`,
+  fetchFantasy: `/discover/movie?api_key=${API_KEY}&with_genres=14`,
+  fetchMystery: `/discover/movie?api_key=${API_KEY}&with_genres=9648`,
 };
 
 function fetchMovieById(id) {
@@ -19,10 +22,15 @@ function fetchMovieCredits(id) {
   return `/movie/${id}/credits?api_key=${API_KEY}&language=en-US`;
 }
 
+function fetchNetworkCompanies(id) {
+  return `/company/${id}?api_key=${API_KEY}`;
+}
+
 const requests = {
   tmdb_requests,
   fetchMovieById,
   fetchMovieCredits,
+  fetchNetworkCompanies,
 };
 
 export default requests;
