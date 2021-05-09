@@ -19,7 +19,7 @@ const initialState = {
   loading: false, // Indicates the loading state
   movie: null,
   favoriteMovies: [], // Indicates the favorite movies
-  isFavorite: false, // Indicates if the fetched movie is favorite
+  networkMovies: [], // Indicates the fetched networks movies
 };
 
 /************** STATE SLICE **************/
@@ -69,8 +69,11 @@ const moviesSlice = createSlice({
     moviesSetFavoriteMovies(state, action) {
       state.favoriteMovies = action.payload;
     },
-    moviesSetIsFavorite(state, action) {
-      state.isFavorite = action.payload;
+    moviesSetNetworkMovies(state, action) {
+      state.networkMovies = action.payload;
+    },
+    moviesReset() {
+      return initialState;
     },
   },
 });
@@ -92,7 +95,8 @@ export const {
   moviesSetLoading,
   setMovie,
   moviesSetFavoriteMovies,
-  moviesSetIsFavorite,
+  moviesSetNetworkMovies,
+  moviesReset,
 } = moviesSlice.actions;
 
 /************** THUNKS **************/
@@ -230,20 +234,6 @@ export const getMovieById = (id) => {
   };
 };
 
-export const isFavoriteMovie = (favoriteMovies, id) => {
-  return (dispatch) => {
-    dispatch(moviesSetIsFavorite(false));
-    if (favoriteMovies.length !== 0) {
-      favoriteMovies.map((movie) => {
-        if (movie.id == id) {
-          dispatch(moviesSetIsFavorite(true));
-        } else {
-          dispatch(moviesSetIsFavorite(false));
-        }
-      });
-    }
-  };
-};
 export const getFavoriteMovies = (uid) => {
   return (dispatch) => {
     const ref = db.ref("users/" + uid).orderByChild("index");
@@ -260,5 +250,18 @@ export const getFavoriteMovies = (uid) => {
         console.log("The read failed: " + errorObject.code);
       }
     );
+  };
+};
+
+export const getNetworkMovies = (id) => {
+  return (dispatch) => {
+    axios
+      .get(requests.fetchNetworkMovies(id))
+      .then((movies) => {
+        dispatch(moviesSetNetworkMovies(movies.data.results));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 };

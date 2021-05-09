@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <div>
-      <MoviesCategory movies={trendingMovies} categoryTitle={"Trending"} />
+      <MoviesCategory movies={trendingMovies} />
     </div>
   );
 };

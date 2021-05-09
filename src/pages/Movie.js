@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { addFavoriteMovie } from "../firebase/utils";
-import {
-  getMovieById,
-  moviesSetIsFavorite,
-} from "../store/reducers/movieReducer";
+import { getMovieById } from "../store/reducers/movieReducer";
 import { store } from "../store/store";
 
 const Movie = () => {
@@ -21,7 +18,6 @@ const Movie = () => {
   }, []);
 
   function addMovie() {
-    dispatch(moviesSetIsFavorite(true));
     let data = [...store.getState().movies.favoriteMovies];
     let size = favoriteMovies.length;
     let index = 1;
