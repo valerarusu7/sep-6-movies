@@ -70,6 +70,7 @@ const moviesSlice = createSlice({
       state.favoriteMovies = action.payload;
     },
     moviesSetNetworkMovies(state, action) {
+      state.networkMovies = [];
       state.networkMovies = action.payload;
     },
     moviesReset() {
@@ -113,12 +114,17 @@ export const getTrendingMovies = () => {
 
 export const getTopRatedMovies = () => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
       .get(requests.tmdb_requests.fetchTopRated)
       .then((movies) => {
         dispatch(moviesSetTopRatedMovies(movies.data.results));
+        dispatch(moviesSetLoading(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
   };
 };
 
@@ -255,12 +261,15 @@ export const getFavoriteMovies = (uid) => {
 
 export const getNetworkMovies = (id) => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
       .get(requests.fetchNetworkMovies(id))
       .then((movies) => {
         dispatch(moviesSetNetworkMovies(movies.data.results));
+        dispatch(moviesSetLoading(false));
       })
       .catch((error) => {
+        dispatch(moviesSetLoading(false));
         console.log(error);
       });
   };

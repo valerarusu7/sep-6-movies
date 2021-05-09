@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useHistory, useLocation, useParams } from "react-router";
+import Loading from "../components/Loading";
 import MoviesCategory from "../components/Movies/MoviesCategory";
 import {
   getActionMovies,
@@ -25,14 +26,14 @@ const Genre = () => {
     mysteryMovies,
     dramaMovies,
     fantasyMovies,
+    loading,
   } = useSelector((state) => state.movies);
   const [movies, setMovies] = useState([]);
   const dispatch = useDispatch();
   const { type } = useParams();
-  {
-    console.log(type);
-  }
+
   useEffect(() => {
+    window.scrollTo(0, 0);
     switch (type) {
       case "comedy":
         dispatch(getComedyMovies());
@@ -76,9 +77,7 @@ const Genre = () => {
   }, [type]);
 
   return (
-    <div>
-      <MoviesCategory movies={movies} />
-    </div>
+    <div>{!loading ? <MoviesCategory movies={movies} /> : <Loading />}</div>
   );
 };
 
