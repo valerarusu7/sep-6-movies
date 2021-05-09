@@ -19,7 +19,7 @@ const initialState = {
   loading: false, // Indicates the loading state
   movie: null,
   favoriteMovies: [], // Indicates the favorite movies
-  networks: [], // Indicates the fetched networks providers (ex. Netflix)
+  networkMovies: [], // Indicates the fetched networks movies
 };
 
 /************** STATE SLICE **************/
@@ -63,14 +63,17 @@ const moviesSlice = createSlice({
     moviesSetLoading(state, action) {
       state.loading = action.payload;
     },
-    moviesAddNetwork(state, action) {
-      state.networks.push(action.payload);
-    },
     setMovie(state, action) {
       state.movie = action.payload;
     },
     moviesSetFavoriteMovies(state, action) {
       state.favoriteMovies = action.payload;
+    },
+    moviesSetNetworkMovies(state, action) {
+      state.networkMovies = action.payload;
+    },
+    moviesReset() {
+      return initialState;
     },
   },
 });
@@ -90,9 +93,10 @@ export const {
   moviesSetFantasyMovies,
   moviesSetMysteryMovies,
   moviesSetLoading,
-  moviesAddNetwork,
   setMovie,
   moviesSetFavoriteMovies,
+  moviesSetNetworkMovies,
+  moviesReset,
 } = moviesSlice.actions;
 
 /************** THUNKS **************/
@@ -230,19 +234,6 @@ export const getMovieById = (id) => {
   };
 };
 
-export const addNetwork = (id) => {
-  return (dispatch) => {
-    axios
-      .get(requests.fetchNetworkCompanies(id))
-      .then((result) => {
-        console.log(result.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-};
-
 export const getFavoriteMovies = (uid) => {
   return (dispatch) => {
     const ref = db.ref("users/" + uid).orderByChild("index");
@@ -259,5 +250,18 @@ export const getFavoriteMovies = (uid) => {
         console.log("The read failed: " + errorObject.code);
       }
     );
+  };
+};
+
+export const getNetworkMovies = (id) => {
+  return (dispatch) => {
+    axios
+      .get(requests.fetchNetworkMovies(id))
+      .then((movies) => {
+        dispatch(moviesSetNetworkMovies(movies.data.results));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 };

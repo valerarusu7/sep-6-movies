@@ -15,12 +15,15 @@ const authSlice = createSlice({
     authSetUser(state, action) {
       state.user = action.payload;
     },
+    authReset() {
+      return initialState;
+    },
   },
 });
 
 /************** EXPORTED ACTIONS & REDUCERS **************/
 export default authSlice.reducer;
-export const { authSetUser } = authSlice.actions;
+export const { authSetUser, authReset } = authSlice.actions;
 
 /************** THUNKS **************/
 export const signIn = () => {
@@ -40,7 +43,7 @@ export const signOut = () => {
     auth
       .signOut()
       .then(() => {
-        dispatch(authSetUser(null));
+        dispatch(authReset());
       })
       .catch((error) => console.log(error));
   };

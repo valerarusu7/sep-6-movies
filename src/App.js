@@ -8,6 +8,7 @@ import { Route, Switch } from "react-router";
 import Movie from "./pages/Movie";
 import Genre from "./pages/Genre";
 import Networks from "./pages/Networks";
+import Network from "./pages/Network";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -22,6 +23,7 @@ function App() {
             <Route path="/genre/:type" exact component={Genre} />
             <Route path="/favorite-movies" component={Favorite} />
             <Route path="/networks" component={Networks} />
+            <Route path="/network/:id" component={Network} />
             <Route path="/movie/:id" component={Movie} />
           </Switch>
         </Layout>

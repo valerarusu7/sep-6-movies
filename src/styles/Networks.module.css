@@ -34,3 +34,29 @@
   box-shadow: 5px 5px 5px 5px black;
   transition: box-shadow 300ms;
 }
+
+.logo {
+  background-color: white;
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  box-shadow: 2px 2px 2px 2px black;
+  margin-top: 10px;
+}
+
+.company__name {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 1px;
+  font-size: 40px;
+}
+
+.company__types {
+  display: flex;
+  justify-content: space-evenly;
+  color: grey;
+}

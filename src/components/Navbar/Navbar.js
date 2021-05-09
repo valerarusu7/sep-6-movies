@@ -1,18 +1,23 @@
 import React from "react";
 import styles from "../../styles/Navbar.module.css";
 import linkStyles from "../../styles/Navbar.module.css";
-import { Avatar, Popover } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../../store/reducers/authReducer";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import { AiFillStar } from "react-icons/ai";
+import { moviesReset } from "../../store/reducers/movieReducer";
+import Search from "../Search";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const history = useHistory();
 
+  function logout() {
+    dispatch(signOut());
+    dispatch(moviesReset());
+  }
   return user != null ? (
     <div className={styles.nav}>
       <div>
@@ -54,6 +59,8 @@ const Navbar = () => {
           Networks
         </NavLink>
       </div>
+      <Search />
+
       <div className={styles.nav__right}>
         <NavLink to="/favorite-movies" className={linkStyles.link__favorite}>
           <AiFillStar size={30} />
@@ -65,7 +72,7 @@ const Navbar = () => {
         />
         <FiLogOut
           size={20}
-          onClick={() => dispatch(signOut())}
+          onClick={() => logout()}
           className={styles.button}
         />
       </div>

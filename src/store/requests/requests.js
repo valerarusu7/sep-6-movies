@@ -30,12 +30,17 @@ function fetchNetworkMovies(id) {
   return `/discover/tv?api_key=${API_KEY}&with_networks=${id}`;
 }
 
+function querySearch(text) {
+  return `search/movie?api_key=${API_KEY}&language=en-US&query=${text}&page=1&include_adult=false`;
+}
+
 const requests = {
   tmdb_requests,
   fetchMovieById,
   fetchMovieCredits,
   fetchNetworkCompanies,
   fetchNetworkMovies,
+  querySearch,
 };
 
 export default requests;

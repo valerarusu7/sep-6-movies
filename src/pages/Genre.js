@@ -77,7 +77,7 @@ const Genre = () => {
 
   return (
     <div>
-      <MoviesCategory movies={movies} categoryTitle={"Trending"} />
+      <MoviesCategory movies={movies} />
     </div>
   );
 };
