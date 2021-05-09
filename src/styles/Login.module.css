@@ -1,0 +1,128 @@
+.container {
+  background: rgb(31, 32, 48);
+  background: linear-gradient(
+    90deg,
+    rgba(31, 32, 48, 1) 35%,
+    rgba(21, 20, 36, 1) 100%
+  );
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+.login {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 10px;
+  height: 420px;
+  width: 300px;
+  border-radius: 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.img {
+  width: 100px;
+  object-fit: contain;
+  height: 100px;
+  z-index: 99;
+  filter: blur(0);
+}
+.button {
+  background-color: rgb(31, 32, 48);
+  color: white;
+  padding: 15px;
+  text-decoration: none;
+  border-radius: 20px;
+  z-index: 99;
+  filter: blur(0);
+}
+
+.drop1 {
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 10px 10px 60px -8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  transition: all 0.2s ease;
+  height: 80px;
+  width: 80px;
+  top: -20px;
+  left: -40px;
+  z-index: -1;
+}
+
+.drop2 {
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 10px 10px 60px -8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  transition: all 0.2s ease;
+  height: 80px;
+  width: 80px;
+  bottom: -30px;
+  right: -10px;
+}
+.drop3 {
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 10px 10px 60px -8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  transition: all 0.2s ease;
+  height: 100px;
+  width: 100px;
+  bottom: 120px;
+  right: -50px;
+  z-index: -1;
+}
+.drop4 {
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 10px 10px 60px -8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  transition: all 0.2s ease;
+  height: 120px;
+  width: 120px;
+  top: -60px;
+  right: -60px;
+}
+.drop5 {
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 10px 10px 60px -8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  transition: all 0.2s ease;
+  height: 60px;
+  width: 60px;
+  bottom: 170px;
+  left: 90px;
+  z-index: -1;
+}
