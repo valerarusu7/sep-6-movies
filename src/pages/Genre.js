@@ -148,6 +148,7 @@ const Genre = () => {
           }
           pages={page}
           handleChange={handleChange}
+          pagination
         />
       ) : (
         <Loading />

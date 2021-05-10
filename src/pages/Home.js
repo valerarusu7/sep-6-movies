@@ -5,12 +5,24 @@ import Loading from "../components/Loading";
 import MoviesCategory from "../components/Movies/MoviesCategory";
 import { getTrendingMovies } from "../store/reducers/movieReducer";
 import requests from "../store/requests/requests";
+import style from "../styles/Home.module.css";
+import Slider from "../components/Slider";
 
 const Home = () => {
-  const { trendingMovies, loading } = useSelector((state) => state.movies);
+  const { trendingMovies, sliderMovies, loading } = useSelector(
+    (state) => state.movies
+  );
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
+  let settings = {
+    dots: true,
+    infinite: true,
+    speed: 400,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    arrows: true,
+  };
 
   useEffect(() => {
     setPage(1);
@@ -35,10 +47,13 @@ const Home = () => {
     <div>
       {!loading ? (
         <div>
+          <Slider sliderMovies={sliderMovies} style={style} />
           <MoviesCategory
-            movies={movies}
+            movies={movies.length != 0 ? movies : trendingMovies}
             pages={page}
             handleChange={handleChange}
+            toolbar
+            type="Trending"
           />
         </div>
       ) : (

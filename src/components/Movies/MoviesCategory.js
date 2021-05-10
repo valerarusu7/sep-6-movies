@@ -20,7 +20,7 @@ const MoviesCategory = ({
   results,
   handleChange,
   page,
-  pagination
+  pagination,
 }) => {
   const classes = useStyles();
 
