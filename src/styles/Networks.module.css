@@ -28,13 +28,14 @@
 
 .network {
   border: white;
-  margin: 30px;
+  margin: 20px;
   display: flex;
   object-fit: contain;
   background-color: #1f2030;
   border-radius: 20px;
   padding: 50px;
   height: 300px;
+  max-width: 300px;
   justify-content: center;
   place-items: center;
   box-shadow: 2px 2px 2px 2px black;

@@ -270,7 +270,7 @@ export const getNetworkMovies = (id) => {
     axios
       .get(requests.fetchNetworkTvShows(id))
       .then((movies) => {
-        console.log(movies);
+        console.log(movies.data.results);
         dispatch(moviesSetShowResults(movies.data.total_results));
         dispatch(moviesSetNetworkTVShows(movies.data.results));
         dispatch(moviesSetLoading(false));

@@ -13,7 +13,9 @@ const MoviesToolbar = ({ styles, type, results }) => {
         </div>
       </div>
       <div className={styles.all}>
-        <a className={styles.all__button}>ALL</a>
+        {parseInt(showResults) > 100 ? (
+          <a className={styles.all__button}>ALL</a>
+        ) : null}
       </div>
     </div>
   );

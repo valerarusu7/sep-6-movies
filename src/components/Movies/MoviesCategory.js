@@ -11,11 +11,9 @@ const MoviesCategory = ({ movies, toolbar, type, results }) => {
           <MoviesToolbar styles={styles} type={type} results={results} />
         ) : null}
         {movies !== null || undefined
-          ? movies
-              .filter((movie) => movie.poster_path != null)
-              .map((movie) => (
-                <MovieItem movie={movie} styles={styles} key={movie.id} />
-              ))
+          ? movies.map((movie) => (
+              <MovieItem movie={movie} styles={styles} key={movie.id} />
+            ))
           : null}
       </div>
     </div>

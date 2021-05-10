@@ -35,9 +35,9 @@ export const networkCompanies = [
       "Hulu (/ˈhuːluː/) (stylized in all lowercase as hulu) is an American subscription video on demand service fully controlled and majority-owned by The Walt Disney Company, with Comcast's NBCUniversal as an equity stakeholder.",
   },
   {
-    id: 1062,
-    name: "HBO Nordic",
-    logo_path: "/sFWkLyP2ps3yUOajuqaUEWxpSWP.png",
+    id: 49,
+    name: "HBO",
+    logo_path: "/tuomPhY2UtuPTqqFnKMVHvSb724.png",
     description:
       "Home Box Office (HBO)—originally established on November 8, 1972, as a premium cable television network in the United States—has, since 1991, expanded into a family of international pay television channels presently owned by WarnerMedia subsidiary Home Box Office, Inc. and operated through sister subsidiary WarnerMedia International or owned by third-party media companies through programming and brand licensing partnerships.",
   },
@@ -61,5 +61,26 @@ export const networkCompanies = [
     logo_path: "/ifhbNuuVnlwYy5oXA5VIb2YR8AZ.png",
     description:
       "Amazon Prime is a paid subscription program from Amazon which is available in various countries and gives users access to additional services otherwise unavailable or available at a premium to other Amazon customers. Services include same, one or two-day delivery of goods and streaming music, video, e-books, gaming and grocery shopping services.",
+  },
+  {
+    id: 56,
+    name: "Cartoon Network",
+    logo_path: "/c5OC6oVCg6QP4eqzW6XIq17CQjI.png",
+    description:
+      "Cartoon Network (often shortened to CN) is an American cable television channel owned by the Kids, Young Adults and Classics division of Warner Bros. Entertainment, itself a subsidiary of AT&T's WarnerMedia through its Studios and Networks Group division.",
+  },
+  {
+    id: 71,
+    name: "The CW",
+    logo_path: "/ge9hzeaU7nMtQ4PjkFlc68dGAJ9.png",
+    description:
+      "The CW Television Network (commonly referred to as simply The CW) is an American English-language free-to-air television network that is operated by The CW Network, LLC, a limited liability joint venture between the CBS Entertainment Group unit of ViacomCBS, the owner of the defunct television network UPN; and the Studios and Networks division of AT&T's WarnerMedia, the parent company of Warner Bros., former majority owner of The WB. The network's name is an abbreviation derived from the first letters of the names of its two parent corporations (CBS and WarnerMedia).",
+  },
+  {
+    id: 16,
+    name: "CBS",
+    logo_path: "/nm8d7P7MJNiBLdgIzUK0gkuEA4r.png",
+    description:
+      "CBS (originally an abbreviation for Columbia Broadcasting System, its former legal name that was used from 1928 to 1974) is an American commercial broadcast television and radio network. It serves as the flagship property of the CBS Entertainment Group division of ViacomCBS. The network is headquartered at the CBS Building in New York City, with major production facilities and operations at the CBS Broadcast Center in New York City, and CBS Television City and the CBS Studio Center in Los Angeles.",
   },
 ];
