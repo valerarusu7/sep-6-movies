@@ -106,3 +106,24 @@
 .all__button:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
+
+.more {
+  width: 100%;
+  max-width: 270px;
+  margin: 20px;
+  cursor: pointer;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.15);
+  height: 270px;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px 2px black;
+  flex-direction: column;
+}
+
+.pagination {
+  padding: 20px;
+  margin-bottom: 10px;
+}
