@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as Sentry from "@sentry/react";
 import { auth, provider } from "../../firebase/firebase";
 
 /************** STATE **************/

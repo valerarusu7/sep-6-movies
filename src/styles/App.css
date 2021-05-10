@@ -1,0 +1,18 @@
+.pagefade-enter,
+.pagefade-appear {
+  opacity: 0;
+}
+.pagefade-enter.pagefade-enter-active,
+.pagefade-appear.pagefade-appear-active {
+  opacity: 1;
+  transition: opacity 250ms;
+}
+.pagefade-enter.pagefade-enter-active {
+  transition-delay: 250ms;
+}
+.pagefade-exit {
+  opacity: 1;
+}
+.pagefade-exit.pagefade-exit-active {
+  opacity: 0;
+}

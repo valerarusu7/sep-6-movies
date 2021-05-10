@@ -19,7 +19,8 @@ const initialState = {
   loading: false, // Indicates the loading state
   movie: null,
   favoriteMovies: [], // Indicates the favorite movies
-  networkMovies: [], // Indicates the fetched networks movies
+  networkTVShows: [], //Indicates the fetched networks TVShows
+  showResults: 0, // Inidcates TV Shows results
 };
 
 /************** STATE SLICE **************/
@@ -69,8 +70,12 @@ const moviesSlice = createSlice({
     moviesSetFavoriteMovies(state, action) {
       state.favoriteMovies = action.payload;
     },
-    moviesSetNetworkMovies(state, action) {
-      state.networkMovies = action.payload;
+    moviesSetNetworkTVShows(state, action) {
+      state.networkTVShows = [];
+      state.networkTVShows = action.payload;
+    },
+    moviesSetShowResults(state, action) {
+      state.showResults = action.payload;
     },
     moviesReset() {
       return initialState;
@@ -95,7 +100,8 @@ export const {
   moviesSetLoading,
   setMovie,
   moviesSetFavoriteMovies,
-  moviesSetNetworkMovies,
+  moviesSetNetworkTVShows,
+  moviesSetShowResults,
   moviesReset,
 } = moviesSlice.actions;
 
@@ -113,12 +119,17 @@ export const getTrendingMovies = () => {
 
 export const getTopRatedMovies = () => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
       .get(requests.tmdb_requests.fetchTopRated)
       .then((movies) => {
         dispatch(moviesSetTopRatedMovies(movies.data.results));
+        dispatch(moviesSetLoading(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
   };
 };
 
@@ -255,13 +266,54 @@ export const getFavoriteMovies = (uid) => {
 
 export const getNetworkMovies = (id) => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
-      .get(requests.fetchNetworkMovies(id))
+      .get(requests.fetchNetworkTvShows(id))
       .then((movies) => {
-        dispatch(moviesSetNetworkMovies(movies.data.results));
+        console.log(movies.data.results);
+        dispatch(moviesSetShowResults(movies.data.total_results));
+        dispatch(moviesSetNetworkTVShows(movies.data.results));
+        dispatch(moviesSetLoading(false));
       })
       .catch((error) => {
+        dispatch(moviesSetLoading(false));
         console.log(error);
       });
+  };
+};
+
+export const getMovieType = (type) => {
+  return (dispatch) => {
+    switch (type) {
+      case "comedy":
+        dispatch(getComedyMovies());
+        break;
+      case "horror":
+        dispatch(getHorrorMovies());
+        break;
+      case "top-rated":
+        dispatch(getTopRatedMovies());
+        break;
+      case "action":
+        dispatch(getActionMovies());
+        break;
+      case "romance":
+        dispatch(getRomanceMovies());
+        break;
+      case "mystery":
+        dispatch(getMysteryMovies());
+        break;
+      case "drama":
+        dispatch(getDramaMovies());
+        break;
+      case "fantasy":
+        dispatch(getFantasyMovies());
+        break;
+      case "documentaries":
+        dispatch(getDocumentariesMovies());
+        break;
+      default:
+        break;
+    }
   };
 };

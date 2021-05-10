@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { networkCompanies } from "../data";
 import styles from "../styles/Networks.module.css";
 
-const Networks = ({}) => {
+const Networks = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.networks}>
