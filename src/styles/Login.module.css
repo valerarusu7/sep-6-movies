@@ -47,6 +47,10 @@
   filter: blur(0);
 }
 
+.button:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: black;
+}
 .drop1 {
   background: rgba(255, 255, 255, 0.06);
   -webkit-backdrop-filter: blur(10px);

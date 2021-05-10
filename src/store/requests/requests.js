@@ -27,6 +27,10 @@ function fetchNetworkCompanies(id) {
 }
 
 function fetchNetworkMovies(id) {
+  return `/discover/movie?api_key=${API_KEY}&with_networks=${id}`;
+}
+
+function fetchNetworkTvShows(id) {
   return `/discover/tv?api_key=${API_KEY}&with_networks=${id}`;
 }
 
@@ -40,6 +44,7 @@ const requests = {
   fetchMovieCredits,
   fetchNetworkCompanies,
   fetchNetworkMovies,
+  fetchNetworkTvShows,
   querySearch,
 };
 
