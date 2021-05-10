@@ -38,6 +38,18 @@ function querySearch(text) {
   return `search/movie?api_key=${API_KEY}&language=en-US&query=${text}&page=1&include_adult=false`;
 }
 
+function getNewTrendings(page) {
+  return `/trending/all/week?api_key=${API_KEY}&language=en-US&page=${page}`;
+}
+
+function getNewMoviesById(id, page) {
+  return `/discover/movie?api_key=${API_KEY}&with_genres=${id}&page=${page}`;
+}
+
+function getNewTopRated(page) {
+  return `/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${page}`;
+}
+
 const requests = {
   tmdb_requests,
   fetchMovieById,
@@ -46,6 +58,9 @@ const requests = {
   fetchNetworkMovies,
   fetchNetworkTvShows,
   querySearch,
+  getNewTrendings,
+  getNewMoviesById,
+  getNewTopRated,
 };
 
 export default requests;

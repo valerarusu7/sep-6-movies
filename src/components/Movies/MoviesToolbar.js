@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const MoviesToolbar = ({ styles, type, results }) => {
   const { showResults } = useSelector((state) => state.movies);
@@ -14,7 +15,15 @@ const MoviesToolbar = ({ styles, type, results }) => {
       </div>
       <div className={styles.all}>
         {parseInt(showResults) > 100 ? (
-          <a className={styles.all__button}>ALL</a>
+          <div className={styles.button__container}>
+            <div className={styles.all__button}>ALL</div>
+            <div className={styles.all__button_direction}>
+              <IoIosArrowBack size={20} color="white" />
+            </div>
+            <div className={styles.all__button_direction}>
+              <IoIosArrowForward size={20} color="white" />
+            </div>
+          </div>
         ) : null}
       </div>
     </div>

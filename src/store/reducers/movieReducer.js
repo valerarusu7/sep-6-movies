@@ -16,6 +16,7 @@ const initialState = {
   dramaMovies: [], // Indicates the drama movies data
   fantasyMovies: [], // Indicates the fantasy movies data
   mysteryMovies: [], // Indicates the mystery movies data
+  sliderMovies: [], // Indicates slider movies
   loading: false, // Indicates the loading state
   movie: null,
   favoriteMovies: [], // Indicates the favorite movies
@@ -61,6 +62,9 @@ const moviesSlice = createSlice({
     moviesSetFantasyMovies(state, action) {
       state.fantasyMovies = action.payload;
     },
+    moviesSetSliderMovies(state, action) {
+      state.sliderMovies = action.payload;
+    },
     moviesSetLoading(state, action) {
       state.loading = action.payload;
     },
@@ -98,6 +102,7 @@ export const {
   moviesSetFantasyMovies,
   moviesSetMysteryMovies,
   moviesSetLoading,
+  moviesSetSliderMovies,
   setMovie,
   moviesSetFavoriteMovies,
   moviesSetNetworkTVShows,
@@ -111,7 +116,10 @@ export const getTrendingMovies = () => {
     axios
       .get(requests.tmdb_requests.fetchTrending)
       .then((movies) => {
-        dispatch(moviesSetTrendingMovies(movies.data.results));
+        let trending = movies.data.results.splice(8, 19);
+        dispatch(moviesSetShowResults(movies.data.total_results));
+        dispatch(moviesSetSliderMovies(movies.data.results.slice(0, 8)));
+        dispatch(moviesSetTrendingMovies(trending));
       })
       .catch((error) => console.log(error));
   };
@@ -270,7 +278,7 @@ export const getNetworkMovies = (id) => {
     axios
       .get(requests.fetchNetworkTvShows(id))
       .then((movies) => {
-        console.log(movies.data.results);
+        console.log(movies);
         dispatch(moviesSetShowResults(movies.data.total_results));
         dispatch(moviesSetNetworkTVShows(movies.data.results));
         dispatch(moviesSetLoading(false));

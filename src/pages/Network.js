@@ -19,7 +19,6 @@ const Network = ({}) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
     networkCompanies.map((company) => {
       if (id == company.id) {
         setImage(company.logo_path);
@@ -28,7 +27,6 @@ const Network = ({}) => {
       }
     });
     dispatch(getNetworkMovies(id));
-    dispatch(getNetworkMovies(id, "movie"));
   }, []);
 
   return (
@@ -47,6 +45,7 @@ const Network = ({}) => {
                 toolbar
                 type="TV Shows"
                 results
+                pagination={false}
               />
               <div className={styles.related__channels}>
                 <div className={styles.related__channels__text}>
@@ -57,7 +56,7 @@ const Network = ({}) => {
                     .filter((company) => company.id != id)
                     .map((company) => {
                       return (
-                        <NavLink to={`/network/${company.id}`}>
+                        <NavLink to={`/network/${company.id}`} key={company.id}>
                           <NetworkLogo
                             image={company.logo_path}
                             styles={styles}

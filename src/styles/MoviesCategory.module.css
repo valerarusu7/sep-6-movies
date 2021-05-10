@@ -39,7 +39,8 @@
   position: relative;
   object-fit: contain;
   width: 100%;
-  max-width: 270px;
+  height: 450px;
+  max-width: 260px;
   margin: 20px;
   text-decoration: inherit;
   color: inherit;
@@ -83,12 +84,12 @@
 .all {
   display: flex;
   justify-content: flex-end;
-  margin-right: 30px;
-  place-items: center;
+  margin-right: 20px;
+  place-items: flex-end;
 }
 
 .all__button {
-  height: 70%;
+  height: 20px;
   background-color: #1f2030;
   width: 70px;
   border: solid;
@@ -101,8 +102,56 @@
   color: white;
   font-weight: 500;
   cursor: pointer;
+  margin-right: 5px;
+  padding: 5px;
+}
+
+.all__button_direction {
+  height: 20px;
+  background-color: #1f2030;
+  width: 30px;
+  border: solid;
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, 0.15);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.button__container {
+  display: flex;
 }
 
 .all__button:hover {
   background-color: rgba(255, 255, 255, 0.15);
+}
+
+.all__button_direction:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.more {
+  width: 100%;
+  max-width: 270px;
+  margin: 20px;
+  cursor: pointer;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.15);
+  height: 270px;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px 2px black;
+  flex-direction: column;
+}
+
+.pagination {
+  padding: 20px;
+  margin-bottom: 10px;
 }
