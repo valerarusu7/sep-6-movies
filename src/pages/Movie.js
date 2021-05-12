@@ -2,19 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { addFavoriteMovie } from "../firebase/utils";
-import { getMovieById } from "../store/reducers/movieReducer";
+import { getMovieById, getMovieCredits } from "../store/reducers/movieReducer";
 import { store } from "../store/store";
+import styles from "../styles/Movie.module.css";
+import VerticalList from "../components/VerticalList";
 
 const Movie = () => {
   const { user } = useSelector((state) => state.auth);
   const [isFavorite, setIsFavorite] = useState(false);
-  const { movie, favoriteMovies } = useSelector((state) => state.movies);
+  const { movie, favoriteMovies, movieCredits } = useSelector(
+    (state) => state.movies
+  );
   const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
     isFavoriteMovie();
-    dispatch(getMovieById(id));
+    dispatch(getMovieById({ id }));
+    dispatch(getMovieCredits({ id }));
   }, []);
 
   function addMovie() {
@@ -51,7 +56,8 @@ const Movie = () => {
       <div>
         {movie != undefined || null ? (
           <div>
-            <div>{movie.title + " " + movie.id}</div>
+            <h1>{movie.title}</h1>
+            <VerticalList list={movieCredits.crew} />
             {isFavorite ? (
               <div>Favorite</div>
             ) : (

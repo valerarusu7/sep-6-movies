@@ -19,6 +19,7 @@ const initialState = {
   sliderMovies: [], // Indicates slider movies
   loading: false, // Indicates the loading state
   movie: null,
+  movieCredits: null,
   favoriteMovies: [], // Indicates the favorite movies
   networkTVShows: [], //Indicates the fetched networks TVShows
   showResults: 0, // Inidcates TV Shows results
@@ -71,6 +72,9 @@ const moviesSlice = createSlice({
     setMovie(state, action) {
       state.movie = action.payload;
     },
+    setMovieCredits(state, action) {
+      state.movieCredits = action.payload;
+    },
     moviesSetFavoriteMovies(state, action) {
       state.favoriteMovies = action.payload;
     },
@@ -104,6 +108,7 @@ export const {
   moviesSetLoading,
   moviesSetSliderMovies,
   setMovie,
+  setMovieCredits,
   moviesSetFavoriteMovies,
   moviesSetNetworkTVShows,
   moviesSetShowResults,
@@ -290,7 +295,7 @@ export const getDocumentariesMovies = () => {
   };
 };
 
-export const getMovieById = (id) => {
+export const getMovieById = ({ id }) => {
   return (dispatch) => {
     axios
       .get(requests.fetchMovieById(id))
@@ -298,7 +303,27 @@ export const getMovieById = (id) => {
         dispatch(setMovie(result.data));
       })
       .catch((error) => {
-        console.log(error);
+        if (error.response.status === 404) {
+          window.location.href = "/404";
+          return;
+        }
+      });
+  };
+};
+
+export const getMovieCredits = ({ id }) => {
+  return (dispatch) => {
+    axios
+      .get(requests.fetchMovieCredits(id))
+      .then((result) => {
+        dispatch(setMovieCredits(result.data));
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          console.log("404");
+          window.location.href = "/404";
+          return;
+        }
       });
   };
 };
