@@ -7,7 +7,12 @@ export function addFavoriteMovie(user, movie, index) {
     id: movie.id,
     poster_path: movie.poster_path,
     title: movie.title,
-    overview: movie.overview,
+    vote_average: movie.vote_average,
+    year: movie.release_date
+      ? movie.release_date.substring(0, 4)
+      : movie.first_air_date
+      ? movie.first_air_date.substring(0, 4)
+      : "Unknown",
   });
 }
 

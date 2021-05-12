@@ -48,6 +48,28 @@
   color: white;
 }
 
+.rating {
+  background-color: black;
+  opacity: 0.8;
+  top: 30px;
+  position: absolute;
+  color: white;
+  border-top-right-radius: 99px;
+  border-bottom-right-radius: 99px;
+  padding: 7px;
+}
+
+.rating__content {
+  display: flex;
+  font-size: 18px;
+  justify-content: space-evenly;
+  place-items: center;
+}
+
+.movie__info {
+  color: grey;
+}
+
 .row__posters::-webkit-scrollbar {
   display: none;
 }
