@@ -11,6 +11,7 @@ import Networks from "./pages/Networks";
 import Network from "./pages/Network";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./styles/App.css";
+import NotFound from "./pages/404";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/networks" component={Networks} />
                 <Route path="/network/:id" component={Network} />
                 <Route path="/movie/:id" component={Movie} />
+                <Route path="/*" component={NotFound} />
               </Switch>
             </CSSTransition>
           </TransitionGroup>
