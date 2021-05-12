@@ -42,9 +42,9 @@ const Movie = () => {
   }
 
   function isFavoriteMovie() {
-    if (favoriteMovies.length != 0) {
+    if (favoriteMovies.length !== 0) {
       favoriteMovies.map((movie) => {
-        if (movie.id == id) {
+        if (movie.id === id) {
           setIsFavorite(true);
         }
       });
@@ -55,7 +55,7 @@ const Movie = () => {
     <div>
       <div>
         {movie != undefined || null ? (
-          <div style={{ marginTop: -50 }}>
+          <div className={styles.movieStyle} style={{ marginTop: -50 }}>
             <div id={styles.gradient} />
             <img
               className={styles.img}
@@ -64,18 +64,37 @@ const Movie = () => {
             />
             <div id={styles.content}>
               <h1>{movie.title}</h1>
-              <div>
+              <div className={styles.movieGenre}>
                 {movie.genres.map((genre) => {
                   return <span key={genre.id}> {genre.name} </span>;
                 })}
               </div>
+              <div className={styles.otherInfo}>
+                <span>{movie.original_language}</span>
+                <span>{movie.release_date}</span>
+                <span>{movie.status}</span>
+              </div>
+              <br />
+              <p>{movie.overview}</p>
               {/* <VerticalList list={movieCredits.crew} /> */}
 
               {isFavorite ? (
                 <div>Favorite</div>
               ) : (
-                <button onClick={() => addMovie()}>Add to favorites</button>
+                <button
+                  className={styles.favouriteButton}
+                  onClick={() => addMovie()}
+                >
+                  Add to favorites
+                </button>
               )}
+
+              <button
+                className={styles.trailerButton}
+                onClick={() => addMovie()}
+              >
+                Watch trailer
+              </button>
             </div>
           </div>
         ) : null}
