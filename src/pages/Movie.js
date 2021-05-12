@@ -64,10 +64,6 @@ const Movie = () => {
     background: data.darkVibrant,
   };
 
-  const favouriteStyle = {
-    border: `3px ${data.darkMuted} solid`,
-  };
-
   const trailerStyle = {
     border: `3px ${data.darkMuted} solid`,
     background: data.darkMuted,
@@ -110,7 +106,6 @@ const Movie = () => {
               ) : (
                 <button
                   className={styles.favouriteButton}
-                  style={favouriteStyle}
                   onClick={() => addMovie()}
                 >
                   Add to favorites
