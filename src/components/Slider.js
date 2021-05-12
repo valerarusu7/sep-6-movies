@@ -17,7 +17,7 @@ const SliderComponent = ({ style, sliderMovies }) => {
   return (
     <div
       className={style.slider__container}
-      style={{ marginBottom: 60, marginTop: 70 }}
+      style={{ marginBottom: 40, marginTop: 70 }}
     >
       <Slider {...settings} className={style.slider}>
         {sliderMovies.map((movie) => {

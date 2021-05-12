@@ -4,7 +4,7 @@ import no_poster from "../../assets/no_poster.png";
 
 const MovieItem = ({ movie, styles }) => {
   return (
-      <Link className={styles.poster} to={`/movie/${movie.id}`} key={movie.id}>
+    <Link className={styles.poster} to={`/movie/${movie.id}`} key={movie.id}>
       <img
         src={
           movie.poster_path != null
