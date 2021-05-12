@@ -55,14 +55,28 @@ const Movie = () => {
     <div>
       <div>
         {movie != undefined || null ? (
-          <div>
-            <h1>{movie.title}</h1>
-            <VerticalList list={movieCredits.crew} />
-            {isFavorite ? (
-              <div>Favorite</div>
-            ) : (
-              <button onClick={() => addMovie()}>Add to favorites</button>
-            )}
+          <div style={{ marginTop: -50 }}>
+            <div id={styles.gradient} />
+            <img
+              className={styles.img}
+              src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+              alt={movie.id}
+            />
+            <div id={styles.content}>
+              <h1>{movie.title}</h1>
+              <div>
+                {movie.genres.map((genre) => {
+                  return <span key={genre.id}> {genre.name} </span>;
+                })}
+              </div>
+              {/* <VerticalList list={movieCredits.crew} /> */}
+
+              {isFavorite ? (
+                <div>Favorite</div>
+              ) : (
+                <button onClick={() => addMovie()}>Add to favorites</button>
+              )}
+            </div>
           </div>
         ) : null}
       </div>

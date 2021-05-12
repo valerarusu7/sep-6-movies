@@ -1,24 +1,41 @@
-h1 {
-  color: white;
+body,
+html {
+  height: 100%;
 }
 
-.container {
-  width: 100%;
-  background-color: #151424;
-  color: white;
+span {
+  background-color: #28264a;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+#content {
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  color: black !important;
+  z-index: 2;
+}
+
+#gradient {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  background: linear-gradient(
+    90deg,
+    rgba(21, 20, 36, 1) 0%,
+    rgba(21, 20, 36, 1) 50%,
+    transparent
+  );
+  z-index: 1;
+  left: 0;
 }
 
 .img {
-  position: relative;
-  object-fit: contain;
-  height: 100%;
-  width: 100%;
-  filter: blur(1px);
-  -webkit-filter: blur(9px);
-  z-index: 1;
-}
-
-.overflow {
-  z-index: 2;
-  position: relative;
+  width: 90%;
+  margin-left: 400px;
+  position: absolute;
+  right: 0;
 }
