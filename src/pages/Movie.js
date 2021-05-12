@@ -6,6 +6,7 @@ import { getMovieById, getMovieCredits } from "../store/reducers/movieReducer";
 import { store } from "../store/store";
 import styles from "../styles/Movie.module.css";
 import VerticalList from "../components/VerticalList";
+import { usePalette } from "react-palette";
 
 const Movie = () => {
   const { user } = useSelector((state) => state.auth);
@@ -51,12 +52,29 @@ const Movie = () => {
     }
   }
 
+  const { data, loading, error } = usePalette(
+    `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+  );
+
+  const gradientStyle = {
+    background: `linear-gradient(90deg,${data.vibrant} 0%,${data.vibrant} 50%,transparent)`,
+  };
+
+  const genreStyle = {
+    background: data.darkVibrant,
+  };
+
+  const trailerStyle = {
+    border: `3px ${data.darkMuted} solid`,
+    background: data.darkMuted,
+  };
+
   return (
     <div>
       <div>
         {movie != undefined || null ? (
           <div className={styles.movieStyle} style={{ marginTop: -50 }}>
-            <div id={styles.gradient} />
+            <div style={gradientStyle} id={styles.gradient} />
             <img
               className={styles.img}
               src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
@@ -66,7 +84,12 @@ const Movie = () => {
               <h1>{movie.title}</h1>
               <div className={styles.movieGenre}>
                 {movie.genres.map((genre) => {
-                  return <span key={genre.id}> {genre.name} </span>;
+                  return (
+                    <span style={genreStyle} key={genre.id}>
+                      {" "}
+                      {genre.name}{" "}
+                    </span>
+                  );
                 })}
               </div>
               <div className={styles.otherInfo}>
@@ -91,6 +114,7 @@ const Movie = () => {
 
               <button
                 className={styles.trailerButton}
+                style={trailerStyle}
                 onClick={() => addMovie()}
               >
                 Watch trailer
