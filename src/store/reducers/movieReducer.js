@@ -117,6 +117,7 @@ export const getTrendingMovies = () => {
     axios
       .get(requests.tmdb_requests.fetchTrending)
       .then((movies) => {
+        console.log(movies);
         let trending = movies.data.results.splice(8, 19);
         dispatch(moviesSetShowResults(movies.data.total_results));
         dispatch(moviesSetSliderMovies(movies.data.results.slice(0, 8)));
