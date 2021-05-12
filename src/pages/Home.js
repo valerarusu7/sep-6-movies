@@ -22,9 +22,11 @@ const Home = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     arrows: true,
+    autoPlay: true,
   };
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setPage(1);
     dispatch(getTrendingMovies());
     setMovies(trendingMovies);
@@ -47,7 +49,10 @@ const Home = () => {
     <div>
       {!loading ? (
         <div>
-          <Slider sliderMovies={sliderMovies} style={style} />
+          <Slider
+            sliderMovies={sliderMovies != null || undefined ? sliderMovies : []}
+            style={style}
+          />
           <MoviesCategory
             movies={movies.length != 0 ? movies : trendingMovies}
             pages={page}

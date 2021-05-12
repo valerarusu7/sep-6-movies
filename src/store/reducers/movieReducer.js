@@ -113,6 +113,7 @@ export const {
 /************** THUNKS **************/
 export const getTrendingMovies = () => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
       .get(requests.tmdb_requests.fetchTrending)
       .then((movies) => {
@@ -120,8 +121,12 @@ export const getTrendingMovies = () => {
         dispatch(moviesSetShowResults(movies.data.total_results));
         dispatch(moviesSetSliderMovies(movies.data.results.slice(0, 8)));
         dispatch(moviesSetTrendingMovies(trending));
+        dispatch(moviesSetLoading(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
   };
 };
 
@@ -143,100 +148,145 @@ export const getTopRatedMovies = () => {
 
 export const getNetflixMovies = () => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
       .get(requests.tmdb_requests.fetchNetflixOriginals)
       .then((movies) => {
         dispatch(moviesSetNetflixMovies(movies.data.results));
+        dispatch(moviesSetLoading(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
   };
 };
 
 export const getActionMovies = () => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
       .get(requests.tmdb_requests.fetchActionMovies)
       .then((movies) => {
         dispatch(moviesSetActionMovies(movies.data.results));
+        dispatch(moviesSetLoading(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
   };
 };
 
 export const getComedyMovies = () => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
       .get(requests.tmdb_requests.fetchComedyMovies)
       .then((movies) => {
         dispatch(moviesSetComedyMovies(movies.data.results));
+        dispatch(moviesSetLoading(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
   };
 };
 
 export const getRomanceMovies = () => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
       .get(requests.tmdb_requests.fetchRomanceMovies)
       .then((movies) => {
         dispatch(moviesSetRomanceMovies(movies.data.results));
+        dispatch(moviesSetLoading(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
   };
 };
 
 export const getHorrorMovies = () => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
       .get(requests.tmdb_requests.fetchHorrorMovies)
       .then((movies) => {
         dispatch(moviesSetHorrorMovies(movies.data.results));
+        dispatch(moviesSetLoading(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
   };
 };
 
 export const getDramaMovies = () => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
       .get(requests.tmdb_requests.fetchDrama)
       .then((movies) => {
         dispatch(moviesSetDramaMovies(movies.data.results));
+        dispatch(moviesSetLoading(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
   };
 };
 
 export const getMysteryMovies = () => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
       .get(requests.tmdb_requests.fetchMystery)
       .then((movies) => {
         dispatch(moviesSetMysteryMovies(movies.data.results));
+        dispatch(moviesSetLoading(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
   };
 };
 
 export const getFantasyMovies = () => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
       .get(requests.tmdb_requests.fetchFantasy)
       .then((movies) => {
         dispatch(moviesSetFantasyMovies(movies.data.results));
+        dispatch(moviesSetLoading(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
   };
 };
 
 export const getDocumentariesMovies = () => {
   return (dispatch) => {
+    dispatch(moviesSetLoading(true));
     axios
       .get(requests.tmdb_requests.fetchDocumentaries)
       .then((movies) => {
         dispatch(moviesSetDocumentariesMovies(movies.data.results));
+        dispatch(moviesSetLoading(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
   };
 };
 
