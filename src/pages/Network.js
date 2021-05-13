@@ -19,15 +19,15 @@ const Network = ({}) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    networkCompanies.map((company) => {
-      if (id == company.id) {
+    networkCompanies.foreach((company) => {
+      if (id === company.id) {
         setImage(company.logo_path);
         setName(company.name);
         setDescription(company.description);
       }
     });
     dispatch(getNetworkMovies(id));
-  }, []);
+  }, [dispatch, id]);
 
   return (
     <div className={styles.container}>
@@ -53,7 +53,7 @@ const Network = ({}) => {
                 </div>
                 <div className={styles.company__logos}>
                   {networkCompanies
-                    .filter((company) => company.id != id)
+                    .filter((company) => company.id !== id)
                     .map((company) => {
                       return (
                         <NavLink to={`/network/${company.id}`} key={company.id}>

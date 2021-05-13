@@ -2,7 +2,7 @@ import { Skeleton } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import Loading from "../components/Loading";
+// import Loading from "../components/Loading";
 import MoviesCategory from "../components/Movies/MoviesCategory";
 import {
   getMovieType,
@@ -39,7 +39,7 @@ const Genre = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getMovieType(type));
-  }, [type]);
+  }, [dispatch, type]);
 
   const handleChange = (event, value) => {
     window.scrollTo({ top: 0, behavior: "smooth" });

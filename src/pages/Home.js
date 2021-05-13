@@ -15,22 +15,22 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  let settings = {
-    dots: true,
-    infinite: true,
-    speed: 400,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    arrows: true,
-    autoPlay: true,
-  };
+  // let settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 400,
+  //   slidesToShow: 3,
+  //   slidesToScroll: 1,
+  //   arrows: true,
+  //   autoPlay: true,
+  // };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setPage(1);
     dispatch(getTrendingMovies());
     setMovies(trendingMovies);
-  }, []);
+  }, [dispatch]);
 
   const handleChange = (event, value) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -54,7 +54,7 @@ const Home = () => {
             style={style}
           />
           <MoviesCategory
-            movies={movies.length != 0 ? movies : trendingMovies}
+            movies={movies.length !== 0 ? movies : trendingMovies}
             pages={page}
             handleChange={handleChange}
             toolbar

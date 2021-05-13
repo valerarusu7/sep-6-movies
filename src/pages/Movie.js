@@ -21,7 +21,7 @@ const Movie = () => {
     isFavoriteMovie();
     dispatch(getMovieById({ id }));
     dispatch(getMovieCredits({ id }));
-  }, []);
+  }, [dispatch, id]);
 
   function addMovie() {
     let data = [...store.getState().movies.favoriteMovies];
@@ -52,7 +52,8 @@ const Movie = () => {
     }
   }
 
-  const { data, loading, error } = usePalette(
+  //Loading and error can be used in destructuring
+  const { data } = usePalette(
     `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
   );
 
@@ -72,7 +73,7 @@ const Movie = () => {
   return (
     <div>
       <div>
-        {movie != undefined || null ? (
+        {movie !== undefined || null ? (
           <div className={styles.movieStyle} style={{ marginTop: -50 }}>
             <div style={gradientStyle} id={styles.gradient} />
             <img

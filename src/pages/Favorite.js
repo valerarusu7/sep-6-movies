@@ -15,7 +15,7 @@ const Favorite = () => {
 
   useEffect(() => {
     dispatch(getFavoriteMovies(user.uid));
-  }, []);
+  }, [dispatch, user.uid]);
 
   // a little function to help us with reordering the result
   const reorder = (list, startIndex, endIndex) => {
@@ -28,7 +28,7 @@ const Favorite = () => {
 
   function updateMovieOrder(result) {
     let reorderedMovies = [];
-    result.map((reorderedMovie, key) => {
+    result.forEach((reorderedMovie, key) => {
       let index = key + 1;
       let movie = {
         index: index,
