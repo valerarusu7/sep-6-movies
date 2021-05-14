@@ -6,6 +6,7 @@ import { getMovieById, getMovieCredits } from "../store/reducers/movieReducer";
 import { store } from "../store/store";
 import styles from "../styles/Movie.module.css";
 import VerticalList from "../components/VerticalList";
+import { AiOutlineStar } from "react-icons/ai";
 import { usePalette } from "react-palette";
 
 const Movie = () => {
@@ -60,6 +61,10 @@ const Movie = () => {
     background: `linear-gradient(90deg,${data.vibrant} 0%,${data.vibrant} 50%,transparent)`,
   };
 
+  const voteAverageStyle = {
+    background: data.vibrant,
+  };
+
   const genreStyle = {
     background: data.darkVibrant,
   };
@@ -80,24 +85,49 @@ const Movie = () => {
               src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
               alt={movie.id}
             />
+            <div className={styles.voteAverage} style={voteAverageStyle}>
+              <div>
+                <AiOutlineStar size={20} />
+                <h2>{movie.vote_average}</h2>
+                <h6>/10</h6>
+              </div>
+              <div>
+                <p>{movie.vote_count}</p>
+              </div>
+            </div>
             <div id={styles.content}>
               <h1>{movie.title}</h1>
               <div className={styles.movieGenre}>
                 {movie.genres.map((genre) => {
                   return (
                     <span style={genreStyle} key={genre.id}>
-                      {" "}
-                      {genre.name}{" "}
+                      {genre.name}
                     </span>
                   );
                 })}
               </div>
               <div className={styles.otherInfo}>
-                <span>{movie.original_language}</span>
-                <span>{movie.release_date}</span>
-                <span>{movie.status}</span>
+                <p>
+                  <strong>Original language: </strong>
+                  {movie.original_language}
+                </p>
+                <p>
+                  <strong>Release date: </strong>
+                  {movie.release_date}
+                </p>
+                <p>
+                  <strong>Status: </strong>
+                  {movie.status}
+                </p>
+                <p>
+                  <strong>Budget: </strong>
+                  {movie.budget.toLocaleString()} $
+                </p>
+                <p>
+                  <strong>Revenue: </strong>
+                  {movie.revenue.toLocaleString()} $
+                </p>
               </div>
-              <br />
               <p>{movie.overview}</p>
               {/* <VerticalList list={movieCredits.crew} /> */}
 
@@ -111,7 +141,6 @@ const Movie = () => {
                   Add to favorites
                 </button>
               )}
-
               <button
                 className={styles.trailerButton}
                 style={trailerStyle}
