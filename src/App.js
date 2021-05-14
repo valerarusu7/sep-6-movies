@@ -21,7 +21,6 @@ function App() {
     <div>
       {user != null ? (
         <Layout>
-          <Navbar />
           <TransitionGroup>
             <CSSTransition
               key={currentKey}

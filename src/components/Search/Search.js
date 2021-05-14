@@ -40,6 +40,7 @@ const Search = () => {
         <input
           value={query}
           onChange={(event) => setSearch(event.target.value)}
+          style={{ width: "400px" }}
         />
       </div>
       <div className={styles.results}>

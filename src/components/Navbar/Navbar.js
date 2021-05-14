@@ -21,36 +21,32 @@ const Navbar = () => {
   }
   return user != null ? (
     <div className={styles.nav}>
-      <div>
-        <NavbarLink to="/" exact page="Home" />
-        <NavbarLink to="/genre/top-rated" page="Top Rated" />
-        <NavbarLink to="/genre/comedy" page="Comedy" />
-        <NavbarLink to="/genre/action" page="Action" />
-        <NavbarLink to="/genre/horror" page="Horror" />
-        <NavbarLink to="/genre/romance" page="Romance" />
-        <NavbarLink to="/genre/drama" page="Drama" />
-        <NavbarLink to="/genre/fantasy" page="Fantasy" />
-        <NavbarLink to="/genre/mystery" page="Mystery" />
-        <NavbarLink to="/genre/documentaries" page="Documentaries" />
-        <NavbarLink to="/networks" page="Networks" />
-      </div>
-      <Search />
-      <div className={styles.nav__right}>
-        <NavLink to="/favorite-movies" className={linkStyles.link__favorite}>
-          <AiFillStar size={30} />
-        </NavLink>
-        <Avatar
-          src={user.photoURL}
-          alt={user.displayName}
-          style={{ marginRight: "10px" }}
-        />
-        <NavLink to="/" className={linkStyles.link__favorite}>
-          <FiLogOut
-            size={20}
-            onClick={() => logout()}
-            className={styles.button}
+      <div className={styles.nav__links}>
+        <div className={styles.nav__avatar}>
+          <Avatar
+            src={user.photoURL}
+            alt={user.displayName}
+            style={{ marginRight: "10px" }}
           />
-        </NavLink>
+          <div>{user.displayName}</div>
+        </div>
+        <div className={styles.nav__genres}>
+          <NavbarLink to="/" exact page="Home" />
+          <NavbarLink to="/genre/top-rated" page="Top Rated" />
+          <NavbarLink to="/genre/comedy" page="Comedy" />
+          <NavbarLink to="/genre/action" page="Action" />
+          <NavbarLink to="/genre/horror" page="Horror" />
+          <NavbarLink to="/genre/romance" page="Romance" />
+          <NavbarLink to="/genre/drama" page="Drama" />
+          <NavbarLink to="/genre/fantasy" page="Fantasy" />
+          <NavbarLink to="/genre/mystery" page="Mystery" />
+          <NavbarLink to="/genre/documentaries" page="Documentaries" />
+        </div>
+        <NavbarLink to="/networks" page="Networks" />
+        <NavbarLink to="/favorite-movies" page="Favorite Movies" />
+        <Link to="/" className={styles.link} onClick={() => logout()}>
+          Logout
+        </Link>
       </div>
     </div>
   ) : null;

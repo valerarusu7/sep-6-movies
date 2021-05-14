@@ -7,6 +7,7 @@ import { getTrendingMovies } from "../store/reducers/movieReducer";
 import requests from "../store/requests/requests";
 import style from "../styles/Home.module.css";
 import Slider from "../components/Slider";
+import Searchbar from "../components/Search/Searchbar";
 
 const Home = () => {
   const { trendingMovies, sliderMovies, loading } = useSelector(
@@ -46,7 +47,9 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <div className={style.home}>
+      <Searchbar name="Home" />
+
       {!loading ? (
         <div>
           <Slider
