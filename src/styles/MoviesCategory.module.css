@@ -1,11 +1,12 @@
 .container {
   background-color: #151424;
   height: 100%;
-  width: 99%;
+  width: 100%;
   display: grid;
   justify-content: center;
   place-items: center;
   margin: auto;
+  margin-top: 50px;
 }
 
 .container::-webkit-scrollbar {
@@ -46,6 +47,7 @@
   color: inherit;
   cursor: pointer;
   color: white;
+  transition: all 0.2s ease-in-out;
 }
 
 .rating {
@@ -64,6 +66,10 @@
   font-size: 18px;
   justify-content: space-evenly;
   place-items: center;
+}
+
+.poster:hover {
+  transform: scale(1.05);
 }
 
 .movie__info {

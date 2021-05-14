@@ -1,3 +1,13 @@
+.home {
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.home::-webkit-scrollbar {
+  display: none;
+}
+
 .img {
   border: 4px solid transparent;
   border-radius: 4px;
@@ -26,6 +36,7 @@
   display: flex;
   justify-content: center;
   margin: auto;
+  z-index: 1;
 }
 .slider ul li button::before {
   font-size: 10px;

@@ -2,8 +2,8 @@ import { Skeleton } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import Loading from "../components/Loading";
 import MoviesCategory from "../components/Movies/MoviesCategory";
+import Searchbar from "../components/Search/Searchbar";
 import {
   getMovieType,
   moviesSetActionMovies,
@@ -18,6 +18,7 @@ import {
 } from "../store/reducers/movieReducer";
 import axios from "../store/requests/axios";
 import requests from "../store/requests/requests";
+import styles from "../styles/Home.module.css";
 
 const Genre = () => {
   const {
@@ -123,7 +124,8 @@ const Genre = () => {
   }
 
   return (
-    <div>
+    <div className={styles.home}>
+      <Searchbar name={type.replace("-", " ")} />
       {!loading ? (
         <MoviesCategory
           movies={
