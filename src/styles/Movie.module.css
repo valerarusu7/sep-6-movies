@@ -15,26 +15,20 @@
   margin: 0px 10px 0px 0px;
 }
 
-.otherInfo {
-  margin-top: 20px;
-}
-
-.otherInfo span {
-  color: #bbbcb6;
-  margin-right: 15px;
-}
-
 #content {
   position: absolute;
   max-width: 20%;
-  top: 20%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   left: 300px;
   color: white;
   z-index: 2;
 }
 
 p {
-  text-justify: inter-character;
+  text-align: justify;
 }
 
 #gradient {
@@ -60,8 +54,7 @@ p {
   border: 3px #ed2939 solid;
   color: white;
   background: transparent;
-  margin-right: 20px;
-  width: 150;
+  margin-bottom: 20px;
   position: relative;
   z-index: 1;
 }
