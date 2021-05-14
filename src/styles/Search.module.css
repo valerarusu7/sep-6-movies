@@ -1,7 +1,42 @@
 .container {
-  background-color: red;
+  width: 200px;
 }
 
 .search {
   border-radius: 20px;
+  position: relative;
+}
+
+.results {
+  position: absolute;
+  margin-top: 10px;
+  width: 300px;
+  height: auto;
+}
+
+.results__container {
+  background-color: #1f2030;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.result {
+  display: flex;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  color: inherit;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+
+.result:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+
+.result__info {
+  margin-left: 10px;
 }

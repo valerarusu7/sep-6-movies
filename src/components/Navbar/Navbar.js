@@ -8,7 +8,7 @@ import { Link, NavLink } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import { AiFillStar } from "react-icons/ai";
 import { moviesReset } from "../../store/reducers/movieReducer";
-import Search from "../Search";
+import Search from "../Search/Search";
 import NavbarLink from "./NavbarLink";
 
 const Navbar = () => {
@@ -35,7 +35,6 @@ const Navbar = () => {
         <NavbarLink to="/networks" page="Networks" />
       </div>
       <Search />
-
       <div className={styles.nav__right}>
         <NavLink to="/favorite-movies" className={linkStyles.link__favorite}>
           <AiFillStar size={30} />

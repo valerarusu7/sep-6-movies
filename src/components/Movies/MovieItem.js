@@ -7,6 +7,7 @@ import { genres } from "../../genres";
 const MovieItem = ({ movie, styles }) => {
   const [firstGenre, setFirstGenre] = useState();
   const [secondGenre, setSecondGenre] = useState();
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     genres.map((genre) => {
@@ -18,8 +19,15 @@ const MovieItem = ({ movie, styles }) => {
       }
     });
   }, []);
+
   return (
-    <Link className={styles.poster} to={`/movie/${movie.id}`} key={movie.id}>
+    <Link
+      className={styles.poster}
+      to={`/movie/${movie.id}`}
+      key={movie.id}
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+    >
       <div className={styles.rating}>
         <div className={styles.rating__content}>
           <AiOutlineStar size={20} style={{ marginRight: 5 }} />
@@ -48,6 +56,15 @@ const MovieItem = ({ movie, styles }) => {
           secondGenre != undefined ? `/${secondGenre}` : ""
         }`}</div>
       </div>
+      {show === true ? (
+        <div className={styles.movie__info}>
+          {movie.release_date
+            ? movie.release_date.substring(0, 4)
+            : movie.first_air_date
+            ? movie.first_air_date.substring(0, 4)
+            : "Unknown"}
+        </div>
+      ) : null}
     </Link>
   );
 };

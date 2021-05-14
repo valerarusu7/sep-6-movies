@@ -46,6 +46,7 @@
   color: inherit;
   cursor: pointer;
   color: white;
+  transition: all 0.2s ease-in-out;
 }
 
 .rating {
@@ -64,6 +65,10 @@
   font-size: 18px;
   justify-content: space-evenly;
   place-items: center;
+}
+
+.poster:hover {
+  transform: scale(1.05);
 }
 
 .movie__info {
