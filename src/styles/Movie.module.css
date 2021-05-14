@@ -1,3 +1,13 @@
+.movie {
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.movie::-webkit-scrollbar {
+  display: none;
+}
+
 .movieGenre span {
   border: none;
   padding: 5px;
@@ -18,7 +28,7 @@
   position: absolute;
   max-width: 20%;
   top: 20%;
-  left: 5%;
+  left: 300px;
   color: white;
   z-index: 2;
 }
@@ -30,16 +40,17 @@ p {
 #gradient {
   position: absolute;
   height: 100%;
-  width: 50%;
+  width: 55%;
   z-index: 1;
-  left: 0;
 }
 
 .img {
-  width: 90%;
-  margin-left: 400px;
-  position: absolute;
-  right: 0;
+  max-width: 100%;
+  height: 100vh;
+  position: fixed;
+  right: -220px;
+  top: 0;
+  bottom: 0;
 }
 
 .favouriteButton,
@@ -85,7 +96,7 @@ p {
   color: white;
   z-index: 2;
   right: 0;
-  width: 250px;
+  width: 200px;
   top: 20%;
   padding-left: 20px;
   border-radius: 50px 0px 0px 50px;
