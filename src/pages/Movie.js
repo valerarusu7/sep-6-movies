@@ -9,25 +9,26 @@ import {
 } from "../store/reducers/movieReducer";
 import { store } from "../store/store";
 import styles from "../styles/Movie.module.css";
-import VerticalList from "../components/VerticalList";
 import { AiOutlineStar } from "react-icons/ai";
 import { usePalette } from "react-palette";
 import MovieDescription from "../components/Movies/MovieDescription";
+import Skeleton from "react-loading-skeleton";
+import Loading from "../components/Loading";
 
 const Movie = () => {
   const { user } = useSelector((state) => state.auth);
   const [isFavorite, setIsFavorite] = useState(false);
-  const { movie, favoriteMovies, movieCredits, movieVideo } = useSelector(
-    (state) => state.movies
-  );
+  const { movie, favoriteMovies } = useSelector((state) => state.movies);
+  const movieLoading = useSelector((state) => state.movies.loading);
   const dispatch = useDispatch();
   const { id } = useParams();
 
+  {
+    console.log(movieLoading);
+  }
   useEffect(() => {
     isFavoriteMovie();
     dispatch(getMovieById({ id }));
-    dispatch(getMovieCredits({ id }));
-    dispatch(getMovieVideo({ id }));
   }, []);
 
   function addMovie() {
@@ -39,13 +40,13 @@ const Movie = () => {
     }
     let favoriteMovie = {
       index: index,
-      id: movie.id,
-      poster_path: movie.poster_path,
-      title: movie.title,
-      overview: movie.overview,
+      id: movie.details.id,
+      poster_path: movie.details.poster_path,
+      title: movie.details.title,
+      overview: movie.details.overview,
     };
     data.push(favoriteMovie);
-    addFavoriteMovie(user, movie, index);
+    addFavoriteMovie(user, movie.details, index);
     setIsFavorite(true);
   }
 
@@ -61,7 +62,7 @@ const Movie = () => {
 
   const { data, loading, error } = usePalette(
     movie != null
-      ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+      ? `https://image.tmdb.org/t/p/original/${movie.details.backdrop_path}`
       : null
   );
 
@@ -80,28 +81,32 @@ const Movie = () => {
 
   return (
     <div className={styles.movie}>
-      {loading != true ? (
+      {movieLoading != true ? (
         <div>
           {movie != undefined || null ? (
             <div className={styles.movieStyle}>
               <div style={gradientStyle} id={styles.gradient} />
               <img
                 className={styles.img}
-                src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-                alt={movie.id}
+                src={`https://image.tmdb.org/t/p/original/${movie.details.backdrop_path}`}
+                alt={movie.details.id}
               />
               <div className={styles.voteAverage} style={voteAverageStyle}>
                 <div>
                   <AiOutlineStar size={20} />
-                  <h2>{movie.vote_average}</h2>
+                  <h2>{movie.details.vote_average}</h2>
                   <h6>/10</h6>
                 </div>
                 <div>
-                  <p>{movie.vote_count}</p>
+                  <p>{movie.details.vote_count}</p>
                 </div>
               </div>
               <div id={styles.content}>
-                <MovieDescription movie={movie} data={data} styles={styles} />
+                <MovieDescription
+                  movie={movie.details}
+                  data={data}
+                  styles={styles}
+                />
 
                 {isFavorite ? (
                   <div>Favorite</div>
@@ -113,14 +118,14 @@ const Movie = () => {
                     Add to favorites
                   </button>
                 )}
-                {movieVideo != null || undefined ? (
+                {movie.trailer != null || undefined ? (
                   <button
                     className={styles.trailerButton}
                     type="button"
                     style={trailerStyle}
                     onClick={() =>
                       window.open(
-                        `https://www.youtube.com/watch?v=${movieVideo.key}`,
+                        `https://www.youtube.com/watch?v=${movie.trailer.key}`,
                         "_blank"
                       )
                     }
@@ -141,7 +146,18 @@ const Movie = () => {
             </div>
           ) : null}
         </div>
-      ) : null}
+      ) : (
+        <div
+          style={{
+            placeItems: "center",
+            display: "flex",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          <Loading />
+        </div>
+      )}
     </div>
   );
 };

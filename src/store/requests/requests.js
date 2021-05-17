@@ -15,7 +15,7 @@ const tmdb_requests = {
 };
 
 function fetchMovieById(id) {
-  return `/movie/${id}?api_key=${API_KEY}&language=en-US`;
+  return `/movie?id=${id}`;
 }
 
 function fetchMovieCredits(id) {

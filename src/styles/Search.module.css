@@ -1,10 +1,10 @@
 .search {
   position: relative;
-  background: transparent;
+  background: #1f2030;
   color: white;
   padding: 0px 5px 0px 0px;
   border-radius: 50px;
-  border: 2px white solid;
+  border: 2px solid rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
 }
