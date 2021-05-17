@@ -1,7 +1,9 @@
 .home {
-  width: 100%;
+  width: calc(100% - 250px);
   height: 100vh;
   overflow-y: scroll;
+  position: relative;
+  left: 250px;
 }
 
 .home::-webkit-scrollbar {
