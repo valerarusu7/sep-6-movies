@@ -13,9 +13,6 @@
     rgba(21, 20, 36, 1) 100%
   );
   backdrop-filter: blur(5px);
-  border-bottom: solid;
-  border-color: grey;
-  border-width: 1px;
   color: white;
   flex-direction: column;
 }
