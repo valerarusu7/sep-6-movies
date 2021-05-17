@@ -47,7 +47,7 @@ const Home = () => {
   }
 
   return (
-    <div className={style.home} style={{ position: "relative", left: "250px" }}>
+    <div className={style.home}>
       <Searchbar name="Home" />
       {!loading ? (
         <div>

@@ -1,11 +1,10 @@
 .container {
   background-color: #151424;
-  height: 100%;
   width: 100%;
+  height: 100%;
   display: grid;
   justify-content: center;
   place-items: center;
-  margin: auto;
   margin-top: 50px;
 }
 
