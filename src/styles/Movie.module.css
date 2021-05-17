@@ -8,11 +8,16 @@
   display: none;
 }
 
+.movieGenre {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .movieGenre span {
   border: none;
-  padding: 5px;
+  padding: 7px;
   border-radius: 5px;
-  margin: 0px 10px 0px 0px;
+  margin: 0px 10px 10px 0px;
 }
 
 #content {
