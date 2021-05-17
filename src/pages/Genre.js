@@ -2,8 +2,8 @@ import { Skeleton } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+// import Loading from "../components/Loading";
 import MoviesCategory from "../components/Movies/MoviesCategory";
-import Searchbar from "../components/Search/Searchbar";
 import {
   getMovieType,
   moviesSetActionMovies,
@@ -18,7 +18,6 @@ import {
 } from "../store/reducers/movieReducer";
 import axios from "../store/requests/axios";
 import requests from "../store/requests/requests";
-import styles from "../styles/Home.module.css";
 
 const Genre = () => {
   const {
@@ -40,7 +39,7 @@ const Genre = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getMovieType(type));
-  }, [type]);
+  }, [dispatch, type]);
 
   const handleChange = (event, value) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -82,7 +81,7 @@ const Genre = () => {
   };
 
   function getNewMovies(id, page) {
-    if (id != 1) {
+    if (id !== 1) {
       axios.get(requests.getNewMoviesById(id, page)).then((fetchedMovies) => {
         switch (type) {
           case "comedy":
@@ -124,28 +123,27 @@ const Genre = () => {
   }
 
   return (
-    <div className={styles.home}>
-      <Searchbar name={type.replace("-", " ")} />
+    <div>
       {!loading ? (
         <MoviesCategory
           movies={
-            type == "comedy"
+            type === "comedy"
               ? comedyMovies
-              : type == "horror"
+              : type === "horror"
               ? horrorMovies
-              : type == "top-rated"
+              : type === "top-rated"
               ? topRatedMovies
-              : type == "action"
+              : type === "action"
               ? actionMovies
-              : type == "romance"
+              : type === "romance"
               ? romanceMovies
-              : type == "mystery"
+              : type === "mystery"
               ? mysteryMovies
-              : type == "drama"
+              : type === "drama"
               ? dramaMovies
-              : type == "fantasy"
+              : type === "fantasy"
               ? fantasyMovies
-              : type == "documentaries"
+              : type === "documentaries"
               ? documentariesMovies
               : null
           }

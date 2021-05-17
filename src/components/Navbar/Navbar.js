@@ -33,7 +33,7 @@ const Navbar = () => {
           />
           <div>{user.displayName}</div>
         </div>
-        <div className={styles.nav__genres}>
+        <div className={styles.nav_basic}>
           <NavbarLink to="/" exact page="Home" Icon={AiFillHome} />
           <NavbarLink
             to="/genre/top-rated"
@@ -41,7 +41,7 @@ const Navbar = () => {
             Icon={IoMdPodium}
           />
         </div>
-        <div className={styles.nav__genres}>
+        <div className={styles.nav_genres}>
           <NavbarLink to="/genre/comedy" page="Comedy" />
           <NavbarLink to="/genre/action" page="Action" />
           <NavbarLink to="/genre/horror" page="Horror" />

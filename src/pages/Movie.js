@@ -10,7 +10,7 @@ import {
 import { store } from "../store/store";
 import styles from "../styles/Movie.module.css";
 import VerticalList from "../components/VerticalList";
-import { AiOutlineStar } from "react-icons/ai";
+import { AiOutlineStar, AiFillDownCircle } from "react-icons/ai";
 import { usePalette } from "react-palette";
 import MovieDescription from "../components/Movies/MovieDescription";
 
@@ -137,6 +137,17 @@ const Movie = () => {
                     No available trailer
                   </button>
                 )}
+              </div>
+              <AiFillDownCircle size="100" id={styles.circle} color="white" />
+              <div id={styles.castAndCrew}>
+                <p>lol</p>
+                <p>lol</p>
+                <p>lol</p>
+                <p>lol</p>
+                <p>lol</p>
+                <p>lol</p>
+                <p>lol</p>
+                <p>lol</p>
               </div>
             </div>
           ) : null}
