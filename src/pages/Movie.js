@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { addFavoriteMovie } from "../firebase/utils";
-import { getMovieById, getMovieCredits } from "../store/reducers/movieReducer";
+import {
+  getMovieById,
+  getMovieCredits,
+  getMovieVideo,
+} from "../store/reducers/movieReducer";
 import { store } from "../store/store";
 import styles from "../styles/Movie.module.css";
 import VerticalList from "../components/VerticalList";
@@ -12,7 +16,7 @@ import { usePalette } from "react-palette";
 const Movie = () => {
   const { user } = useSelector((state) => state.auth);
   const [isFavorite, setIsFavorite] = useState(false);
-  const { movie, favoriteMovies, movieCredits } = useSelector(
+  const { movie, favoriteMovies, movieCredits, movieVideo } = useSelector(
     (state) => state.movies
   );
   const dispatch = useDispatch();
@@ -22,6 +26,7 @@ const Movie = () => {
     isFavoriteMovie();
     dispatch(getMovieById({ id }));
     dispatch(getMovieCredits({ id }));
+    dispatch(getMovieVideo({ id }));
   }, []);
 
   function addMovie() {
@@ -56,7 +61,7 @@ const Movie = () => {
   const { data, loading, error } = usePalette(
     movie != null
       ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
-      : `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+      : null
   );
 
   const gradientStyle = {
@@ -77,87 +82,91 @@ const Movie = () => {
   };
 
   return (
-    <div>
-      <div>
-        {loading != true ? (
-          <div>
-            {movie != undefined || null ? (
-              <div className={styles.movieStyle} style={{ marginTop: -50 }}>
-                <div style={gradientStyle} id={styles.gradient} />
-                <img
-                  className={styles.img}
-                  src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-                  alt={movie.id}
-                />
-                <div className={styles.voteAverage} style={voteAverageStyle}>
-                  <div>
-                    <AiOutlineStar size={20} />
-                    <h2>{movie.vote_average}</h2>
-                    <h6>/10</h6>
-                  </div>
-                  <div>
-                    <p>{movie.vote_count}</p>
-                  </div>
+    <div className={styles.movie}>
+      {loading != true ? (
+        <div>
+          {movie != undefined || null ? (
+            <div className={styles.movieStyle}>
+              <div style={gradientStyle} id={styles.gradient} />
+              <img
+                className={styles.img}
+                src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                alt={movie.id}
+              />
+              <div className={styles.voteAverage} style={voteAverageStyle}>
+                <div>
+                  <AiOutlineStar size={20} />
+                  <h2>{movie.vote_average}</h2>
+                  <h6>/10</h6>
                 </div>
-                <div id={styles.content}>
-                  <h1>{movie.title}</h1>
-                  <div className={styles.movieGenre}>
-                    {movie.genres.map((genre) => {
-                      return (
-                        <span style={genreStyle} key={genre.id}>
-                          {genre.name}
-                        </span>
-                      );
-                    })}
-                  </div>
-                  <div className={styles.otherInfo}>
-                    <p>
-                      <strong>Original language: </strong>
-                      {movie.original_language}
-                    </p>
-                    <p>
-                      <strong>Release date: </strong>
-                      {movie.release_date}
-                    </p>
-                    <p>
-                      <strong>Status: </strong>
-                      {movie.status}
-                    </p>
-                    <p>
-                      <strong>Budget: </strong>
-                      {movie.budget.toLocaleString()} $
-                    </p>
-                    <p>
-                      <strong>Revenue: </strong>
-                      {movie.revenue.toLocaleString()} $
-                    </p>
-                  </div>
-                  <p>{movie.overview}</p>
-                  {/* <VerticalList list={movieCredits.crew} /> */}
-
-                  {isFavorite ? (
-                    <div>Favorite</div>
-                  ) : (
-                    <button
-                      className={styles.favouriteButton}
-                      onClick={() => addMovie()}
-                    >
-                      Add to favorites
-                    </button>
-                  )}
-                  <button
-                    className={styles.trailerButton}
-                    style={trailerStyle}
-                    onClick={() => addMovie()}
-                  >
-                    Watch trailer
-                  </button>
+                <div>
+                  <p>{movie.vote_count}</p>
                 </div>
               </div>
-            ) : null}
-          </div>
-        ) : null}
-      </div>
+              <div id={styles.content}>
+                <h1>{movie.title}</h1>
+                <div className={styles.movieGenre}>
+                  {movie.genres.map((genre) => {
+                    return (
+                      <span style={genreStyle} key={genre.id}>
+                        {genre.name}
+                      </span>
+                    );
+                  })}
+                </div>
+                <div className={styles.otherInfo}>
+                  <p>
+                    <strong>Original language: </strong>
+                    {movie.original_language}
+                  </p>
+                  <p>
+                    <strong>Release date: </strong>
+                    {movie.release_date}
+                  </p>
+                  <p>
+                    <strong>Status: </strong>
+                    {movie.status}
+                  </p>
+                  <p>
+                    <strong>Budget: </strong>
+                    {movie.budget.toLocaleString()} $
+                  </p>
+                  <p>
+                    <strong>Revenue: </strong>
+                    {movie.revenue.toLocaleString()} $
+                  </p>
+                </div>
+                <p>{movie.overview}</p>
+                {/* <VerticalList list={movieCredits.crew} /> */}
+
+                {isFavorite ? (
+                  <div>Favorite</div>
+                ) : (
+                  <button
+                    className={styles.favouriteButton}
+                    onClick={() => addMovie()}
+                  >
+                    Add to favorites
+                  </button>
+                )}
+                <button
+                  className={styles.trailerButton}
+                  type="button"
+                  style={trailerStyle}
+                  onClick={() =>
+                    window.open(
+                      `https://www.youtube.com/watch?v=${movieVideo.key}`,
+                      "_blank"
+                    )
+                  }
+                >
+                  Watch trailer
+                </button>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 };

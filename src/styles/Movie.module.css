@@ -1,3 +1,13 @@
+.movie {
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.movie::-webkit-scrollbar {
+  display: none;
+}
+
 .movieGenre span {
   border: none;
   padding: 5px;
@@ -5,41 +15,37 @@
   margin: 0px 10px 0px 0px;
 }
 
-.otherInfo {
-  margin-top: 20px;
-}
-
-.otherInfo span {
-  color: #bbbcb6;
-  margin-right: 15px;
-}
-
 #content {
   position: absolute;
   max-width: 20%;
-  top: 20%;
-  left: 5%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 300px;
   color: white;
   z-index: 2;
 }
 
 p {
-  text-justify: inter-character;
+  text-align: justify;
 }
 
 #gradient {
   position: absolute;
   height: 100%;
-  width: 50%;
+  width: 55%;
   z-index: 1;
   left: 0;
 }
 
 .img {
-  width: 70%;
-  margin-left: 400px;
-  position: absolute;
-  right: 0;
+  max-width: 100%;
+  height: 100vh;
+  position: fixed;
+  right: -220px;
+  top: 0;
+  bottom: 0;
 }
 
 .favouriteButton,
@@ -49,8 +55,7 @@ p {
   border: 3px #ed2939 solid;
   color: white;
   background: transparent;
-  margin-right: 20px;
-  width: 150;
+  margin-bottom: 20px;
   position: relative;
   z-index: 1;
 }
@@ -85,7 +90,7 @@ p {
   color: white;
   z-index: 2;
   right: 0;
-  width: 250px;
+  width: 200px;
   top: 20%;
   padding-left: 20px;
   border-radius: 50px 0px 0px 50px;

@@ -20,6 +20,7 @@ const initialState = {
   loading: false, // Indicates the loading state
   movie: null,
   movieCredits: null,
+  movieVideo: null,
   favoriteMovies: [], // Indicates the favorite movies
   networkTVShows: [], //Indicates the fetched networks TVShows
   showResults: 0, // Inidcates TV Shows results
@@ -75,6 +76,9 @@ const moviesSlice = createSlice({
     setMovieCredits(state, action) {
       state.movieCredits = action.payload;
     },
+    setMovieVideo(state, action) {
+      state.movieVideo = action.payload;
+    },
     moviesSetFavoriteMovies(state, action) {
       state.favoriteMovies = action.payload;
     },
@@ -109,6 +113,7 @@ export const {
   moviesSetSliderMovies,
   setMovie,
   setMovieCredits,
+  setMovieVideo,
   moviesSetFavoriteMovies,
   moviesSetNetworkTVShows,
   moviesSetShowResults,
@@ -122,7 +127,6 @@ export const getTrendingMovies = () => {
     axios
       .get(requests.tmdb_requests.fetchTrending)
       .then((movies) => {
-        console.log(movies);
         let trending = movies.data.results.splice(8, 19);
         dispatch(moviesSetShowResults(movies.data.total_results));
         dispatch(moviesSetSliderMovies(movies.data.results.slice(0, 8)));
@@ -326,6 +330,19 @@ export const getMovieCredits = ({ id }) => {
           window.location.href = "/404";
           return;
         }
+      });
+  };
+};
+
+export const getMovieVideo = ({ id }) => {
+  return (dispatch) => {
+    axios
+      .get(requests.fetchMovieVideo(id))
+      .then((result) => {
+        dispatch(setMovieVideo(result.data.results[0]));
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 };
