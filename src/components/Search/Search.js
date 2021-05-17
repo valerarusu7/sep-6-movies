@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import requests from "../../store/requests/requests";
 import styles from "../../styles/Search.module.css";
 import SearchItem from "./SearchItem";
+import { BsSearch } from "react-icons/bs";
 
 const Search = () => {
   const [movies, setMovies] = useState([]);
@@ -37,10 +38,14 @@ const Search = () => {
   return (
     <div className={styles.container}>
       <div className={styles.search}>
+        <div className={styles.icon}>
+          <BsSearch size="15px" color="white" />
+        </div>
         <input
           value={query}
+          placeholder="Search"
+          className={styles.input}
           onChange={(event) => setSearch(event.target.value)}
-          style={{ width: "400px" }}
         />
       </div>
       <div className={styles.results}>

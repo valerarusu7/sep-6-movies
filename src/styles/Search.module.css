@@ -1,6 +1,12 @@
 .search {
-  border-radius: 20px;
   position: relative;
+  background: transparent;
+  color: white;
+  padding: 0px 5px 0px 0px;
+  border-radius: 50px;
+  border: 2px white solid;
+  display: flex;
+  align-items: center;
 }
 
 .results {
@@ -64,4 +70,23 @@
   display: flex;
   justify-content: flex-end;
   margin-right: 300px;
+}
+
+.input {
+  margin-left: 5px;
+  border: none;
+  color: white;
+  width: 400px;
+  background: transparent;
+}
+
+.input:focus {
+  outline-width: 0;
+}
+
+.icon {
+  height: 30px;
+  display: flex;
+  padding: 3px 5px 3px 10px;
+  align-items: center;
 }
