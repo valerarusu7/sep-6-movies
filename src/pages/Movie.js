@@ -9,6 +9,7 @@ import { AiOutlineStar, AiFillDownCircle } from "react-icons/ai";
 import { usePalette } from "react-palette";
 import MovieDescription from "../components/Movies/MovieDescription";
 import Loading from "../components/Loading";
+import VerticalList from "../components/VerticalList";
 
 const Movie = () => {
   const { user } = useSelector((state) => state.auth);
@@ -137,14 +138,10 @@ const Movie = () => {
               </div>
               <AiFillDownCircle size="100" id={styles.circle} color="white" />
               <div id={styles.castAndCrew}>
-                <p>lol</p>
-                <p>lol</p>
-                <p>lol</p>
-                <p>lol</p>
-                <p>lol</p>
-                <p>lol</p>
-                <p>lol</p>
-                <p>lol</p>
+                <div className={styles.listStyle}>
+                  <h2>Cast</h2>
+                  <VerticalList list={movie.credits.crew} styles={styles} />
+                </div>
               </div>
             </div>
           ) : null}

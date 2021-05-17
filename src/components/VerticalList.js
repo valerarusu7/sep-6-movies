@@ -14,10 +14,14 @@ function removeDuplicates(originalArray, prop) {
   return newArray;
 }
 
-function VerticalList({ list }) {
+function VerticalList({ list, styles }) {
   var uniqueArray = removeDuplicates(list, "id");
   const listElement = uniqueArray.map((element) => {
-    return <p key={element.id}>{element.name}</p>;
+    return (
+      <div>
+        <p key={element.id}>{element.name}</p>
+      </div>
+    );
   });
   return <div>{listElement}</div>;
 }

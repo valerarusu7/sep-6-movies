@@ -18,14 +18,6 @@ function fetchMovieById(id) {
   return `/movie?id=${id}`;
 }
 
-function fetchMovieCredits(id) {
-  return `/movie/${id}/credits?api_key=${API_KEY}&language=en-US`;
-}
-
-function fetchMovieVideo(id) {
-  return `/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
-}
-
 function fetchNetworkCompanies(id) {
   return `/network/${id}?api_key=${API_KEY}`;
 }
@@ -57,8 +49,6 @@ function getNewTopRated(page) {
 const requests = {
   tmdb_requests,
   fetchMovieById,
-  fetchMovieCredits,
-  fetchMovieVideo,
   fetchNetworkCompanies,
   fetchNetworkMovies,
   fetchNetworkTvShows,
