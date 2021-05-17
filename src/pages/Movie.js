@@ -2,17 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { addFavoriteMovie } from "../firebase/utils";
-import {
-  getMovieById,
-  getMovieCredits,
-  getMovieVideo,
-} from "../store/reducers/movieReducer";
+import { getMovieById } from "../store/reducers/movieReducer";
 import { store } from "../store/store";
 import styles from "../styles/Movie.module.css";
-import { AiOutlineStar } from "react-icons/ai";
+import { AiOutlineStar, AiFillDownCircle } from "react-icons/ai";
 import { usePalette } from "react-palette";
 import MovieDescription from "../components/Movies/MovieDescription";
-import Skeleton from "react-loading-skeleton";
 import Loading from "../components/Loading";
 
 const Movie = () => {
@@ -23,9 +18,6 @@ const Movie = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  {
-    console.log(movieLoading);
-  }
   useEffect(() => {
     isFavoriteMovie();
     dispatch(getMovieById({ id }));
@@ -142,6 +134,17 @@ const Movie = () => {
                     No available trailer
                   </button>
                 )}
+              </div>
+              <AiFillDownCircle size="100" id={styles.circle} color="white" />
+              <div id={styles.castAndCrew}>
+                <p>lol</p>
+                <p>lol</p>
+                <p>lol</p>
+                <p>lol</p>
+                <p>lol</p>
+                <p>lol</p>
+                <p>lol</p>
+                <p>lol</p>
               </div>
             </div>
           ) : null}

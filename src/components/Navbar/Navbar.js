@@ -33,7 +33,7 @@ const Navbar = () => {
           />
           <div>{user.displayName}</div>
         </div>
-        <div className={styles.nav__genres}>
+        <div className={styles.nav_basic}>
           <NavbarLink to="/" exact page="Home" Icon={AiFillHome} />
           <NavbarLink
             to="/genre/top-rated"
