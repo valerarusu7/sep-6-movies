@@ -98,6 +98,7 @@ p {
   right: 0;
   width: 200px;
   top: 20%;
+  background-color: rgb(31, 32, 48);
   padding-left: 20px;
   border-radius: 50px 0px 0px 50px;
   display: flex;
