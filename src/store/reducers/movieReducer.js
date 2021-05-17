@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import db from "../../firebase/firebase";
 import axios from "../requests/axios";
 import requests from "../requests/requests";
+import heroku_axios from "../requests/heroku_axios";
 
 /************** STATE **************/
 const initialState = {
@@ -19,8 +20,6 @@ const initialState = {
   sliderMovies: [], // Indicates slider movies
   loading: false, // Indicates the loading state
   movie: null,
-  movieCredits: null,
-  movieVideo: null,
   favoriteMovies: [], // Indicates the favorite movies
   networkTVShows: [], //Indicates the fetched networks TVShows
   showResults: 0, // Inidcates TV Shows results
@@ -73,12 +72,6 @@ const moviesSlice = createSlice({
     setMovie(state, action) {
       state.movie = action.payload;
     },
-    setMovieCredits(state, action) {
-      state.movieCredits = action.payload;
-    },
-    setMovieVideo(state, action) {
-      state.movieVideo = action.payload;
-    },
     moviesSetFavoriteMovies(state, action) {
       state.favoriteMovies = action.payload;
     },
@@ -112,8 +105,6 @@ export const {
   moviesSetLoading,
   moviesSetSliderMovies,
   setMovie,
-  setMovieCredits,
-  setMovieVideo,
   moviesSetFavoriteMovies,
   moviesSetNetworkTVShows,
   moviesSetShowResults,
@@ -302,47 +293,21 @@ export const getDocumentariesMovies = () => {
 
 export const getMovieById = ({ id }) => {
   return (dispatch) => {
-    axios
+    dispatch(moviesSetLoading(true));
+    heroku_axios
       .get(requests.fetchMovieById(id))
       .then((result) => {
-        console.log(result);
         dispatch(setMovie(result.data));
+        setTimeout(() => {
+          dispatch(moviesSetLoading(false));
+        }, 1000);
       })
       .catch((error) => {
+        dispatch(moviesSetLoading(false));
         if (error.response.status === 404) {
           window.location.href = "/404";
           return;
         }
-      });
-  };
-};
-
-export const getMovieCredits = ({ id }) => {
-  return (dispatch) => {
-    axios
-      .get(requests.fetchMovieCredits(id))
-      .then((result) => {
-        dispatch(setMovieCredits(result.data));
-      })
-      .catch((error) => {
-        if (error.response.status === 404) {
-          console.log("404");
-          window.location.href = "/404";
-          return;
-        }
-      });
-  };
-};
-
-export const getMovieVideo = ({ id }) => {
-  return (dispatch) => {
-    axios
-      .get(requests.fetchMovieVideo(id))
-      .then((result) => {
-        dispatch(setMovieVideo(result.data.results[0]));
-      })
-      .catch((error) => {
-        console.log(error);
       });
   };
 };
