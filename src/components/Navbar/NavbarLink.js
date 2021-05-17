@@ -10,7 +10,7 @@ const NavbarLink = ({ to, page, exact, Icon }) => {
       className={linkStyles.link}
       activeClassName={linkStyles.active__link}
     >
-      {Icon && <Icon />}
+      {Icon && <Icon fontSize="small" size={20} />}
       {page}
     </NavLink>
   );

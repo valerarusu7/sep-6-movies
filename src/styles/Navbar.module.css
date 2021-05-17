@@ -57,6 +57,22 @@
   place-items: center;
 }
 
+.link__border {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: 500;
+  height: 100%;
+  padding: 5px;
+  border-left: 3px solid;
+  border-color: transparent;
+  margin: 10px;
+  display: flex;
+  place-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 .link > * {
   margin-right: 5px;
 }
@@ -83,7 +99,7 @@
   color: inherit;
   cursor: pointer;
   font-weight: 500;
-  background-color: brown;
+  background-color: rgb(31, 32, 48);
   border-radius: 5px;
 }
 
