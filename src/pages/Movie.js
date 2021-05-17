@@ -12,6 +12,7 @@ import styles from "../styles/Movie.module.css";
 import VerticalList from "../components/VerticalList";
 import { AiOutlineStar } from "react-icons/ai";
 import { usePalette } from "react-palette";
+import MovieDescription from "../components/Movies/MovieDescription";
 
 const Movie = () => {
   const { user } = useSelector((state) => state.auth);
@@ -72,10 +73,6 @@ const Movie = () => {
     background: data.vibrant,
   };
 
-  const genreStyle = {
-    background: data.darkVibrant,
-  };
-
   const trailerStyle = {
     border: `3px ${data.darkMuted} solid`,
     background: data.darkMuted,
@@ -104,40 +101,7 @@ const Movie = () => {
                 </div>
               </div>
               <div id={styles.content}>
-                <h1>{movie.title}</h1>
-                <div className={styles.movieGenre}>
-                  {movie.genres.map((genre) => {
-                    return (
-                      <span style={genreStyle} key={genre.id}>
-                        {genre.name}
-                      </span>
-                    );
-                  })}
-                </div>
-                <div className={styles.otherInfo}>
-                  <p>
-                    <strong>Original language: </strong>
-                    {movie.original_language}
-                  </p>
-                  <p>
-                    <strong>Release date: </strong>
-                    {movie.release_date}
-                  </p>
-                  <p>
-                    <strong>Status: </strong>
-                    {movie.status}
-                  </p>
-                  <p>
-                    <strong>Budget: </strong>
-                    {movie.budget.toLocaleString()} $
-                  </p>
-                  <p>
-                    <strong>Revenue: </strong>
-                    {movie.revenue.toLocaleString()} $
-                  </p>
-                </div>
-                <p>{movie.overview}</p>
-                {/* <VerticalList list={movieCredits.crew} /> */}
+                <MovieDescription movie={movie} data={data} styles={styles} />
 
                 {isFavorite ? (
                   <div>Favorite</div>
@@ -149,19 +113,30 @@ const Movie = () => {
                     Add to favorites
                   </button>
                 )}
-                <button
-                  className={styles.trailerButton}
-                  type="button"
-                  style={trailerStyle}
-                  onClick={() =>
-                    window.open(
-                      `https://www.youtube.com/watch?v=${movieVideo.key}`,
-                      "_blank"
-                    )
-                  }
-                >
-                  Watch trailer
-                </button>
+                {movieVideo != null || undefined ? (
+                  <button
+                    className={styles.trailerButton}
+                    type="button"
+                    style={trailerStyle}
+                    onClick={() =>
+                      window.open(
+                        `https://www.youtube.com/watch?v=${movieVideo.key}`,
+                        "_blank"
+                      )
+                    }
+                  >
+                    Watch trailer
+                  </button>
+                ) : (
+                  <button
+                    className={styles.trailerButton}
+                    style={trailerStyle}
+                    type="button"
+                    disabled
+                  >
+                    No available trailer
+                  </button>
+                )}
               </div>
             </div>
           ) : null}

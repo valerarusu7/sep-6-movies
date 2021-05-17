@@ -33,6 +33,7 @@ p {
 
 #gradient {
   position: absolute;
+  background-color: #151424;
   height: 100%;
   width: 55%;
   z-index: 1;
@@ -63,6 +64,11 @@ p {
 .favouriteButton:hover,
 .trailerButton:hover {
   cursor: pointer;
+}
+
+.trailerButton {
+  background-color: rgb(31, 32, 48);
+  border: rgb(31, 32, 48);
 }
 
 .favouriteButton:before {
