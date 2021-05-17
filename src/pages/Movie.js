@@ -9,24 +9,26 @@ import {
 } from "../store/reducers/movieReducer";
 import { store } from "../store/store";
 import styles from "../styles/Movie.module.css";
-import VerticalList from "../components/VerticalList";
 import { AiOutlineStar } from "react-icons/ai";
 import { usePalette } from "react-palette";
+import MovieDescription from "../components/Movies/MovieDescription";
+import Skeleton from "react-loading-skeleton";
+import Loading from "../components/Loading";
 
 const Movie = () => {
   const { user } = useSelector((state) => state.auth);
   const [isFavorite, setIsFavorite] = useState(false);
-  const { movie, favoriteMovies, movieCredits, movieVideo } = useSelector(
-    (state) => state.movies
-  );
+  const { movie, favoriteMovies } = useSelector((state) => state.movies);
+  const movieLoading = useSelector((state) => state.movies.loading);
   const dispatch = useDispatch();
   const { id } = useParams();
 
+  {
+    console.log(movieLoading);
+  }
   useEffect(() => {
     isFavoriteMovie();
     dispatch(getMovieById({ id }));
-    dispatch(getMovieCredits({ id }));
-    dispatch(getMovieVideo({ id }));
   }, []);
 
   function addMovie() {
@@ -38,13 +40,13 @@ const Movie = () => {
     }
     let favoriteMovie = {
       index: index,
-      id: movie.id,
-      poster_path: movie.poster_path,
-      title: movie.title,
-      overview: movie.overview,
+      id: movie.details.id,
+      poster_path: movie.details.poster_path,
+      title: movie.details.title,
+      overview: movie.details.overview,
     };
     data.push(favoriteMovie);
-    addFavoriteMovie(user, movie, index);
+    addFavoriteMovie(user, movie.details, index);
     setIsFavorite(true);
   }
 
@@ -59,7 +61,9 @@ const Movie = () => {
   }
 
   const { data, loading, error } = usePalette(
-    `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+    movie != null
+      ? `https://image.tmdb.org/t/p/original/${movie.details.backdrop_path}`
+      : null
   );
 
   const gradientStyle = {
@@ -70,10 +74,6 @@ const Movie = () => {
     background: data.vibrant,
   };
 
-  const genreStyle = {
-    background: data.darkVibrant,
-  };
-
   const trailerStyle = {
     border: `3px ${data.darkMuted} solid`,
     background: data.darkMuted,
@@ -81,86 +81,83 @@ const Movie = () => {
 
   return (
     <div className={styles.movie}>
-      {movie != undefined || null ? (
-        <div className={styles.movieStyle}>
-          <div style={gradientStyle} id={styles.gradient} />
-          <img
-            className={styles.img}
-            src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-            alt={movie.id}
-          />
-          <div className={styles.voteAverage} style={voteAverageStyle}>
-            <div>
-              <AiOutlineStar size={20} />
-              <h2>{movie.vote_average}</h2>
-              <h6>/10</h6>
-            </div>
-            <div>
-              <p>{movie.vote_count}</p>
-            </div>
-          </div>
-          <div id={styles.content}>
-            <h1>{movie.title}</h1>
-            <div className={styles.movieGenre}>
-              {movie.genres.map((genre) => {
-                return (
-                  <span style={genreStyle} key={genre.id}>
-                    {genre.name}
-                  </span>
-                );
-              })}
-            </div>
-            <div className={styles.otherInfo}>
-              <p>
-                <strong>Original language: </strong>
-                {movie.original_language}
-              </p>
-              <p>
-                <strong>Release date: </strong>
-                {movie.release_date}
-              </p>
-              <p>
-                <strong>Status: </strong>
-                {movie.status}
-              </p>
-              <p>
-                <strong>Budget: </strong>
-                {movie.budget.toLocaleString()} $
-              </p>
-              <p>
-                <strong>Revenue: </strong>
-                {movie.revenue.toLocaleString()} $
-              </p>
-            </div>
-            <p>{movie.overview}</p>
-            {/* <VerticalList list={movieCredits.crew} /> */}
+      {movieLoading != true ? (
+        <div>
+          {movie != undefined || null ? (
+            <div className={styles.movieStyle}>
+              <div style={gradientStyle} id={styles.gradient} />
+              <img
+                className={styles.img}
+                src={`https://image.tmdb.org/t/p/original/${movie.details.backdrop_path}`}
+                alt={movie.details.id}
+              />
+              <div className={styles.voteAverage} style={voteAverageStyle}>
+                <div>
+                  <AiOutlineStar size={20} />
+                  <h2>{movie.details.vote_average}</h2>
+                  <h6>/10</h6>
+                </div>
+                <div>
+                  <p>{movie.details.vote_count}</p>
+                </div>
+              </div>
+              <div id={styles.content}>
+                <MovieDescription
+                  movie={movie.details}
+                  data={data}
+                  styles={styles}
+                />
 
-            {isFavorite ? (
-              <div>Favorite</div>
-            ) : (
-              <button
-                className={styles.favouriteButton}
-                onClick={() => addMovie()}
-              >
-                Add to favorites
-              </button>
-            )}
-            <button
-              className={styles.trailerButton}
-              type="button"
-              style={trailerStyle}
-              onClick={() =>
-                window.open(
-                  `https://www.youtube.com/watch?v=${movieVideo.key}`,
-                  "_blank"
-                )
-              }
-            >
-              Watch trailer
-            </button>
-          </div>
+                {isFavorite ? (
+                  <div>Favorite</div>
+                ) : (
+                  <button
+                    className={styles.favouriteButton}
+                    onClick={() => addMovie()}
+                  >
+                    Add to favorites
+                  </button>
+                )}
+                {movie.trailer != null || undefined ? (
+                  <button
+                    className={styles.trailerButton}
+                    type="button"
+                    style={trailerStyle}
+                    onClick={() =>
+                      window.open(
+                        `https://www.youtube.com/watch?v=${movie.trailer.key}`,
+                        "_blank"
+                      )
+                    }
+                  >
+                    Watch trailer
+                  </button>
+                ) : (
+                  <button
+                    className={styles.trailerButton}
+                    style={trailerStyle}
+                    type="button"
+                    disabled
+                  >
+                    No available trailer
+                  </button>
+                )}
+              </div>
+            </div>
+          ) : null}
         </div>
-      ) : null}
+      ) : (
+        <div
+          style={{
+            placeItems: "center",
+            display: "flex",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          <Loading />
+        </div>
+      )}
     </div>
   );
 };

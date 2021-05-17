@@ -49,7 +49,6 @@ const Home = () => {
   return (
     <div className={style.home}>
       <Searchbar name="Home" />
-
       {!loading ? (
         <div>
           <Slider

@@ -7,7 +7,8 @@ import movieReducer from "./reducers/movieReducer";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "movies"],
+  whitelist: ["auth"],
+  blacklist: ["movies"],
 };
 
 const reducers = combineReducers({

@@ -8,11 +8,16 @@
   display: none;
 }
 
+.movieGenre {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .movieGenre span {
   border: none;
-  padding: 5px;
+  padding: 7px;
   border-radius: 5px;
-  margin: 0px 10px 0px 0px;
+  margin: 0px 10px 10px 0px;
 }
 
 #content {
@@ -33,9 +38,11 @@ p {
 
 #gradient {
   position: absolute;
+  background-color: #151424;
   height: 100%;
   width: 55%;
   z-index: 1;
+  left: 0;
 }
 
 .img {
@@ -62,6 +69,11 @@ p {
 .favouriteButton:hover,
 .trailerButton:hover {
   cursor: pointer;
+}
+
+.trailerButton {
+  background-color: rgb(31, 32, 48);
+  border: rgb(31, 32, 48);
 }
 
 .favouriteButton:before {
@@ -91,6 +103,7 @@ p {
   right: 0;
   width: 200px;
   top: 20%;
+  background-color: rgb(31, 32, 48);
   padding-left: 20px;
   border-radius: 50px 0px 0px 50px;
   display: flex;

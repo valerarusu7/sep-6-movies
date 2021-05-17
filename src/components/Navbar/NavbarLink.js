@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import linkStyles from "../../styles/Navbar.module.css";
 
-const NavbarLink = ({ to, page, exact }) => {
+const NavbarLink = ({ to, page, exact, Icon }) => {
   return (
     <NavLink
       exact={exact}
@@ -10,6 +10,7 @@ const NavbarLink = ({ to, page, exact }) => {
       className={linkStyles.link}
       activeClassName={linkStyles.active__link}
     >
+      {Icon && <Icon fontSize="small" size={20} />}
       {page}
     </NavLink>
   );

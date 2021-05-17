@@ -6,10 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../../store/reducers/authReducer";
 import { Link, NavLink } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
-import { AiFillStar } from "react-icons/ai";
 import { moviesReset } from "../../store/reducers/movieReducer";
 import Search from "../Search/Search";
 import NavbarLink from "./NavbarLink";
+import { AiFillHome, AiFillStar } from "react-icons/ai";
+import TvIcon from "@material-ui/icons/Tv";
+import { RiLogoutBoxRFill } from "react-icons/ri";
+import { IoMdPodium } from "react-icons/io";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
@@ -31,8 +34,14 @@ const Navbar = () => {
           <div>{user.displayName}</div>
         </div>
         <div className={styles.nav__genres}>
-          <NavbarLink to="/" exact page="Home" />
-          <NavbarLink to="/genre/top-rated" page="Top Rated" />
+          <NavbarLink to="/" exact page="Home" Icon={AiFillHome} />
+          <NavbarLink
+            to="/genre/top-rated"
+            page="Top Rated"
+            Icon={IoMdPodium}
+          />
+        </div>
+        <div className={styles.nav__genres}>
           <NavbarLink to="/genre/comedy" page="Comedy" />
           <NavbarLink to="/genre/action" page="Action" />
           <NavbarLink to="/genre/horror" page="Horror" />
@@ -42,9 +51,14 @@ const Navbar = () => {
           <NavbarLink to="/genre/mystery" page="Mystery" />
           <NavbarLink to="/genre/documentaries" page="Documentaries" />
         </div>
-        <NavbarLink to="/networks" page="Networks" />
-        <NavbarLink to="/favorite-movies" page="Favorite Movies" />
+        <NavbarLink to="/networks" page="Networks" Icon={TvIcon} />
+        <NavbarLink
+          to="/favorite-movies"
+          page="Favorite Movies"
+          Icon={AiFillStar}
+        />
         <Link to="/" className={styles.link} onClick={() => logout()}>
+          <RiLogoutBoxRFill />
           Logout
         </Link>
       </div>
