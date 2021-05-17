@@ -54,7 +54,9 @@ const Movie = () => {
   }
 
   const { data, loading, error } = usePalette(
-    `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+    movie != null
+      ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+      : `https://image.tmdb.org/t/p/original/${movie.poster_path}`
   );
 
   const gradientStyle = {
@@ -77,78 +79,82 @@ const Movie = () => {
   return (
     <div>
       <div>
-        {movie != undefined || null ? (
-          <div className={styles.movieStyle} style={{ marginTop: -50 }}>
-            <div style={gradientStyle} id={styles.gradient} />
-            <img
-              className={styles.img}
-              src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-              alt={movie.id}
-            />
-            <div className={styles.voteAverage} style={voteAverageStyle}>
-              <div>
-                <AiOutlineStar size={20} />
-                <h2>{movie.vote_average}</h2>
-                <h6>/10</h6>
-              </div>
-              <div>
-                <p>{movie.vote_count}</p>
-              </div>
-            </div>
-            <div id={styles.content}>
-              <h1>{movie.title}</h1>
-              <div className={styles.movieGenre}>
-                {movie.genres.map((genre) => {
-                  return (
-                    <span style={genreStyle} key={genre.id}>
-                      {genre.name}
-                    </span>
-                  );
-                })}
-              </div>
-              <div className={styles.otherInfo}>
-                <p>
-                  <strong>Original language: </strong>
-                  {movie.original_language}
-                </p>
-                <p>
-                  <strong>Release date: </strong>
-                  {movie.release_date}
-                </p>
-                <p>
-                  <strong>Status: </strong>
-                  {movie.status}
-                </p>
-                <p>
-                  <strong>Budget: </strong>
-                  {movie.budget.toLocaleString()} $
-                </p>
-                <p>
-                  <strong>Revenue: </strong>
-                  {movie.revenue.toLocaleString()} $
-                </p>
-              </div>
-              <p>{movie.overview}</p>
-              {/* <VerticalList list={movieCredits.crew} /> */}
+        {loading != true ? (
+          <div>
+            {movie != undefined || null ? (
+              <div className={styles.movieStyle} style={{ marginTop: -50 }}>
+                <div style={gradientStyle} id={styles.gradient} />
+                <img
+                  className={styles.img}
+                  src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                  alt={movie.id}
+                />
+                <div className={styles.voteAverage} style={voteAverageStyle}>
+                  <div>
+                    <AiOutlineStar size={20} />
+                    <h2>{movie.vote_average}</h2>
+                    <h6>/10</h6>
+                  </div>
+                  <div>
+                    <p>{movie.vote_count}</p>
+                  </div>
+                </div>
+                <div id={styles.content}>
+                  <h1>{movie.title}</h1>
+                  <div className={styles.movieGenre}>
+                    {movie.genres.map((genre) => {
+                      return (
+                        <span style={genreStyle} key={genre.id}>
+                          {genre.name}
+                        </span>
+                      );
+                    })}
+                  </div>
+                  <div className={styles.otherInfo}>
+                    <p>
+                      <strong>Original language: </strong>
+                      {movie.original_language}
+                    </p>
+                    <p>
+                      <strong>Release date: </strong>
+                      {movie.release_date}
+                    </p>
+                    <p>
+                      <strong>Status: </strong>
+                      {movie.status}
+                    </p>
+                    <p>
+                      <strong>Budget: </strong>
+                      {movie.budget.toLocaleString()} $
+                    </p>
+                    <p>
+                      <strong>Revenue: </strong>
+                      {movie.revenue.toLocaleString()} $
+                    </p>
+                  </div>
+                  <p>{movie.overview}</p>
+                  {/* <VerticalList list={movieCredits.crew} /> */}
 
-              {isFavorite ? (
-                <div>Favorite</div>
-              ) : (
-                <button
-                  className={styles.favouriteButton}
-                  onClick={() => addMovie()}
-                >
-                  Add to favorites
-                </button>
-              )}
-              <button
-                className={styles.trailerButton}
-                style={trailerStyle}
-                onClick={() => addMovie()}
-              >
-                Watch trailer
-              </button>
-            </div>
+                  {isFavorite ? (
+                    <div>Favorite</div>
+                  ) : (
+                    <button
+                      className={styles.favouriteButton}
+                      onClick={() => addMovie()}
+                    >
+                      Add to favorites
+                    </button>
+                  )}
+                  <button
+                    className={styles.trailerButton}
+                    style={trailerStyle}
+                    onClick={() => addMovie()}
+                  >
+                    Watch trailer
+                  </button>
+                </div>
+              </div>
+            ) : null}
           </div>
         ) : null}
       </div>

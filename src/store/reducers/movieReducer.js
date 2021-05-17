@@ -301,6 +301,7 @@ export const getMovieById = ({ id }) => {
     axios
       .get(requests.fetchMovieById(id))
       .then((result) => {
+        console.log(result);
         dispatch(setMovie(result.data));
       })
       .catch((error) => {
