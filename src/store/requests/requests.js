@@ -14,6 +14,10 @@ const tmdb_requests = {
   fetchMystery: `/discover/movie?api_key=${API_KEY}&with_genres=9648`,
 };
 
+function fetchActorById(id) {
+ return `/person?id=${id}`;
+}
+
 function fetchMovieById(id) {
   return `/movie?id=${id}`;
 }
@@ -56,6 +60,7 @@ function getNewTopRated(page) {
 
 const requests = {
   tmdb_requests,
+  fetchActorById,
   fetchMovieById,
   fetchMovieCredits,
   fetchMovieVideo,
