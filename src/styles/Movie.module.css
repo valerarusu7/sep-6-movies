@@ -1,5 +1,9 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .movie {
-  width: 100%;
+  width: calc(100% - 250px);
   height: 100vh;
   overflow-y: scroll;
 }
@@ -130,12 +134,67 @@ p {
   cursor: pointer;
 }
 
-#castAndCrew {
+#otherInfo {
   position: absolute;
-  max-width: 20%;
-  height: 50vh;
+  width: calc(100% - 250px);
+  height: 100vh;
   bottom: -100vh;
+  right: 0;
   z-index: 5;
-  left: 500px;
   color: white;
+}
+
+#otherInfoChooser {
+  height: 100px;
+}
+
+#otherInfoChooser {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#otherInfoChooser li {
+  display: inline-flex;
+  list-style-type: none;
+  margin-right: 30px;
+  font-size: 1.3em;
+}
+
+.groupList {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.verticalListStyle {
+  max-width: 90%;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  white-space: nowrap;
+}
+
+.personItem {
+  margin-right: 35px;
+  background-color: white;
+  height: 275px;
+  width: 150px;
+  color: black;
+  display: inline-flex;
+  flex-direction: column;
+  border-radius: 15px;
+  align-items: center;
+}
+
+.personImg {
+  width: 150px;
+  height: 220px;
+  border-radius: 13px 13px 0px 0px;
+}
+
+.personContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
