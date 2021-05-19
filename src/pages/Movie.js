@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { addFavoriteMovie } from "../firebase/utils";
@@ -72,6 +72,10 @@ const Movie = () => {
     background: data.darkMuted,
   };
 
+  const myRef = useRef(null);
+
+  const executeScroll = () => myRef.current.scrollIntoView();
+
   return (
     <div className={styles.movie}>
       {movieLoading != true ? (
@@ -136,10 +140,15 @@ const Movie = () => {
                   </button>
                 )}
               </div>
-              <AiFillDownCircle size="100" id={styles.circle} color="white" />
+              <AiFillDownCircle
+                size="100"
+                id={styles.circle}
+                color="white"
+                onClick={executeScroll}
+              />
               <div id={styles.otherInfo}>
                 <div className={styles.crewList}>
-                  <h2>Cast</h2>
+                  <h2 ref={myRef}>Cast</h2>
                   <VerticalList list={movie.credits.crew} styles={styles} />
                 </div>
               </div>

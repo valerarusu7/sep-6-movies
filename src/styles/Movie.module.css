@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .movie {
   width: calc(100% - 250px);
   height: 100vh;
@@ -132,30 +136,33 @@ p {
 
 #otherInfo {
   position: absolute;
-  width: 100%;
-  height: 50vh;
+  width: calc(100% - 250px);
+  height: 100vh;
   bottom: -100vh;
-  left: 250px !important;
+  right: 0;
   z-index: 5;
   color: white;
 }
 
 .crewList {
   position: relative;
-  bottom: 50vh;
   display: flex;
   flex-direction: column;
 }
 
 .verticalListStyle {
-  max-width: 50%;
+  max-width: 80%;
   overflow-x: auto;
   margin: 20px;
   padding: 20px;
   white-space: nowrap;
 }
 
-.verticalListStyle span {
-  background-color: violet;
-  margin: 20px;
+.personItem {
+  margin-right: 100px;
+  display: inline-block;
+}
+
+.smallImg {
+  max-height: 150px;
 }
