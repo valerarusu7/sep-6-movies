@@ -137,8 +137,8 @@ const Movie = () => {
                 )}
               </div>
               <AiFillDownCircle size="100" id={styles.circle} color="white" />
-              <div id={styles.castAndCrew}>
-                <div className={styles.listStyle}>
+              <div id={styles.otherInfo}>
+                <div className={styles.crewList}>
                   <h2>Cast</h2>
                   <VerticalList list={movie.credits.crew} styles={styles} />
                 </div>

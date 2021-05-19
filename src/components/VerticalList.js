@@ -18,12 +18,12 @@ function VerticalList({ list, styles }) {
   var uniqueArray = removeDuplicates(list, "id");
   const listElement = uniqueArray.map((element) => {
     return (
-      <div>
-        <p key={element.id}>{element.name}</p>
-      </div>
+      <>
+        <span key={element.id}>{element.name}</span>
+      </>
     );
   });
-  return <div>{listElement}</div>;
+  return <div className={styles.verticalListStyle}>{listElement}</div>;
 }
 
 export default VerticalList;
