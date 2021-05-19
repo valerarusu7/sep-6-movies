@@ -9,7 +9,7 @@ import { AiOutlineStar, AiFillDownCircle } from "react-icons/ai";
 import { usePalette } from "react-palette";
 import MovieDescription from "../components/Movies/MovieDescription";
 import Loading from "../components/Loading";
-import VerticalList from "../components/VerticalList";
+import MovieCredits from "../components/MovieCredits";
 
 const Movie = () => {
   const { user } = useSelector((state) => state.auth);
@@ -147,10 +147,15 @@ const Movie = () => {
                 onClick={executeScroll}
               />
               <div id={styles.otherInfo}>
-                <div className={styles.crewList}>
-                  <h2 ref={myRef}>Cast</h2>
-                  <VerticalList list={movie.credits.crew} styles={styles} />
-                </div>
+                <ul id={styles.otherInfoChooser} ref={myRef}>
+                  <strong>
+                    <li>Cast & Crew</li>
+                  </strong>
+                  <li>Similar movies</li>
+                  <li>Media</li>
+                  <li>Reviews</li>
+                </ul>
+                <MovieCredits styles={styles} credits={movie.credits} />
               </div>
             </div>
           ) : null}
