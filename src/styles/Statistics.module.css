@@ -1,0 +1,101 @@
+.container {
+  width: calc(100% - 250px);
+  height: 100vh;
+  color: white;
+  overflow-y: scroll;
+  position: relative;
+  left: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+}
+
+.inner__container {
+  display: flex;
+  height: 380px;
+}
+
+.outer__container {
+  display: flex;
+  width: 100%;
+}
+
+.img {
+  width: 260px;
+  height: 380px;
+}
+
+.delete {
+  position: absolute;
+  top: 0;
+  margin-left: 250px;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.movies__container {
+  display: flex;
+  width: 100%;
+}
+
+.movie {
+  width: 33%;
+  height: 380px;
+  display: flex;
+  justify-content: center;
+}
+
+.input__container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+
+.input {
+  height: 380px;
+  width: 300px;
+}
+
+.stats {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+
+.stat {
+  width: 100%;
+  text-align: center;
+  height: 70px;
+  place-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.headers {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+
+.movies__statistics {
+  display: flex;
+  width: 100%;
+}
+
+.stat__container {
+  place-items: center;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}

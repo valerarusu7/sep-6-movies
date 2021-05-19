@@ -8,6 +8,7 @@ import heroku_axios from "../requests/heroku_axios";
 const initialState = {
   movies: [],
   sliderMovies: [],
+  compareMovies: [],
   loading: false, // Indicates the loading state
   movie: null,
   favoriteMovies: [], // Indicates the favorite movies
@@ -25,6 +26,21 @@ const moviesSlice = createSlice({
     },
     setSliderMovies(state, action) {
       state.sliderMovies = action.payload;
+    },
+    setCompareMovies(state, action) {
+      state.compareMovies = action.payload;
+    },
+    addCompareMovie(state, action) {
+      let newMovies = [...state.compareMovies];
+      newMovies.push(action.payload);
+      state.compareMovies = newMovies;
+    },
+    removeCompareMovie(state, action) {
+      let id = action.payload;
+      let newMovies = [
+        ...state.compareMovies.filter((movie) => movie.details.id !== id),
+      ];
+      state.compareMovies = newMovies;
     },
     moviesSetLoading(state, action) {
       state.loading = action.payload;
@@ -53,6 +69,9 @@ export default moviesSlice.reducer;
 export const {
   setMovies,
   setSliderMovies,
+  setCompareMovies,
+  addCompareMovie,
+  removeCompareMovie,
   setMovie,
   moviesSetLoading,
   moviesSetFavoriteMovies,
@@ -86,6 +105,7 @@ export const getMovieById = ({ id }) => {
     heroku_axios
       .get(requests.fetchMovieById(id))
       .then((result) => {
+        console.log(result);
         dispatch(setMovie(result.data));
         setTimeout(() => {
           dispatch(moviesSetLoading(false));
@@ -129,6 +149,23 @@ export const getNetworkMovies = (id) => {
         console.log(movies);
         dispatch(moviesSetShowResults(movies.data.total_results));
         dispatch(moviesSetNetworkTVShows(movies.data.results));
+        dispatch(moviesSetLoading(false));
+      })
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
+  };
+};
+
+export const getCompareMovieBy = ({ id }) => {
+  return (dispatch) => {
+    dispatch(moviesSetLoading(true));
+    heroku_axios
+      .get(requests.fetchMovieById(id))
+      .then((movies) => {
+        console.log(movies);
+        dispatch(addCompareMovie(movies.data));
         dispatch(moviesSetLoading(false));
       })
       .catch((error) => {

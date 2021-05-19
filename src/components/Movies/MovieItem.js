@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import no_poster from "../../assets/no_poster.png";
 import { AiOutlineStar } from "react-icons/ai";
 import { genres } from "../../genres";
+import MovieReleaseDate from "./MovieReleaseDate";
+import MovieTitle from "./MovieTitle";
+import MovieImage from "./MovieImage";
 
 const MovieItem = ({ movie, styles }) => {
   const [firstGenre, setFirstGenre] = useState();
@@ -34,37 +36,14 @@ const MovieItem = ({ movie, styles }) => {
           {movie.vote_average}
         </div>
       </div>
-      <img
-        src={
-          movie.poster_path != null
-            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-            : no_poster
-        }
-        alt={movie.title}
-        width={260}
-        height={380}
-      />
-      <div>
-        {movie.title
-          ? movie.title
-          : movie.name
-          ? movie.name
-          : movie.original_name}
-      </div>
+      <MovieImage movie={movie} width={260} height={380} />
+      <MovieTitle movie={movie} />
       <div className={styles.movie__info}>
         <div>{`${firstGenre}${
           secondGenre != undefined ? `/${secondGenre}` : ""
         }`}</div>
       </div>
-      {show === true ? (
-        <div className={styles.movie__info}>
-          {movie.release_date
-            ? movie.release_date.substring(0, 4)
-            : movie.first_air_date
-            ? movie.first_air_date.substring(0, 4)
-            : "Unknown"}
-        </div>
-      ) : null}
+      {show === true ? <MovieReleaseDate movie={movie} /> : null}
     </Link>
   );
 };
