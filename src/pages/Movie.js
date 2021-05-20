@@ -5,11 +5,13 @@ import { addFavoriteMovie } from "../firebase/utils";
 import { getMovieById } from "../store/reducers/movieReducer";
 import { store } from "../store/store";
 import styles from "../styles/Movie.module.css";
+import movieItemStyles from "../styles/MoviesCategory.module.css";
 import { AiOutlineStar, AiFillDownCircle } from "react-icons/ai";
 import { usePalette } from "react-palette";
 import MovieDescription from "../components/Movies/MovieDescription";
 import Loading from "../components/Loading";
 import MovieCredits from "../components/MovieCredits";
+import MovieItem from "../components/Movies/MovieItem";
 
 const Movie = () => {
   const { user } = useSelector((state) => state.auth);
@@ -73,27 +75,52 @@ const Movie = () => {
     background: data.darkMuted,
   };
 
-  let component = null;
-  switch (activeContent) {
-    case 1:
-      component = <MovieCredits styles={styles} credits={movie.credits} />;
-      break;
-    case 2:
-      component = <div />;
-      break;
-    case 3:
-      component = <div />;
-      break;
-    case 4:
-      component = <div />;
-      break;
-    default:
-      component = <div />;
-  }
+  const switchContent = () => {
+    let component = null;
+    switch (activeContent) {
+      case 1:
+        component = <MovieCredits styles={styles} credits={movie.credits} />;
+        break;
+      case 2:
+        component = (
+          <div
+            className={movieItemStyles.container}
+            style={{ display: "inline-flex", justifyContent: "center" }}
+          >
+            {movie.similar_movies !== null || undefined ? (
+              movie.similar_movies.map((similarMovie) => (
+                <MovieItem
+                  movie={similarMovie}
+                  styles={movieItemStyles}
+                  key={similarMovie.id}
+                />
+              ))
+            ) : (
+              <h1>No available data</h1>
+            )}
+          </div>
+        );
+        break;
+      case 3:
+        component = <div />;
+        break;
+      case 4:
+        component = <div />;
+        break;
+      default:
+        component = <div />;
+    }
+    return component;
+  };
 
   const myRef = useRef(null);
 
   const executeScroll = () => myRef.current.scrollIntoView();
+
+  const setActiveId = (id) => {
+    setActiveContent(id);
+    executeScroll();
+  };
 
   return (
     <div className={styles.movie}>
@@ -168,7 +195,7 @@ const Movie = () => {
               <div id={styles.otherInfo}>
                 <ul id={styles.otherInfoChooser} ref={myRef}>
                   <li
-                    onClick={() => setActiveContent(1)}
+                    onClick={() => setActiveId(1)}
                     style={
                       activeContent === 1
                         ? { fontWeight: "bold" }
@@ -178,7 +205,7 @@ const Movie = () => {
                     Cast & Crew
                   </li>
                   <li
-                    onClick={() => setActiveContent(2)}
+                    onClick={() => setActiveId(2)}
                     style={
                       activeContent === 2
                         ? { fontWeight: "bold" }
@@ -188,7 +215,7 @@ const Movie = () => {
                     Similar movies
                   </li>
                   <li
-                    onClick={() => setActiveContent(3)}
+                    onClick={() => setActiveId(3)}
                     style={
                       activeContent === 3
                         ? { fontWeight: "bold" }
@@ -198,7 +225,7 @@ const Movie = () => {
                     Media
                   </li>
                   <li
-                    onClick={() => setActiveContent(4)}
+                    onClick={() => setActiveId(4)}
                     style={
                       activeContent === 4
                         ? { fontWeight: "bold" }
@@ -208,7 +235,7 @@ const Movie = () => {
                     Reviews
                   </li>
                 </ul>
-                {component}
+                {switchContent()}
               </div>
             </div>
           ) : null}
