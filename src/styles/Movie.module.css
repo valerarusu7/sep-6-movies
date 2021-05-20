@@ -77,8 +77,9 @@ p {
   bottom: 0;
 }
 
-.favouriteButton,
-.trailerButton {
+.unfavouriteButton,
+.trailerButton,
+.favouriteButton {
   border-radius: 5px;
   padding: 10px;
   border: 3px #ed2939 solid;
@@ -89,17 +90,17 @@ p {
   z-index: 1;
 }
 
-.favouriteButton:hover,
-.trailerButton:hover {
+.favouriteButton {
+  background-color: #ed2939;
+}
+
+.unfavouriteButton:hover,
+.trailerButton:hover,
+.favouriteButton:hover {
   cursor: pointer;
 }
 
-.trailerButton {
-  background-color: rgb(31, 32, 48);
-  border: rgb(31, 32, 48);
-}
-
-.favouriteButton:before {
+.unfavouriteButton:before {
   transition: 0.5s all ease;
   position: absolute;
   top: 0;
@@ -111,7 +112,7 @@ p {
   background-color: #ed2939;
 }
 
-.favouriteButton:hover:before {
+.unfavouriteButton:hover::before {
   transition: 0.5s all ease;
   left: 0;
   right: 0;

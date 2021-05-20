@@ -152,10 +152,12 @@ const Movie = () => {
                 />
 
                 {isFavorite ? (
-                  <div>Favorite</div>
+                  <button className={styles.favouriteButton}>
+                    Remove from favorites
+                  </button>
                 ) : (
                   <button
-                    className={styles.favouriteButton}
+                    className={styles.unfavouriteButton}
                     onClick={() => addMovie()}
                   >
                     Add to favorites
