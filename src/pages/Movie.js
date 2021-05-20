@@ -188,12 +188,15 @@ const Movie = () => {
                   </button>
                 )}
               </div>
+
               <AiFillDownCircle
                 size="100"
                 id={styles.circle}
                 color="white"
                 onClick={executeScroll}
+                className={styles.fillDownCircle}
               />
+
               <div id={styles.otherInfo}>
                 <ul id={styles.otherInfoChooser} ref={myRef}>
                   <li

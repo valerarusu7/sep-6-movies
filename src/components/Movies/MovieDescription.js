@@ -1,4 +1,5 @@
 import React from "react";
+import { BsArrowRight } from "react-icons/bs";
 
 const MovieDescription = ({ movie, data, styles }) => {
   const genreStyle = {
@@ -38,6 +39,9 @@ const MovieDescription = ({ movie, data, styles }) => {
           <strong>Revenue: </strong>
           {movie.revenue.toLocaleString()} $
         </p>
+        <div className={styles.compareArrow}>
+          <span>Compare</span> <BsArrowRight />
+        </div>
       </div>
       <p>{movie.overview}</p>
     </>

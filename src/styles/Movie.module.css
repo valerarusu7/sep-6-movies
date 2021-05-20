@@ -222,3 +222,25 @@ p {
   flex-direction: column;
   align-items: center;
 }
+
+.fillDownCircle:hover {
+  fill: rgb(31, 32, 48);
+}
+
+.compareArrow {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.compareArrow > * {
+  margin-right: 5px;
+}
+
+.compareArrow:hover {
+  cursor: pointer;
+}
+
+.compareArrow:hover > * {
+  color: #151424;
+}
