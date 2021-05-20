@@ -203,8 +203,8 @@ const Movie = () => {
                     onClick={() => setActiveId(1)}
                     style={
                       activeContent === 1
-                        ? { fontWeight: "bold" }
-                        : { fontWeight: "normal" }
+                        ? { fontWeight: "normal" }
+                        : { fontWeight: "lighter" }
                     }
                   >
                     Cast & Crew
@@ -213,8 +213,8 @@ const Movie = () => {
                     onClick={() => setActiveId(2)}
                     style={
                       activeContent === 2
-                        ? { fontWeight: "bold" }
-                        : { fontWeight: "normal" }
+                        ? { fontWeight: "normal" }
+                        : { fontWeight: "lighter" }
                     }
                   >
                     Similar movies
@@ -223,8 +223,8 @@ const Movie = () => {
                     onClick={() => setActiveId(3)}
                     style={
                       activeContent === 3
-                        ? { fontWeight: "bold" }
-                        : { fontWeight: "normal" }
+                        ? { fontWeight: "normal" }
+                        : { fontWeight: "lighter" }
                     }
                   >
                     Media
@@ -233,8 +233,8 @@ const Movie = () => {
                     onClick={() => setActiveId(4)}
                     style={
                       activeContent === 4
-                        ? { fontWeight: "bold" }
-                        : { fontWeight: "normal" }
+                        ? { fontWeight: "normal" }
+                        : { fontWeight: "lighter" }
                     }
                   >
                     Reviews

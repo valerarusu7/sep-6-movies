@@ -18,7 +18,7 @@ const MovieDescription = ({ movie, data, styles }) => {
           );
         })}
       </div>
-      <div className={styles.otherInfo}>
+      <div>
         <p>
           <strong>Original language: </strong>
           {movie.original_language}
