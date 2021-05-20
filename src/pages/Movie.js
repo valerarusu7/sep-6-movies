@@ -14,6 +14,7 @@ import MovieCredits from "../components/MovieCredits";
 const Movie = () => {
   const { user } = useSelector((state) => state.auth);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [activeContent, setActiveContent] = useState(1);
   const { movie, favoriteMovies } = useSelector((state) => state.movies);
   const movieLoading = useSelector((state) => state.movies.loading);
   const dispatch = useDispatch();
@@ -71,6 +72,24 @@ const Movie = () => {
     border: `3px ${data.darkMuted} solid`,
     background: data.darkMuted,
   };
+
+  let component = null;
+  switch (activeContent) {
+    case 1:
+      component = <MovieCredits styles={styles} credits={movie.credits} />;
+      break;
+    case 2:
+      component = <div />;
+      break;
+    case 3:
+      component = <div />;
+      break;
+    case 4:
+      component = <div />;
+      break;
+    default:
+      component = <div />;
+  }
 
   const myRef = useRef(null);
 
@@ -148,14 +167,48 @@ const Movie = () => {
               />
               <div id={styles.otherInfo}>
                 <ul id={styles.otherInfoChooser} ref={myRef}>
-                  <strong>
-                    <li>Cast & Crew</li>
-                  </strong>
-                  <li>Similar movies</li>
-                  <li>Media</li>
-                  <li>Reviews</li>
+                  <li
+                    onClick={() => setActiveContent(1)}
+                    style={
+                      activeContent === 1
+                        ? { fontWeight: "bold" }
+                        : { fontWeight: "normal" }
+                    }
+                  >
+                    Cast & Crew
+                  </li>
+                  <li
+                    onClick={() => setActiveContent(2)}
+                    style={
+                      activeContent === 2
+                        ? { fontWeight: "bold" }
+                        : { fontWeight: "normal" }
+                    }
+                  >
+                    Similar movies
+                  </li>
+                  <li
+                    onClick={() => setActiveContent(3)}
+                    style={
+                      activeContent === 3
+                        ? { fontWeight: "bold" }
+                        : { fontWeight: "normal" }
+                    }
+                  >
+                    Media
+                  </li>
+                  <li
+                    onClick={() => setActiveContent(4)}
+                    style={
+                      activeContent === 4
+                        ? { fontWeight: "bold" }
+                        : { fontWeight: "normal" }
+                    }
+                  >
+                    Reviews
+                  </li>
                 </ul>
-                <MovieCredits styles={styles} credits={movie.credits} />
+                {component}
               </div>
             </div>
           ) : null}

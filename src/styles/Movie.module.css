@@ -180,6 +180,10 @@ p {
   font-size: 1.3em;
 }
 
+#otherInfoChooser li:hover {
+  cursor: pointer;
+}
+
 .groupList {
   position: relative;
   display: flex;
