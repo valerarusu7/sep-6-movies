@@ -21,10 +21,19 @@ html {
   background: #555;
 }
 
-.movie {
+.movie,
+.loading {
   width: calc(100% - 250px);
   height: 100vh;
-  overflow-y: scroll;
+}
+
+.loading {
+  place-items: center;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 10;
+  left: 250px;
 }
 
 .movie::-webkit-scrollbar {

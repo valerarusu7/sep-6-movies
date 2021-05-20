@@ -246,14 +246,7 @@ const Movie = () => {
           ) : null}
         </div>
       ) : (
-        <div
-          style={{
-            placeItems: "center",
-            display: "flex",
-            justifyContent: "center",
-            height: "100vh",
-          }}
-        >
+        <div className={styles.loading}>
           <Loading />
         </div>
       )}
