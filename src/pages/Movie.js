@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { addFavoriteMovie } from "../firebase/utils";
@@ -9,6 +9,7 @@ import { AiOutlineStar, AiFillDownCircle } from "react-icons/ai";
 import { usePalette } from "react-palette";
 import MovieDescription from "../components/Movies/MovieDescription";
 import Loading from "../components/Loading";
+import MovieCredits from "../components/MovieCredits";
 
 const Movie = () => {
   const { user } = useSelector((state) => state.auth);
@@ -70,6 +71,10 @@ const Movie = () => {
     border: `3px ${data.darkMuted} solid`,
     background: data.darkMuted,
   };
+
+  const myRef = useRef(null);
+
+  const executeScroll = () => myRef.current.scrollIntoView();
 
   return (
     <div className={styles.movie}>
@@ -135,16 +140,22 @@ const Movie = () => {
                   </button>
                 )}
               </div>
-              <AiFillDownCircle size="100" id={styles.circle} color="white" />
-              <div id={styles.castAndCrew}>
-                <p>lol</p>
-                <p>lol</p>
-                <p>lol</p>
-                <p>lol</p>
-                <p>lol</p>
-                <p>lol</p>
-                <p>lol</p>
-                <p>lol</p>
+              <AiFillDownCircle
+                size="100"
+                id={styles.circle}
+                color="white"
+                onClick={executeScroll}
+              />
+              <div id={styles.otherInfo}>
+                <ul id={styles.otherInfoChooser} ref={myRef}>
+                  <strong>
+                    <li>Cast & Crew</li>
+                  </strong>
+                  <li>Similar movies</li>
+                  <li>Media</li>
+                  <li>Reviews</li>
+                </ul>
+                <MovieCredits styles={styles} credits={movie.credits} />
               </div>
             </div>
           ) : null}
