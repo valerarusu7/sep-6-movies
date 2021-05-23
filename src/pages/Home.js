@@ -35,14 +35,20 @@ const Home = () => {
 
   return (
     <div className={style.home}>
-  
+      <Searchbar name="Home" />
       {!loading ? (
         <div>
           <Slider
             sliderMovies={sliderMovies != null || undefined ? sliderMovies : []}
             style={style}
           />
-       
+          <MoviesCategory
+            movies={movies}
+            pages={page}
+            handleChange={handleChange}
+            toolbar
+            type="Trending"
+          />
         </div>
       ) : (
         <Loading />
