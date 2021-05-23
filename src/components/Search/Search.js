@@ -4,11 +4,43 @@ import requests from "../../store/requests/requests";
 import styles from "../../styles/Search.module.css";
 import SearchItem from "./SearchItem";
 import { BsSearch } from "react-icons/bs";
+import CompareSearchItem from "../CompareSearchItem";
+import {
+  addCompareMovieById,
+  getCompareMovieById,
+} from "../../store/reducers/movieReducer";
+import { useDispatch, useSelector } from "react-redux";
 
-const Search = () => {
+const Search = ({ width, compare }) => {
+  const { compareMovies } = useSelector((state) => state.movies);
   const [movies, setMovies] = useState([]);
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
+  const dispatch = useDispatch();
+
+  function addCompareItem(movie) {
+    let id = movie.id;
+    if (compareMovies.length < 1) {
+      dispatch(getCompareMovieById({ id }));
+    }
+    if (compareMovies.length >= 1 && compareMovies.length < 3) {
+      let movies = [];
+      let unique = true;
+      compareMovies.map((item) => {
+        if (item.id !== movie.id) {
+          movies.push(item);
+        } else {
+          unique = false;
+        }
+      });
+      if (unique) {
+        let data = { movies: movies };
+        dispatch(addCompareMovieById(id, data));
+      }
+    }
+    setQuery("");
+    setShow(false);
+  }
 
   useEffect(() => {
     setShow(false);
@@ -43,8 +75,9 @@ const Search = () => {
         </div>
         <input
           value={query}
-          placeholder="Search"
+          placeholder={compare === true ? "Add a movie..." : "Search"}
           className={styles.input}
+          style={{ width: width }}
           onChange={(event) => setSearch(event.target.value)}
         />
       </div>
@@ -54,11 +87,21 @@ const Search = () => {
             {movies.length != 0
               ? movies.map((movie) => {
                   return (
-                    <SearchItem
-                      movie={movie}
-                      styles={styles}
-                      handleClick={() => handleClick()}
-                    />
+                    <div key={movie.id}>
+                      {compare === true ? (
+                        <CompareSearchItem
+                          movie={movie}
+                          styles={styles}
+                          addCompareItem={() => addCompareItem(movie)}
+                        />
+                      ) : (
+                        <SearchItem
+                          movie={movie}
+                          styles={styles}
+                          handleClick={() => handleClick()}
+                        />
+                      )}
+                    </div>
                   );
                 })
               : "No results"}
