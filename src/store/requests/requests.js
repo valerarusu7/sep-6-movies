@@ -28,6 +28,9 @@ function querySearch(text) {
   return `search/movie?api_key=${API_KEY}&language=en-US&query=${text}&page=1&include_adult=false`;
 }
 
+function addCompareMovie(id) {
+  return `/compare?movie_id=${id}`;
+}
 const requests = {
   fetchMovieById,
   fetchNetworkCompanies,
@@ -36,6 +39,7 @@ const requests = {
   querySearch,
   fetchMoviesByType,
   fetchActorById,
+  addCompareMovie,
 };
 
 export default requests;

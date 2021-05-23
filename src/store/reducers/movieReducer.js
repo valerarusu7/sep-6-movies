@@ -8,6 +8,7 @@ import heroku_axios from "../requests/heroku_axios";
 const initialState = {
   movies: [],
   sliderMovies: [],
+  compareMovies: [],
   loading: false, // Indicates the loading state
   movie: null,
   favoriteMovies: [], // Indicates the favorite movies
@@ -25,6 +26,21 @@ const moviesSlice = createSlice({
     },
     setSliderMovies(state, action) {
       state.sliderMovies = action.payload;
+    },
+    setCompareMovies(state, action) {
+      state.compareMovies = action.payload;
+    },
+    addCompareMovie(state, action) {
+      let newMovies = [...state.compareMovies];
+      newMovies.push(action.payload);
+      state.compareMovies = newMovies;
+    },
+    removeCompareMovie(state, action) {
+      let id = action.payload;
+      let newMovies = [
+        ...state.compareMovies.filter((movie) => movie.id !== id),
+      ];
+      state.compareMovies = newMovies;
     },
     moviesSetLoading(state, action) {
       state.loading = action.payload;
@@ -53,6 +69,9 @@ export default moviesSlice.reducer;
 export const {
   setMovies,
   setSliderMovies,
+  setCompareMovies,
+  addCompareMovie,
+  removeCompareMovie,
   setMovie,
   moviesSetLoading,
   moviesSetFavoriteMovies,
@@ -126,9 +145,50 @@ export const getNetworkMovies = (id) => {
     axios
       .get(requests.fetchNetworkTvShows(id))
       .then((movies) => {
-        console.log(movies);
         dispatch(moviesSetShowResults(movies.data.total_results));
         dispatch(moviesSetNetworkTVShows(movies.data.results));
+        dispatch(moviesSetLoading(false));
+      })
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
+  };
+};
+
+export const getCompareMovieById = ({ id }) => {
+  return (dispatch) => {
+    dispatch(moviesSetLoading(true));
+    heroku_axios
+      .get(requests.fetchMovieById(id))
+      .then((movies) => {
+        dispatch(addCompareMovie(movies.data.details));
+        dispatch(moviesSetLoading(false));
+      })
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
+  };
+};
+
+export const addCompareMovieById = (id, data) => {
+  let config = {
+    method: "post",
+    url:
+      "https://sep-6-movies-server.herokuapp.com" +
+      requests.addCompareMovie(id),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify(data),
+  };
+
+  return (dispatch) => {
+    dispatch(moviesSetLoading(true));
+    axios(config)
+      .then((movies) => {
+        dispatch(setCompareMovies(movies.data.movies));
         dispatch(moviesSetLoading(false));
       })
       .catch((error) => {
