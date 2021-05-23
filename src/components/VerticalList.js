@@ -1,4 +1,5 @@
 import React from "react";
+import PersonItem from "./PersonItem";
 
 function removeDuplicates(originalArray, prop) {
   var newArray = [];
@@ -14,12 +15,17 @@ function removeDuplicates(originalArray, prop) {
   return newArray;
 }
 
-function VerticalList({ list }) {
+function VerticalList({ list, styles }) {
   var uniqueArray = removeDuplicates(list, "id");
   const listElement = uniqueArray.map((element) => {
-    return <p key={element.id}>{element.name}</p>;
+    return (
+      <>
+        <PersonItem styles={styles} element={element} />
+      </>
+    );
   });
-  return <div>{listElement}</div>;
+
+  return <div className={styles.verticalListStyle}>{listElement}</div>;
 }
 
 export default VerticalList;
