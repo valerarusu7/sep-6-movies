@@ -5,10 +5,14 @@ import styles from "../../styles/Search.module.css";
 import SearchItem from "./SearchItem";
 import { BsSearch } from "react-icons/bs";
 import CompareSearchItem from "../CompareSearchItem";
-import { getCompareMovieBy } from "../../store/reducers/movieReducer";
-import { useDispatch } from "react-redux";
+import {
+  addCompareMovieById,
+  getCompareMovieById,
+} from "../../store/reducers/movieReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 const Search = ({ width, compare }) => {
+  const { compareMovies } = useSelector((state) => state.movies);
   const [movies, setMovies] = useState([]);
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
@@ -16,7 +20,24 @@ const Search = ({ width, compare }) => {
 
   function addCompareItem(movie) {
     let id = movie.id;
-    dispatch(getCompareMovieBy({ id }));
+    if (compareMovies.length < 1) {
+      dispatch(getCompareMovieById({ id }));
+    }
+    if (compareMovies.length >= 1 && compareMovies.length < 3) {
+      let movies = [];
+      let unique = true;
+      compareMovies.map((item) => {
+        if (item.id !== movie.id) {
+          movies.push(item);
+        } else {
+          unique = false;
+        }
+      });
+      if (unique) {
+        let data = { movies: movies };
+        dispatch(addCompareMovieById(id, data));
+      }
+    }
     setQuery("");
     setShow(false);
   }

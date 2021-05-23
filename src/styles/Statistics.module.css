@@ -9,6 +9,10 @@
   flex-direction: column;
 }
 
+.container::-webkit-scrollbar {
+  display: none;
+}
+
 .header {
 }
 

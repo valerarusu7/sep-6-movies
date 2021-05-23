@@ -38,7 +38,7 @@ const moviesSlice = createSlice({
     removeCompareMovie(state, action) {
       let id = action.payload;
       let newMovies = [
-        ...state.compareMovies.filter((movie) => movie.details.id !== id),
+        ...state.compareMovies.filter((movie) => movie.id !== id),
       ];
       state.compareMovies = newMovies;
     },
@@ -105,7 +105,6 @@ export const getMovieById = ({ id }) => {
     heroku_axios
       .get(requests.fetchMovieById(id))
       .then((result) => {
-        console.log(result);
         dispatch(setMovie(result.data));
         setTimeout(() => {
           dispatch(moviesSetLoading(false));
@@ -146,7 +145,6 @@ export const getNetworkMovies = (id) => {
     axios
       .get(requests.fetchNetworkTvShows(id))
       .then((movies) => {
-        console.log(movies);
         dispatch(moviesSetShowResults(movies.data.total_results));
         dispatch(moviesSetNetworkTVShows(movies.data.results));
         dispatch(moviesSetLoading(false));
@@ -158,14 +156,39 @@ export const getNetworkMovies = (id) => {
   };
 };
 
-export const getCompareMovieBy = ({ id }) => {
+export const getCompareMovieById = ({ id }) => {
   return (dispatch) => {
     dispatch(moviesSetLoading(true));
     heroku_axios
       .get(requests.fetchMovieById(id))
       .then((movies) => {
-        console.log(movies);
-        dispatch(addCompareMovie(movies.data));
+        dispatch(addCompareMovie(movies.data.details));
+        dispatch(moviesSetLoading(false));
+      })
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
+  };
+};
+
+export const addCompareMovieById = (id, data) => {
+  let config = {
+    method: "post",
+    url:
+      "https://sep-6-movies-server.herokuapp.com" +
+      requests.addCompareMovie(id),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify(data),
+  };
+
+  return (dispatch) => {
+    dispatch(moviesSetLoading(true));
+    axios(config)
+      .then((movies) => {
+        dispatch(setCompareMovies(movies.data.movies));
         dispatch(moviesSetLoading(false));
       })
       .catch((error) => {
