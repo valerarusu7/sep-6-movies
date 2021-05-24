@@ -1,6 +1,5 @@
 .container {
   background-color: #151424;
-  height: 100%;
   width: 100%;
   display: grid;
   justify-content: center;
@@ -68,17 +67,12 @@
   place-items: center;
 }
 
-.poster:hover {
-  transform: scale(1.05);
-}
-
 .movie__info {
   color: grey;
 }
 
 .poster:hover {
-  transition: 350ms;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .row__posters::-webkit-scrollbar {

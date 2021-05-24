@@ -1,29 +1,15 @@
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
-const tmdb_requests = {
-  fetchTrending: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
-  fetchNetflixOriginals: `/discover/tv?api_key=${API_KEY}&with_networks=213`,
-  fetchTopRated: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
-  fetchActionMovies: `/discover/movie?api_key=${API_KEY}&with_genres=28`,
-  fetchComedyMovies: `/discover/movie?api_key=${API_KEY}&with_genres=35`,
-  fetchHorrorMovies: `/discover/movie?api_key=${API_KEY}&with_genres=27`,
-  fetchRomanceMovies: `/discover/movie?api_key=${API_KEY}&with_genres=10749`,
-  fetchDocumentaries: `/discover/movie?api_key=${API_KEY}&with_genres=99`,
-  fetchDrama: `/discover/movie?api_key=${API_KEY}&with_genres=18`,
-  fetchFantasy: `/discover/movie?api_key=${API_KEY}&with_genres=14`,
-  fetchMystery: `/discover/movie?api_key=${API_KEY}&with_genres=9648`,
-};
+function fetchActorById(id) {
+  return `/person?id=${id}`;
+ }
 
 function fetchMovieById(id) {
   return `/movie?id=${id}`;
 }
 
-function fetchMovieCredits(id) {
-  return `/movie/${id}/credits?api_key=${API_KEY}&language=en-US`;
-}
-
-function fetchMovieVideo(id) {
-  return `/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
+function fetchMoviesByType(type, page) {
+  return `/movies?type=${type}&page=${page}`;
 }
 
 function fetchNetworkCompanies(id) {
@@ -38,34 +24,32 @@ function fetchNetworkTvShows(id) {
   return `/discover/tv?api_key=${API_KEY}&with_networks=${id}`;
 }
 
-function querySearch(text) {
-  return `search/movie?api_key=${API_KEY}&language=en-US&query=${text}&page=1&include_adult=false`;
+function querySearch(text, year) {
+  if (year) {
+    return `search/movie?api_key=${API_KEY}&language=en-US&query=${text}&page=1&include_adult=false&year=${year}`;
+  } else {
+    return `search/movie?api_key=${API_KEY}&language=en-US&query=${text}&page=1&include_adult=false`;
+  }
 }
 
-function getNewTrendings(page) {
-  return `/trending/all/week?api_key=${API_KEY}&language=en-US&page=${page}`;
+function addCompareMovie(id) {
+  return `/compare?movie_id=${id}`;
 }
 
-function getNewMoviesById(id, page) {
-  return `/discover/movie?api_key=${API_KEY}&with_genres=${id}&page=${page}`;
-}
-
-function getNewTopRated(page) {
-  return `/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${page}`;
+function getBoxOfficeByYear(year) {
+  return `/box-offices?year=${year}`;
 }
 
 const requests = {
-  tmdb_requests,
+  fetchActorById,
   fetchMovieById,
-  fetchMovieCredits,
-  fetchMovieVideo,
   fetchNetworkCompanies,
   fetchNetworkMovies,
   fetchNetworkTvShows,
   querySearch,
-  getNewTrendings,
-  getNewMoviesById,
-  getNewTopRated,
+  fetchMoviesByType,
+  addCompareMovie,
+  getBoxOfficeByYear,
 };
 
 export default requests;

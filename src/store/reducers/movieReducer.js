@@ -1,28 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import db from "../../firebase/firebase";
 import axios from "../requests/axios";
 import requests from "../requests/requests";
 import heroku_axios from "../requests/heroku_axios";
 
 /************** STATE **************/
 const initialState = {
-  documentariesMovies: [], // Indicates the documentaries movies data
-  trendingMovies: [], // Indicates the trending movies data
-  netflixOriginalsMovies: [], // Indicates the netflix movies data
-  topRatedMovies: [], // Indicates the top rated movies data
-  actionMovies: [], // Indicates the action movies data
-  comedyMovies: [], // Indicates the comedy movies data
-  horrorMovies: [], // Indicates the horror movies data
-  romanceMovies: [], // Indicates the romance movies data
-  dramaMovies: [], // Indicates the drama movies data
-  fantasyMovies: [], // Indicates the fantasy movies data
-  mysteryMovies: [], // Indicates the mystery movies data
-  sliderMovies: [], // Indicates slider movies
+  movies: [],
+  sliderMovies: [],
+  compareMovies: [],
   loading: false, // Indicates the loading state
   movie: null,
-  favoriteMovies: [], // Indicates the favorite movies
   networkTVShows: [], //Indicates the fetched networks TVShows
   showResults: 0, // Inidcates TV Shows results
+  table_data: [],
 };
 
 /************** STATE SLICE **************/
@@ -30,41 +20,26 @@ const moviesSlice = createSlice({
   name: "movies",
   initialState: initialState,
   reducers: {
-    moviesSetDocumentariesMovies(state, action) {
-      state.documentariesMovies = action.payload;
+    setMovies(state, action) {
+      state.movies = action.payload;
     },
-    moviesSetTrendingMovies(state, action) {
-      state.trendingMovies = action.payload;
-    },
-    moviesSetNetflixMovies(state, action) {
-      state.netflixOriginalsMovies = action.payload;
-    },
-    moviesSetTopRatedMovies(state, action) {
-      state.topRatedMovies = action.payload;
-    },
-    moviesSetActionMovies(state, action) {
-      state.actionMovies = action.payload;
-    },
-    moviesSetComedyMovies(state, action) {
-      state.comedyMovies = action.payload;
-    },
-    moviesSetHorrorMovies(state, action) {
-      state.horrorMovies = action.payload;
-    },
-    moviesSetRomanceMovies(state, action) {
-      state.romanceMovies = action.payload;
-    },
-    moviesSetDramaMovies(state, action) {
-      state.dramaMovies = action.payload;
-    },
-    moviesSetMysteryMovies(state, action) {
-      state.mysteryMovies = action.payload;
-    },
-    moviesSetFantasyMovies(state, action) {
-      state.fantasyMovies = action.payload;
-    },
-    moviesSetSliderMovies(state, action) {
+    setSliderMovies(state, action) {
       state.sliderMovies = action.payload;
+    },
+    setCompareMovies(state, action) {
+      state.compareMovies = action.payload;
+    },
+    addCompareMovie(state, action) {
+      let newMovies = [...state.compareMovies];
+      newMovies.push(action.payload);
+      state.compareMovies = newMovies;
+    },
+    removeCompareMovie(state, action) {
+      let id = action.payload;
+      let newMovies = [
+        ...state.compareMovies.filter((movie) => movie.id !== id),
+      ];
+      state.compareMovies = newMovies;
     },
     moviesSetLoading(state, action) {
       state.loading = action.payload;
@@ -72,15 +47,15 @@ const moviesSlice = createSlice({
     setMovie(state, action) {
       state.movie = action.payload;
     },
-    moviesSetFavoriteMovies(state, action) {
-      state.favoriteMovies = action.payload;
-    },
     moviesSetNetworkTVShows(state, action) {
       state.networkTVShows = [];
       state.networkTVShows = action.payload;
     },
     moviesSetShowResults(state, action) {
       state.showResults = action.payload;
+    },
+    setTableData(state, action) {
+      state.table_data = action.payload;
     },
     moviesReset() {
       return initialState;
@@ -91,197 +66,33 @@ const moviesSlice = createSlice({
 /************** EXPORTED ACTIONS & REDUCERS **************/
 export default moviesSlice.reducer;
 export const {
-  moviesSetDocumentariesMovies,
-  moviesSetTrendingMovies,
-  moviesSetNetflixMovies,
-  moviesSetTopRatedMovies,
-  moviesSetActionMovies,
-  moviesSetComedyMovies,
-  moviesSetHorrorMovies,
-  moviesSetRomanceMovies,
-  moviesSetDramaMovies,
-  moviesSetFantasyMovies,
-  moviesSetMysteryMovies,
-  moviesSetLoading,
-  moviesSetSliderMovies,
+  setMovies,
+  setSliderMovies,
+  setCompareMovies,
+  addCompareMovie,
+  removeCompareMovie,
   setMovie,
-  moviesSetFavoriteMovies,
+  moviesSetLoading,
   moviesSetNetworkTVShows,
   moviesSetShowResults,
+  setTableData,
   moviesReset,
 } = moviesSlice.actions;
 
 /************** THUNKS **************/
-export const getTrendingMovies = () => {
-  return (dispatch) => {
-    dispatch(moviesSetLoading(true));
-    axios
-      .get(requests.tmdb_requests.fetchTrending)
-      .then((movies) => {
-        let trending = movies.data.results.splice(8, 19);
-        dispatch(moviesSetShowResults(movies.data.total_results));
-        dispatch(moviesSetSliderMovies(movies.data.results.slice(0, 8)));
-        dispatch(moviesSetTrendingMovies(trending));
-        dispatch(moviesSetLoading(false));
-      })
-      .catch((error) => {
-        dispatch(moviesSetLoading(false));
-        console.log(error);
-      });
-  };
-};
 
-export const getTopRatedMovies = () => {
+export const getMoviesByType = (type, page) => {
   return (dispatch) => {
     dispatch(moviesSetLoading(true));
-    axios
-      .get(requests.tmdb_requests.fetchTopRated)
-      .then((movies) => {
-        dispatch(moviesSetTopRatedMovies(movies.data.results));
-        dispatch(moviesSetLoading(false));
-      })
-      .catch((error) => {
-        dispatch(moviesSetLoading(false));
-        console.log(error);
-      });
-  };
-};
-
-export const getNetflixMovies = () => {
-  return (dispatch) => {
-    dispatch(moviesSetLoading(true));
-    axios
-      .get(requests.tmdb_requests.fetchNetflixOriginals)
-      .then((movies) => {
-        dispatch(moviesSetNetflixMovies(movies.data.results));
-        dispatch(moviesSetLoading(false));
-      })
-      .catch((error) => {
-        dispatch(moviesSetLoading(false));
-        console.log(error);
-      });
-  };
-};
-
-export const getActionMovies = () => {
-  return (dispatch) => {
-    dispatch(moviesSetLoading(true));
-    axios
-      .get(requests.tmdb_requests.fetchActionMovies)
-      .then((movies) => {
-        dispatch(moviesSetActionMovies(movies.data.results));
-        dispatch(moviesSetLoading(false));
-      })
-      .catch((error) => {
-        dispatch(moviesSetLoading(false));
-        console.log(error);
-      });
-  };
-};
-
-export const getComedyMovies = () => {
-  return (dispatch) => {
-    dispatch(moviesSetLoading(true));
-    axios
-      .get(requests.tmdb_requests.fetchComedyMovies)
-      .then((movies) => {
-        dispatch(moviesSetComedyMovies(movies.data.results));
-        dispatch(moviesSetLoading(false));
-      })
-      .catch((error) => {
-        dispatch(moviesSetLoading(false));
-        console.log(error);
-      });
-  };
-};
-
-export const getRomanceMovies = () => {
-  return (dispatch) => {
-    dispatch(moviesSetLoading(true));
-    axios
-      .get(requests.tmdb_requests.fetchRomanceMovies)
-      .then((movies) => {
-        dispatch(moviesSetRomanceMovies(movies.data.results));
-        dispatch(moviesSetLoading(false));
-      })
-      .catch((error) => {
-        dispatch(moviesSetLoading(false));
-        console.log(error);
-      });
-  };
-};
-
-export const getHorrorMovies = () => {
-  return (dispatch) => {
-    dispatch(moviesSetLoading(true));
-    axios
-      .get(requests.tmdb_requests.fetchHorrorMovies)
-      .then((movies) => {
-        dispatch(moviesSetHorrorMovies(movies.data.results));
-        dispatch(moviesSetLoading(false));
-      })
-      .catch((error) => {
-        dispatch(moviesSetLoading(false));
-        console.log(error);
-      });
-  };
-};
-
-export const getDramaMovies = () => {
-  return (dispatch) => {
-    dispatch(moviesSetLoading(true));
-    axios
-      .get(requests.tmdb_requests.fetchDrama)
-      .then((movies) => {
-        dispatch(moviesSetDramaMovies(movies.data.results));
-        dispatch(moviesSetLoading(false));
-      })
-      .catch((error) => {
-        dispatch(moviesSetLoading(false));
-        console.log(error);
-      });
-  };
-};
-
-export const getMysteryMovies = () => {
-  return (dispatch) => {
-    dispatch(moviesSetLoading(true));
-    axios
-      .get(requests.tmdb_requests.fetchMystery)
-      .then((movies) => {
-        dispatch(moviesSetMysteryMovies(movies.data.results));
-        dispatch(moviesSetLoading(false));
-      })
-      .catch((error) => {
-        dispatch(moviesSetLoading(false));
-        console.log(error);
-      });
-  };
-};
-
-export const getFantasyMovies = () => {
-  return (dispatch) => {
-    dispatch(moviesSetLoading(true));
-    axios
-      .get(requests.tmdb_requests.fetchFantasy)
-      .then((movies) => {
-        dispatch(moviesSetFantasyMovies(movies.data.results));
-        dispatch(moviesSetLoading(false));
-      })
-      .catch((error) => {
-        dispatch(moviesSetLoading(false));
-        console.log(error);
-      });
-  };
-};
-
-export const getDocumentariesMovies = () => {
-  return (dispatch) => {
-    dispatch(moviesSetLoading(true));
-    axios
-      .get(requests.tmdb_requests.fetchDocumentaries)
-      .then((movies) => {
-        dispatch(moviesSetDocumentariesMovies(movies.data.results));
+    heroku_axios
+      .get(requests.fetchMoviesByType(type, page))
+      .then((response) => {
+        if (type === "trending") {
+          dispatch(setMovies(response.data.movies.splice(8, 19)));
+          dispatch(setSliderMovies(response.data.movies.slice(0, 8)));
+        } else {
+          dispatch(setMovies(response.data.movies));
+        }
         dispatch(moviesSetLoading(false));
       })
       .catch((error) => {
@@ -312,32 +123,12 @@ export const getMovieById = ({ id }) => {
   };
 };
 
-export const getFavoriteMovies = (uid) => {
-  return (dispatch) => {
-    const ref = db.ref("users/" + uid).orderByChild("index");
-    ref.on(
-      "value",
-      function (snapshot) {
-        let data = [];
-        snapshot.forEach((item) => {
-          data.push(item.val());
-        });
-        dispatch(moviesSetFavoriteMovies(data));
-      },
-      function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-      }
-    );
-  };
-};
-
 export const getNetworkMovies = (id) => {
   return (dispatch) => {
     dispatch(moviesSetLoading(true));
     axios
       .get(requests.fetchNetworkTvShows(id))
       .then((movies) => {
-        console.log(movies);
         dispatch(moviesSetShowResults(movies.data.total_results));
         dispatch(moviesSetNetworkTVShows(movies.data.results));
         dispatch(moviesSetLoading(false));
@@ -349,38 +140,60 @@ export const getNetworkMovies = (id) => {
   };
 };
 
-export const getMovieType = (type) => {
+export const getCompareMovieById = ({ id }) => {
   return (dispatch) => {
-    switch (type) {
-      case "comedy":
-        dispatch(getComedyMovies());
-        break;
-      case "horror":
-        dispatch(getHorrorMovies());
-        break;
-      case "top-rated":
-        dispatch(getTopRatedMovies());
-        break;
-      case "action":
-        dispatch(getActionMovies());
-        break;
-      case "romance":
-        dispatch(getRomanceMovies());
-        break;
-      case "mystery":
-        dispatch(getMysteryMovies());
-        break;
-      case "drama":
-        dispatch(getDramaMovies());
-        break;
-      case "fantasy":
-        dispatch(getFantasyMovies());
-        break;
-      case "documentaries":
-        dispatch(getDocumentariesMovies());
-        break;
-      default:
-        break;
-    }
+    dispatch(moviesSetLoading(true));
+    heroku_axios
+      .get(requests.fetchMovieById(id))
+      .then((movies) => {
+        dispatch(addCompareMovie(movies.data.details));
+        dispatch(moviesSetLoading(false));
+      })
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
+  };
+};
+
+export const addCompareMovieById = (id, data) => {
+  let config = {
+    method: "post",
+    url:
+      "https://sep-6-movies-server.herokuapp.com" +
+      requests.addCompareMovie(id),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify(data),
+  };
+
+  return (dispatch) => {
+    dispatch(moviesSetLoading(true));
+    axios(config)
+      .then((movies) => {
+        dispatch(setCompareMovies(movies.data.movies));
+        dispatch(moviesSetLoading(false));
+      })
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
+  };
+};
+
+export const getBoxOfficeByYear = (year) => {
+  return (dispatch) => {
+    dispatch(moviesSetLoading(true));
+    heroku_axios
+      .get(requests.getBoxOfficeByYear(year))
+      .then((table) => {
+        dispatch(setTableData(table.data.box_office_movies));
+        dispatch(moviesSetLoading(false));
+      })
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
   };
 };

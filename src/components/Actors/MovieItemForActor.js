@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import no_poster from "../../assets/no_poster.png";
 import { AiOutlineStar } from "react-icons/ai";
 import { genres } from "../../genres";
-import MovieReleaseDate from "./MovieReleaseDate";
-import MovieTitle from "./MovieTitle";
-import MovieImage from "./MovieImage";
 
 const MovieItem = ({ movie, styles }) => {
   const [firstGenre, setFirstGenre] = useState();
@@ -36,14 +34,18 @@ const MovieItem = ({ movie, styles }) => {
           {movie.vote_average}
         </div>
       </div>
-      <MovieImage movie={movie} width={260} height={380} />
-      <MovieTitle movie={movie} />
-      <div className={styles.movie__info}>
-        <div>{`${firstGenre}${
-          secondGenre != undefined ? `/${secondGenre}` : ""
-        }`}</div>
-      </div>
-      {show === true ? <MovieReleaseDate movie={movie} /> : null}
+      <img className={styles.movies}
+        src={
+          movie.poster_path != null
+            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+            : no_poster
+        }
+        alt={movie.title}
+     
+      />
+
+
+      
     </Link>
   );
 };

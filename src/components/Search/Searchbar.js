@@ -11,7 +11,7 @@ const Searchbar = ({ name }) => {
     <div className={styles.search__bar}>
       <div className={styles.search__bar__left}>{name}</div>
       <div className={styles.search__bar__right}>
-        <Search />
+        <Search width="400px" />
       </div>
     </div>
   );
