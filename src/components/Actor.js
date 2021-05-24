@@ -40,7 +40,7 @@ const Actor = () => {
                                             </div>
                                         </div>
                                     </section>
-                                    <div class="column">
+                                    <div className={styles.secondRow} >
                                         <section className={styles.facts}>
 
                                             <h3><bdi>Personal Info</bdi></h3>
@@ -62,23 +62,25 @@ const Actor = () => {
                         <div>
                             {actor != undefined || null ? (
                                 <div className={styles.column}>
-                                    <section>
-                                        <div className={styles.title}>
-                                            <h2 className={styles.facts}>{actor.details.name}</h2>
-                                        </div>
-                                    </section>
-                                    <section>
-                                        <div className={styles.biography}>
-                                            <p><strong> Biography</strong>
-                                                {actor.details.biography}
-                                            </p>
-                                        </div>
-                                    </section>
-                                    <section>
+                                    <div className={styles.poster_wrapper}>
+                                        <section>
+                                            <div className={styles.title}>
+                                                <h2 className={styles.facts}>{actor.details.name}</h2>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div className={styles.biography}>
+                                                <p><strong> Biography</strong>
+                                                    {actor.details.biography}
+                                                </p>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <section className={styles.secondRow}>
                                         <div className={styles.top}><strong> Top 5 Movies</strong></div>
                                     </section>
 
-                                    <div> {actor.top_5 !== null || undefined
+                                    <div className={styles.topmovies}> {actor.top_5 !== null || undefined
                                         ? actor.top_5.map((movie) => (
                                             <MovieItem movie={movie} styles={styles} key={movie.id} />
                                         ))

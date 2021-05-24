@@ -26,26 +26,22 @@ const MovieItem = ({ movie, styles }) => {
       to={`/movie/${movie.id}`}
       key={movie.id}
       onMouseEnter={() => setShow(true)}
-      onMouseLeave={() => setShow(false)}
-    >
-      <div className={styles.rating}>
-        <div className={styles.rating__content}>
-          <AiOutlineStar size={20} style={{ marginRight: 5 }} />
-          {movie.vote_average}
+      onMouseLeave={() => setShow(false)}>
+      <div className={styles.movies} >
+        <div className={styles.rating}>
+          <div className={styles.rating__content}>
+            <AiOutlineStar size={20} style={{ marginRight: 5 }} />
+            {movie.vote_average}
+          </div>
         </div>
-      </div>
-      <img className={styles.movies}
-        src={
-          movie.poster_path != null
-            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-            : no_poster
-        }
-        alt={movie.title}
-     
-      />
-
-
-      
+        <img className={styles.movies}
+          src={
+            movie.poster_path != null
+              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+              : no_poster
+          }
+          alt={movie.title}
+        /></div>
     </Link>
   );
 };

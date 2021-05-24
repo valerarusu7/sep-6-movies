@@ -17,12 +17,11 @@
 
   .profile {
     width: 250px;
-    height: 400px;
+    height: 375px;
     border-radius: 50%;
     border-radius: var(--imageBorderRadius);
     overflow: hidden;
     display: block;
-  
     border-width: 0px;
     outline: none;
     border-radius:5px;
@@ -32,13 +31,16 @@
   .facts{
     height: 50px;
     color: white;
-  
   }
 
   .biography{
-    height: 300px;
+    height: 270px;
+    max-width: 90%;
+    margin-left: 20px;
     color: white;
     overflow:scroll;
+    margin-bottom: 30px;
+
   }
   
   
@@ -55,6 +57,9 @@
     justify-content: center;
     align-items: flex-start;
     align-content: flex-start;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
   }
   
   .reverse .grey_column {
@@ -64,7 +69,7 @@
   
   }
   section.inner_content section.images div.poster, section.inner_content section.images div.profile {
-    min-width: 300px;
+    min-width: 200px;
     width: 300px;
     height: 450px;
     position: relative;
@@ -103,6 +108,9 @@
   }
 .topmovies{
   display: flex;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 
@@ -131,4 +139,20 @@
     font-size: 13px;
     justify-content: space-evenly;
     place-items: center;
+  }
+
+  .poster_wrapper{
+    height: 400px;
+  }
+  .secondRow{
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+
+  .topmovies{
+    display: flex;
+  }
+
+  .title{
+    margin-left: 20px;
   }
