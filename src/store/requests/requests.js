@@ -20,13 +20,22 @@ function fetchNetworkTvShows(id) {
   return `/discover/tv?api_key=${API_KEY}&with_networks=${id}`;
 }
 
-function querySearch(text) {
-  return `search/movie?api_key=${API_KEY}&language=en-US&query=${text}&page=1&include_adult=false`;
+function querySearch(text, year) {
+  if (year) {
+    return `search/movie?api_key=${API_KEY}&language=en-US&query=${text}&page=1&include_adult=false&year=${year}`;
+  } else {
+    return `search/movie?api_key=${API_KEY}&language=en-US&query=${text}&page=1&include_adult=false`;
+  }
 }
 
 function addCompareMovie(id) {
   return `/compare?movie_id=${id}`;
 }
+
+function getBoxOfficeByYear(year) {
+  return `/box-offices?year=${year}`;
+}
+
 const requests = {
   fetchMovieById,
   fetchNetworkCompanies,
@@ -35,6 +44,7 @@ const requests = {
   querySearch,
   fetchMoviesByType,
   addCompareMovie,
+  getBoxOfficeByYear,
 };
 
 export default requests;
