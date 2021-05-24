@@ -1,5 +1,9 @@
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
+function fetchActorById(id) {
+  return `/person?id=${id}`;
+ }
+
 function fetchMovieById(id) {
   return `/movie?id=${id}`;
 }
@@ -37,6 +41,7 @@ function getBoxOfficeByYear(year) {
 }
 
 const requests = {
+  fetchActorById,
   fetchMovieById,
   fetchNetworkCompanies,
   fetchNetworkMovies,
