@@ -60,6 +60,21 @@
   place-items: center;
 }
 
+.profileLink {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  place-items: center;
+  width: 100%;
+}
+
+.profileLink:hover {
+  background-color: rgb(31, 32, 48);
+  border-radius: 5px;
+}
+
 .link__border {
   text-decoration: inherit;
   color: inherit;

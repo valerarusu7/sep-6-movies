@@ -14,6 +14,7 @@ import "./styles/App.css";
 import NotFound from "./pages/404";
 import Statistics from "./pages/Statistics";
 import Actor from "./components/Actor";
+import Profile from "./pages/Profile";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -34,6 +35,7 @@ function App() {
             >
               <Switch location={location}>
                 <Route path="/" exact component={Home} />
+                <Route path="/profile" component={Profile} />
                 <Route path="/genre/:type" exact component={Genre} />
                 <Route path="/favorite-movies" component={Favorite} />
                 <Route path="/networks" component={Networks} />

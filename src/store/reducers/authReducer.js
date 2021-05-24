@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { auth, provider } from "../../firebase/firebase";
 import db from "../../firebase/firebase";
+import { createAdditionalUserInfo } from "../../firebase/utils";
 
 /************** STATE **************/
 const initialState = {
@@ -36,7 +37,10 @@ export const signIn = () => {
     auth
       .signInWithPopup(provider)
       .then((result) => {
-        console.log(result);
+        var isNewUser = result.additionalUserInfo.isNewUser;
+        if (isNewUser) {
+          createAdditionalUserInfo(result.user);
+        }
         dispatch(authSetUser(result.user));
       })
       .catch((error) => console.log(error));
