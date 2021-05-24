@@ -1,5 +1,5 @@
 import React from "react";
-import VerticalList from "./VerticalList";
+import VerticalList from "../VerticalList";
 
 const MovieCredits = ({ styles, credits }) => {
   return (
