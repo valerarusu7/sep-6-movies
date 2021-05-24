@@ -20,7 +20,6 @@ const authSlice = createSlice({
       return initialState;
     },
     moviesSetFavoriteMovies(state, action) {
-      console.log("ACTIVATED");
       state.favoriteMovies = action.payload;
     },
   },

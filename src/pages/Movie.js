@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { addFavoriteMovie } from "../firebase/utils";
+import { addFavoriteMovie, removeFavoriteMovie } from "../firebase/utils";
 import { getMovieById } from "../store/reducers/movieReducer";
 import { moviesSetFavoriteMovies } from "../store/reducers/authReducer";
 import { store } from "../store/store";
@@ -45,19 +45,24 @@ const Movie = () => {
     };
     data.push(favoriteMovie);
     addFavoriteMovie(user, movie.details, index);
-    console.log(data);
     dispatch(moviesSetFavoriteMovies(data));
     setIsFavorite(true);
   }
 
+  function removeMovie() {
+    let data = [...store.getState().auth.favoriteMovies];
+    console.log(data);
+    var filteredData = data.filter((x) => x.id !== movie.details.id);
+    removeFavoriteMovie(user, movie.details);
+    dispatch(moviesSetFavoriteMovies(filteredData));
+    setIsFavorite(false);
+  }
+
   function isFavoriteMovie() {
-    console.log("LOL");
-    console.log(favoriteMovies);
     if (favoriteMovies.length !== 0) {
-      console.log("LUL");
       favoriteMovies.map((movie) => {
+        //Dont put three equals otherwise it wont recognize ID
         if (movie.id == id) {
-          console.log("LEL");
           setIsFavorite(true);
         }
       });
@@ -160,7 +165,10 @@ const Movie = () => {
                 />
 
                 {isFavorite ? (
-                  <button className={styles.favouriteButton}>
+                  <button
+                    className={styles.favouriteButton}
+                    onClick={() => removeMovie()}
+                  >
                     Remove from favorites
                   </button>
                 ) : (
