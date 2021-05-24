@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import db from "../../firebase/firebase";
 import axios from "../requests/axios";
 import requests from "../requests/requests";
 import heroku_axios from "../requests/heroku_axios";
@@ -11,7 +10,6 @@ const initialState = {
   compareMovies: [],
   loading: false, // Indicates the loading state
   movie: null,
-  favoriteMovies: [], // Indicates the favorite movies
   networkTVShows: [], //Indicates the fetched networks TVShows
   showResults: 0, // Inidcates TV Shows results
   table_data: [],
@@ -49,9 +47,6 @@ const moviesSlice = createSlice({
     setMovie(state, action) {
       state.movie = action.payload;
     },
-    moviesSetFavoriteMovies(state, action) {
-      state.favoriteMovies = action.payload;
-    },
     moviesSetNetworkTVShows(state, action) {
       state.networkTVShows = [];
       state.networkTVShows = action.payload;
@@ -78,7 +73,6 @@ export const {
   removeCompareMovie,
   setMovie,
   moviesSetLoading,
-  moviesSetFavoriteMovies,
   moviesSetNetworkTVShows,
   moviesSetShowResults,
   setTableData,
@@ -126,25 +120,6 @@ export const getMovieById = ({ id }) => {
           return;
         }
       });
-  };
-};
-
-export const getFavoriteMovies = (uid) => {
-  return (dispatch) => {
-    const ref = db.ref("users/" + uid).orderByChild("index");
-    ref.on(
-      "value",
-      function (snapshot) {
-        let data = [];
-        snapshot.forEach((item) => {
-          data.push(item.val());
-        });
-        dispatch(moviesSetFavoriteMovies(data));
-      },
-      function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-      }
-    );
   };
 };
 
