@@ -1,6 +1,7 @@
 import React from "react";
 import DescriptionItem from "./DescriptionItem";
 import MovieGenres from "./MovieGenres";
+import { BsArrowRight } from "react-icons/bs";
 
 const MovieDescription = ({ movie, data, styles }) => {
   return (
@@ -22,6 +23,9 @@ const MovieDescription = ({ movie, data, styles }) => {
           header="Revenue:"
           value={`${movie.revenue.toLocaleString()} $`}
         />
+        <div className={styles.compareArrow}>
+          <span>Compare </span> <BsArrowRight size="25px" />
+        </div>
       </div>
       <p>{movie.overview}</p>
     </>
