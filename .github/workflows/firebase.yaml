@@ -28,7 +28,7 @@ jobs:
       - name: yarn install, build and test
         run: |
           yarn install
-          yarn build
+          yarn run build
       - name: Archive Build
         uses: actions/upload-artifact@v2
         with:
