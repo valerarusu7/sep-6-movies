@@ -14,6 +14,7 @@ const initialState = {
   favoriteMovies: [], // Indicates the favorite movies
   networkTVShows: [], //Indicates the fetched networks TVShows
   showResults: 0, // Inidcates TV Shows results
+  table_data: [],
 };
 
 /************** STATE SLICE **************/
@@ -58,6 +59,9 @@ const moviesSlice = createSlice({
     moviesSetShowResults(state, action) {
       state.showResults = action.payload;
     },
+    setTableData(state, action) {
+      state.table_data = action.payload;
+    },
     moviesReset() {
       return initialState;
     },
@@ -77,6 +81,7 @@ export const {
   moviesSetFavoriteMovies,
   moviesSetNetworkTVShows,
   moviesSetShowResults,
+  setTableData,
   moviesReset,
 } = moviesSlice.actions;
 
@@ -88,8 +93,12 @@ export const getMoviesByType = (type, page) => {
     heroku_axios
       .get(requests.fetchMoviesByType(type, page))
       .then((response) => {
-        dispatch(setMovies(response.data.movies.splice(8, 19)));
-        dispatch(setSliderMovies(response.data.movies.slice(0, 8)));
+        if (type === "trending") {
+          dispatch(setMovies(response.data.movies.splice(8, 19)));
+          dispatch(setSliderMovies(response.data.movies.slice(0, 8)));
+        } else {
+          dispatch(setMovies(response.data.movies));
+        }
         dispatch(moviesSetLoading(false));
       })
       .catch((error) => {
@@ -189,6 +198,22 @@ export const addCompareMovieById = (id, data) => {
     axios(config)
       .then((movies) => {
         dispatch(setCompareMovies(movies.data.movies));
+        dispatch(moviesSetLoading(false));
+      })
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
+  };
+};
+
+export const getBoxOfficeByYear = (year) => {
+  return (dispatch) => {
+    dispatch(moviesSetLoading(true));
+    heroku_axios
+      .get(requests.getBoxOfficeByYear(year))
+      .then((table) => {
+        dispatch(setTableData(table.data.box_office_movies));
         dispatch(moviesSetLoading(false));
       })
       .catch((error) => {
