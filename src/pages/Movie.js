@@ -103,6 +103,7 @@ const Movie = () => {
               display: "inline-flex",
               justifyContent: "center",
               flexWrap: "wrap",
+              marginTop: "0px",
             }}
           >
             {movie.similar_movies !== null || undefined ? (
