@@ -3,7 +3,7 @@ html {
 }
 
 ::-webkit-scrollbar {
-  width: 12px !important;
+  height: 15px;
 }
 
 ::-webkit-scrollbar-track {
