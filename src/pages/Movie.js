@@ -11,8 +11,9 @@ import { AiOutlineStar, AiFillDownCircle } from "react-icons/ai";
 import { usePalette } from "react-palette";
 import MovieDescription from "../components/Movies/MovieDescription";
 import Loading from "../components/Loading";
-import MovieCredits from "../components/MovieCredits";
+import MovieCredits from "../components/Movies/MovieCredits";
 import MovieItem from "../components/Movies/MovieItem";
+import MovieVideo from "../components/Movies/MovieVideo";
 
 const Movie = () => {
   const { user } = useSelector((state) => state.auth);
@@ -98,7 +99,11 @@ const Movie = () => {
         component = (
           <div
             className={movieItemStyles.container}
-            style={{ display: "inline-flex", justifyContent: "center" }}
+            style={{
+              display: "inline-flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
           >
             {movie.similar_movies !== null || undefined ? (
               movie.similar_movies.map((similarMovie) => (
@@ -115,7 +120,13 @@ const Movie = () => {
         );
         break;
       case 3:
-        component = <div />;
+        component = (
+          <div className={styles.movieVideo}>
+            {movie.videos.results.map((movieVideo) => {
+              return <MovieVideo video={movieVideo} />;
+            })}
+          </div>
+        );
         break;
       case 4:
         component = <div />;
@@ -179,14 +190,14 @@ const Movie = () => {
                     Add to favorites
                   </button>
                 )}
-                {movie.trailer != null || undefined ? (
+                {movie.videos.results.length !== 0 ? (
                   <button
                     className={styles.trailerButton}
                     type="button"
                     style={trailerStyle}
                     onClick={() =>
                       window.open(
-                        `https://www.youtube.com/watch?v=${movie.trailer.key}`,
+                        `https://www.youtube.com/watch?v=${movie.videos.results[0].key}`,
                         "_blank"
                       )
                     }
