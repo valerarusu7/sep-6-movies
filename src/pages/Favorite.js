@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import FavoriteMovie from "../components/FavoriteMovie";
 import { updateOrderMovie } from "../firebase/utils";
 import {
-  getFavoriteMovies,
   moviesSetFavoriteMovies,
-} from "../store/reducers/movieReducer";
+  getFavoriteMovies,
+} from "../store/reducers/userReducer";
 import styles from "../styles/FavoriteMovie.module.css";
 
 const Favorite = () => {
   const { user } = useSelector((state) => state.auth);
-  const { favoriteMovies } = useSelector((state) => state.movies);
+  const { favoriteMovies } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {

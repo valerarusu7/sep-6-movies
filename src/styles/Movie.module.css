@@ -3,7 +3,7 @@ html {
 }
 
 ::-webkit-scrollbar {
-  width: 12px !important;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -37,7 +37,8 @@ html {
   display: none;
 }
 
-.movieGenre {
+.movieGenre,
+.movieVideo {
   display: flex;
   flex-wrap: wrap;
 }
@@ -75,10 +76,10 @@ p {
 }
 
 .img {
-  max-width: 100%;
+  width: calc(100% - 250px);
   height: 100vh;
   position: absolute;
-  right: -220px;
+  right: 0px;
   top: 0;
   bottom: 0;
 }
@@ -170,14 +171,18 @@ p {
   color: white;
 }
 
-#otherInfoChooser {
-  height: 100px;
-}
-
-#otherInfoChooser {
+#otherInfoChooser,
+.movieVideo {
   display: flex;
+  height: 100px;
   align-items: center;
   justify-content: center;
+}
+
+.movieVideo * {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 20px;
 }
 
 #otherInfoChooser li {
