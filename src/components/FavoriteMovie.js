@@ -5,7 +5,7 @@ import { MdDragHandle } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../store/store";
 import { removeFavoriteMovie } from "../firebase/utils";
-import { moviesSetFavoriteMovies } from "../store/reducers/authReducer";
+import { moviesSetFavoriteMovies } from "../store/reducers/userReducer";
 import { Link } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 
