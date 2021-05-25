@@ -12,6 +12,8 @@ import Network from "./pages/Network";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./styles/App.css";
 import NotFound from "./pages/404";
+import Statistics from "./pages/Statistics";
+import Actor from "./components/Actor";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -22,7 +24,6 @@ function App() {
     <div>
       {user != null ? (
         <Layout>
-          <Navbar />
           <TransitionGroup>
             <CSSTransition
               key={currentKey}
@@ -36,8 +37,10 @@ function App() {
                 <Route path="/genre/:type" exact component={Genre} />
                 <Route path="/favorite-movies" component={Favorite} />
                 <Route path="/networks" component={Networks} />
+                <Route path="/statistics" component={Statistics} />
                 <Route path="/network/:id" component={Network} />
                 <Route path="/movie/:id" component={Movie} />
+                <Route path="/person/:id" component={Actor} />
                 <Route path="/*" component={NotFound} />
               </Switch>
             </CSSTransition>

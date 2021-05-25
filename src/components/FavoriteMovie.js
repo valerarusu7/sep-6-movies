@@ -5,9 +5,9 @@ import { MdDragHandle } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../store/store";
 import { removeFavoriteMovie } from "../firebase/utils";
-import { moviesSetFavoriteMovies } from "../store/reducers/movieReducer";
+import { moviesSetFavoriteMovies } from "../store/reducers/authReducer";
 import { Link } from "react-router-dom";
-import linkStyles from "../styles/Navbar.module.css";
+import { MdDeleteForever } from "react-icons/md";
 
 const FavoriteMovie = ({ item, index }) => {
   const { user } = useSelector((state) => state.auth);
@@ -30,19 +30,34 @@ const FavoriteMovie = ({ item, index }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <Link to={`/movie/${item.id}`} className={linkStyles.link}>
+          <div>
             <div className={styles.container}>
-              <MdDragHandle size={25} />
-              <div className={styles.position}> {index + 1}</div>
-              <img
-                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                alt={item.title}
-                className={styles.img}
-              />
-              <div> {item.title}</div>
-              <button onClick={() => removeMovie()}>Remove</button>
+              <Link to={`/movie/${item.id}`} className={styles.container__left}>
+                <MdDragHandle size={30} color="white" />
+                <div className={styles.position}> {index + 1}</div>
+              </Link>
+              <Link
+                to={`/movie/${item.id}`}
+                className={styles.container__center}
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                  alt={item.title}
+                  className={styles.img}
+                />
+                <p className={styles.title}>{item.title}</p>
+                <p className={styles.title}>{item.year}</p>
+                <p className={styles.title}>{item.vote_average}</p>
+              </Link>
+              <div className={styles.container__right}>
+                <MdDeleteForever
+                  onClick={() => removeMovie()}
+                  color="#8c0303"
+                  size={30}
+                />
+              </div>
             </div>
-          </Link>
+          </div>
         </div>
       )}
     </Draggable>

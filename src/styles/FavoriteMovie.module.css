@@ -1,31 +1,116 @@
+.favorite__movies__container {
+  width: calc(90% - 250px);
+  padding: 10px;
+  position: relative;
+  left: 250px;
+}
+
+.header {
+  color: white;
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  font-size: 20px;
+}
+
 .container {
   display: flex;
   border: solid;
-  border-color: black;
+  border-color: rgba(255, 255, 255, 0.3);
   border-width: 1px;
   border-radius: 5px;
   padding: 10px;
   margin: 5px;
   align-items: center;
   cursor: pointer;
+  background-color: #1f2030;
+  width: 100%;
+  height: 100px;
+  color: white;
+}
+
+.header__table {
+  display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 5px;
+  align-items: center;
+  width: 100%;
+  color: grey;
+  font-weight: 500;
+  cursor: auto;
+}
+
+.container__left {
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+  height: 100%;
+  width: 10%;
+  text-decoration: inherit;
+  cursor: inherit;
+}
+
+.container__center {
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+  height: 100%;
+  width: 85%;
+  color: inherit;
+  text-decoration: inherit;
+  cursor: inherit;
+  text-align: start;
+  justify-content: space-evenly;
+  text-align: justify;
+}
+
+.container__right {
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+  height: 100%;
+  width: 5%;
+  justify-content: center;
+}
+
+.title {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+}
+
+.overview {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 .position {
   padding: 10px;
   border: solid;
-  border-color: grey;
   border-width: 1px;
   border-radius: 10px;
   margin: 5px;
   height: 40px;
   width: 40px;
   display: flex;
-  align-items: center;
-  align-self: center;
   text-align: center;
   justify-content: center;
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 30px;
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .img {
   height: 100px;
+  object-fit: contain;
+  width: 5%;
 }

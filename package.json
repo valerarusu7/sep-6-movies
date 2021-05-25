@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.58",
     "@reduxjs/toolkit": "^1.5.1",
     "@sentry/react": "^6.2.5",
@@ -14,6 +15,7 @@
     "axios": "^0.21.1",
     "better-react-spinkit": "^2.0.4",
     "firebase": "^8.4.1",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-animated-list": "^0.1.4",
     "react-beautiful-dnd": "^13.1.0",

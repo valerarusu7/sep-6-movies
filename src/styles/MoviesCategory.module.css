@@ -1,11 +1,11 @@
 .container {
   background-color: #151424;
-  height: 100%;
-  width: 99%;
+  width: 100%;
   display: grid;
   justify-content: center;
   place-items: center;
   margin: auto;
+  margin-top: 50px;
 }
 
 .container::-webkit-scrollbar {
@@ -46,11 +46,33 @@
   color: inherit;
   cursor: pointer;
   color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.rating {
+  background-color: black;
+  opacity: 0.8;
+  top: 30px;
+  position: absolute;
+  color: white;
+  border-top-right-radius: 99px;
+  border-bottom-right-radius: 99px;
+  padding: 7px;
+}
+
+.rating__content {
+  display: flex;
+  font-size: 18px;
+  justify-content: space-evenly;
+  place-items: center;
+}
+
+.movie__info {
+  color: grey;
 }
 
 .poster:hover {
-  transition: 350ms;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .row__posters::-webkit-scrollbar {

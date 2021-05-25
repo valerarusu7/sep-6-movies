@@ -3,14 +3,12 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import FavoriteMovie from "../components/FavoriteMovie";
 import { updateOrderMovie } from "../firebase/utils";
-import {
-  getFavoriteMovies,
-  moviesSetFavoriteMovies,
-} from "../store/reducers/movieReducer";
+import { moviesSetFavoriteMovies } from "../store/reducers/authReducer";
+import { getFavoriteMovies } from "../store/reducers/authReducer";
+import styles from "../styles/FavoriteMovie.module.css";
 
 const Favorite = () => {
-  const { user } = useSelector((state) => state.auth);
-  const { favoriteMovies } = useSelector((state) => state.movies);
+  const { user, favoriteMovies } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -59,13 +57,19 @@ const Favorite = () => {
   }
 
   return (
-    <center
-      style={{
-        width: "70%",
-        margin: "auto",
-        display: "block",
-      }}
-    >
+    <center className={styles.favorite__movies__container}>
+      <div className={styles.header}>Favorite Movies List</div>
+      <div className={styles.header__table}>
+        <div className={styles.container__left}>
+          <div>Rank</div>
+        </div>
+        <div className={styles.container__center}>
+          <div style={{ margin: 15 }}>Poster</div>
+          <p className={styles.title}>Title</p>
+          <p className={styles.title}>Year</p>
+          <p className={styles.title}>Rating</p>
+        </div>
+      </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided) => (
