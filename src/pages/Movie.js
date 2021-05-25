@@ -31,7 +31,7 @@ const Movie = () => {
   }, []);
 
   function addMovie() {
-    let data = [...store.getState().auth.favoriteMovies];
+    let data = [...store.getState().user.favoriteMovies];
     let size = favoriteMovies.length;
     let index = 1;
     if (size !== 0) {
@@ -51,7 +51,7 @@ const Movie = () => {
   }
 
   function removeMovie() {
-    let data = [...store.getState().auth.favoriteMovies];
+    let data = [...store.getState().user.favoriteMovies];
     console.log(data);
     var filteredData = data.filter((x) => x.id !== movie.details.id);
     removeFavoriteMovie(user, movie.details);

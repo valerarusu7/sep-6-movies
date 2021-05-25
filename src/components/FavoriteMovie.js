@@ -16,7 +16,7 @@ const FavoriteMovie = ({ item, index }) => {
   function removeMovie() {
     removeFavoriteMovie(user, item);
     let state = store.getState();
-    let newMovies = [...state.movies.favoriteMovies];
+    let newMovies = [...state.user.favoriteMovies];
     newMovies.splice(item.id, 1);
     dispatch(moviesSetFavoriteMovies(newMovies));
   }
