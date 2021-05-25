@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { addFavoriteMovie, removeFavoriteMovie } from "../firebase/utils";
 import { getMovieById } from "../store/reducers/movieReducer";
-import { moviesSetFavoriteMovies } from "../store/reducers/authReducer";
+import { moviesSetFavoriteMovies } from "../store/reducers/userReducer";
 import { store } from "../store/store";
 import styles from "../styles/Movie.module.css";
 import movieItemStyles from "../styles/MoviesCategory.module.css";
@@ -20,7 +20,7 @@ const Movie = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [activeContent, setActiveContent] = useState(1);
   const { movie } = useSelector((state) => state.movies);
-  const { favoriteMovies } = useSelector((state) => state.auth);
+  const { favoriteMovies } = useSelector((state) => state.user);
   const movieLoading = useSelector((state) => state.movies.loading);
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -31,7 +31,7 @@ const Movie = () => {
   }, []);
 
   function addMovie() {
-    let data = [...store.getState().auth.favoriteMovies];
+    let data = [...store.getState().user.favoriteMovies];
     let size = favoriteMovies.length;
     let index = 1;
     if (size !== 0) {
@@ -51,7 +51,7 @@ const Movie = () => {
   }
 
   function removeMovie() {
-    let data = [...store.getState().auth.favoriteMovies];
+    let data = [...store.getState().user.favoriteMovies];
     console.log(data);
     var filteredData = data.filter((x) => x.id !== movie.details.id);
     removeFavoriteMovie(user, movie.details);

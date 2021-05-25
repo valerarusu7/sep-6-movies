@@ -3,12 +3,15 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import FavoriteMovie from "../components/FavoriteMovie";
 import { updateOrderMovie } from "../firebase/utils";
-import { moviesSetFavoriteMovies } from "../store/reducers/authReducer";
-import { getFavoriteMovies } from "../store/reducers/authReducer";
+import {
+  moviesSetFavoriteMovies,
+  getFavoriteMovies,
+} from "../store/reducers/userReducer";
 import styles from "../styles/FavoriteMovie.module.css";
 
 const Favorite = () => {
-  const { user, favoriteMovies } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
+  const { favoriteMovies } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
