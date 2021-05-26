@@ -1,6 +1,6 @@
 const API_KEY = "e453502d7e2f31ded447961d9d1f121c";
 
-function fetchActorById(id) {
+function fetchPersonById(id) {
   return `/person?id=${id}`;
 }
 
@@ -41,7 +41,7 @@ function getBoxOfficeByYear(year) {
 }
 
 const requests = {
-  fetchActorById,
+  fetchPersonById,
   fetchMovieById,
   fetchNetworkCompanies,
   fetchNetworkMovies,

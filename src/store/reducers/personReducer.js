@@ -4,7 +4,7 @@ import requests from "../requests/requests";
 
 /************** STATE **************/
 const initialState = {
-actor:null
+person:null
 };
 
 /************** STATE SLICE **************/
@@ -12,8 +12,8 @@ const personSlice = createSlice({
   name: "people",
   initialState: initialState,
   reducers: {
-    setActor(state, action) {
-      state.actor = action.payload;
+    setPerson(state, action) {
+      state.person = action.payload;
     }
   },
 });
@@ -21,20 +21,20 @@ const personSlice = createSlice({
 /************** EXPORTED ACTIONS & REDUCERS **************/
 export default personSlice.reducer;
 export const {
-  setActor,
+  setPerson,
 } = personSlice.actions;
 
 /************** THUNKS **************/
 
 
 
-export const getActorById = ({ id }) => {
+export const getPersonById = ({ id }) => {
   return (dispatch) => {
     axios
-      .get(requests.fetchActorById(id))
+      .get(requests.fetchPersonById(id))
       .then((result) => {
         console.log(result);
-        dispatch(setActor(result.data));
+        dispatch(setPerson(result.data));
       })
       .catch((error) => {
         if (error.response.status === 404) {
