@@ -12,9 +12,7 @@ const Genre = () => {
   const [page, setPage] = useState();
   const dispatch = useDispatch();
   const { type } = useParams();
-  {
-    console.log(page);
-  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getMoviesByType(type, page));
