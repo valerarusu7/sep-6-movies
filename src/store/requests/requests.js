@@ -1,8 +1,8 @@
-const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+const API_KEY = "e453502d7e2f31ded447961d9d1f121c";
 
 function fetchActorById(id) {
   return `/person?id=${id}`;
- }
+}
 
 function fetchMovieById(id) {
   return `/movie?id=${id}`;
