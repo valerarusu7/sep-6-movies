@@ -70,7 +70,7 @@ const Movie = () => {
     }
   }
 
-  const { data, loading, error } = usePalette(
+  const { data } = usePalette(
     movie != null
       ? `https://image.tmdb.org/t/p/original/${movie.details.backdrop_path}`
       : null

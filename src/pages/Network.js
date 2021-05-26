@@ -9,7 +9,7 @@ import Loading from "../components/Loading";
 import NetworkLogo from "../components/NetworkLogo";
 import { NavLink } from "react-router-dom";
 
-const Network = ({}) => {
+const Network = () => {
   const { networkTVShows, loading } = useSelector((state) => state.movies);
   const [image, setImage] = useState();
   const [name, setName] = useState();
@@ -20,14 +20,15 @@ const Network = ({}) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     networkCompanies.map((company) => {
-      if (id == company.id) {
+      if (parseInt(id) === parseInt(company.id)) {
         setImage(company.logo_path);
         setName(company.name);
         setDescription(company.description);
       }
+      return true;
     });
     dispatch(getNetworkMovies(id));
-  }, []);
+  }, [dispatch, id]);
 
   return (
     <div className={styles.container}>
@@ -53,7 +54,7 @@ const Network = ({}) => {
                 </div>
                 <div className={styles.company__logos}>
                   {networkCompanies
-                    .filter((company) => company.id != id)
+                    .filter((company) => parseInt(company.id) !== parseInt(id))
                     .map((company) => {
                       return (
                         <NavLink to={`/network/${company.id}`} key={company.id}>
