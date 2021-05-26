@@ -1,23 +1,15 @@
 import React, { useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
-
+import style from "../../styles/Main.module.css";
 const Layout = ({ children }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <div style={{ display: "flex", flexGrow: 1 }}>
+    <div className={{ display: "flex", flexDirection: "column" }}>
+      <div className={{ display: "flex", flexGrow: 1 }}>
         <Navbar />
-        <main
-          style={{
-            width: "100%",
-            height: "100vh",
-            overflowY: "hidden",
-          }}
-        >
-          {children}
-        </main>
+        <main className={style.main__children}>{children}</main>
       </div>
     </div>
   );
