@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "black-balancer-310707"
+    "default": "black-balancer-310707",
+    "prod": "black-balancer-310707"
   }
 }
