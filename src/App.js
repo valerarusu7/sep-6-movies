@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import Login from "./pages/Login";
 import Layout from "./pages/Layout/Layout";
 import Home from "./pages/Home";
-import Navbar from "./components/Navbar/Navbar";
 import Favorite from "./pages/Favorite";
 import { Route, Switch, useLocation } from "react-router";
 import Movie from "./pages/Movie";

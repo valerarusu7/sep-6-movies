@@ -1,6 +1,4 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { getCompareMovieBy } from "../store/reducers/movieReducer";
 import MovieImage from "./Movies/MovieImage";
 import MovieReleaseDate from "./Movies/MovieReleaseDate";
 import MovieTitle from "./Movies/MovieTitle";

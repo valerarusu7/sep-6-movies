@@ -1,4 +1,3 @@
-import { Skeleton } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
@@ -13,9 +12,7 @@ const Genre = () => {
   const [page, setPage] = useState();
   const dispatch = useDispatch();
   const { type } = useParams();
-  {
-    console.log(page);
-  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getMoviesByType(type, page));

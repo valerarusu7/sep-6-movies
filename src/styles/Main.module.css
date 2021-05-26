@@ -1,0 +1,19 @@
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__container {
+  display: flex;
+  flex-grow: 1;
+}
+
+.main__children {
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.main__children::-webkit-scrollbar {
+  display: none;
+}

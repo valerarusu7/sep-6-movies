@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { signIn } from "../store/reducers/authReducer";
 import style from "../styles/Login.module.css";
-import photo from "../assets/google_PNG19635.png";
 
 const Login = () => {
   const dispatch = useDispatch();

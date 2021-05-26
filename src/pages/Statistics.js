@@ -16,14 +16,8 @@ const Statistics = ({}) => {
       case 2:
         component = <BoxOffice styles={styles} />;
         break;
-      case 3:
-        component = <div />;
-        break;
-      case 4:
-        component = <div />;
-        break;
       default:
-        component = <div />;
+        component = <div>another screen</div>;
     }
     return component;
   };
