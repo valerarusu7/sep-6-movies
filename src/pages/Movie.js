@@ -122,7 +122,7 @@ const Movie = () => {
       case 3:
         component = (
           <div className={styles.movieVideo}>
-            {movie.videos.results.map((movieVideo) => {
+            {movie.videos.map((movieVideo) => {
               return <MovieVideo video={movieVideo} />;
             })}
           </div>
@@ -190,14 +190,14 @@ const Movie = () => {
                     Add to favorites
                   </button>
                 )}
-                {movie.videos.results.length !== 0 ? (
+                {movie.videos.length !== 0 ? (
                   <button
                     className={styles.trailerButton}
                     type="button"
                     style={trailerStyle}
                     onClick={() =>
                       window.open(
-                        `https://www.youtube.com/watch?v=${movie.videos.results[0].key}`,
+                        `https://www.youtube.com/watch?v=${movie.videos[0].key}`,
                         "_blank"
                       )
                     }
