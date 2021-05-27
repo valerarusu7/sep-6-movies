@@ -156,3 +156,28 @@
   .title{
     margin-left: 20px;
   }
+
+  .history{
+    color: white;
+
+    
+
+  }
+
+  .time{
+    color:#A9A9A9;
+
+    
+}
+
+.timeline{
+width: 300px;
+  margin-left: calc(50vw - 275px);
+  margin-right: calc(50vw - 275px)
+}
+ 
+.list{
+  margin-top: 100px;
+  color: white;
+  text-align-last: center;
+}
