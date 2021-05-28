@@ -39,6 +39,9 @@ function addCompareMovie(id) {
 function getBoxOfficeByYear(year) {
   return `/box-offices?year=${year}`;
 }
+function getYearlyStatistics() {
+  return `/box-office-total?fbclid=IwAR34Dn6THLxjau6comG_6ZJCWnlJqTRTbdPMdGGrQqPUATxiXTHh7LnPgJI`;
+}
 
 const requests = {
   fetchActorById,
@@ -50,6 +53,7 @@ const requests = {
   fetchMoviesByType,
   addCompareMovie,
   getBoxOfficeByYear,
+  getYearlyStatistics
 };
 
 export default requests;

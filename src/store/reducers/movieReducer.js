@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "../requests/axios";
 import requests from "../requests/requests";
 import heroku_axios from "../requests/heroku_axios";
+import statistics_axios from "../requests/statistics_axios";
+
 
 /************** STATE **************/
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
   networkTVShows: [], //Indicates the fetched networks TVShows
   showResults: 0, // Inidcates TV Shows results
   table_data: [],
+  statistics: []
 };
 
 /************** STATE SLICE **************/
@@ -57,6 +60,9 @@ const moviesSlice = createSlice({
     setTableData(state, action) {
       state.table_data = action.payload;
     },
+    setStatistics(state, action) {
+      state.statistics = action.payload;
+    },
     moviesReset() {
       return initialState;
     },
@@ -76,6 +82,7 @@ export const {
   moviesSetNetworkTVShows,
   moviesSetShowResults,
   setTableData,
+  setStatistics,
   moviesReset,
 } = moviesSlice.actions;
 
@@ -189,6 +196,22 @@ export const getBoxOfficeByYear = (year) => {
       .get(requests.getBoxOfficeByYear(year))
       .then((table) => {
         dispatch(setTableData(table.data.box_office_movies));
+        dispatch(moviesSetLoading(false));
+      })
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
+  };
+};
+
+export const getYearlyStatistics = () => {
+  return (dispatch) => {
+    dispatch(moviesSetLoading(true));
+    statistics_axios
+      .get(requests.getYearlyStatistics())
+      .then((result) => {
+        dispatch(setTableData(result.data.box_office_movies_total));
         dispatch(moviesSetLoading(false));
       })
       .catch((error) => {

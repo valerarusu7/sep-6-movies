@@ -3,6 +3,7 @@ import styles from "../styles/Statistics.module.css";
 import StatisticsHeader from "../components/Statistics/StatisticsHeader";
 import StatisticsCompare from "../components/Statistics/StatisticsCompare";
 import BoxOffice from "../components/Statistics/BoxOffice";
+import YearlyChart from "../components/Statistics/YearlyChart";
 
 const Statistics = ({}) => {
   const [activeContent, setActiveContent] = useState(1);
@@ -16,6 +17,9 @@ const Statistics = ({}) => {
       case 2:
         component = <BoxOffice styles={styles} />;
         break;
+        case 3:
+          component = <YearlyChart styles={styles} />;
+          break;
       default:
         component = <div>another screen</div>;
     }
