@@ -16,7 +16,7 @@ const YearlyChart = ({ styles }) => {
     <div >
       <h2>Total earning per year</h2>
       <div padding>
-        <BarChart
+        <BarChart 
           width={1000}
           height={750}
           data={table_data}
@@ -32,8 +32,7 @@ const YearlyChart = ({ styles }) => {
           <YAxis  dataKey="total_earnings" />
           <Tooltip />
           <Legend  wrapperStyle={{ top: 50 }}/>
-          <CartesianGrid strokeDasharray="3 3" />
-          <Bar dataKey="total_earnings" fill="#8884d8" background={{ fill: '#eee' }}/>
+          <Bar dataKey="total_earnings" fill="#8884d8" />
         </BarChart>
       </div>
     </div>
