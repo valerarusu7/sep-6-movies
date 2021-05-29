@@ -1,7 +1,7 @@
 const API_KEY = "e453502d7e2f31ded447961d9d1f121c";
 const API_KEY_STATISTICS ="AIzaSyCIEwl5Zgwu02erH2Za2V3ZFNuRgKQFEDU";
 
-function fetchActorById(id) {
+function fetchPersonById(id) {
   return `/person?id=${id}`;
 }
 
@@ -46,7 +46,7 @@ function getYearlyStatistics() {
 }
 
 const requests = {
-  fetchActorById,
+  fetchPersonById,
   fetchMovieById,
   fetchNetworkCompanies,
   fetchNetworkMovies,

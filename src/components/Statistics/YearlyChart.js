@@ -56,8 +56,7 @@ console.log(array);
           <YAxis  dataKey="total_earnings" />  
           <Tooltip formatter={(value) => new Intl.NumberFormat('en').format(value)+ " Million"} />
           <Legend  wrapperStyle={{ top: 20 }}/>
-          <Bar dataKey="total_earnings" name={`Total Earnings in 
-                     Milions`} fill="#8884d8" />
+          <Bar dataKey="total_earnings" name={`Total Earnings per Year `} fill="#8884d8" />
         </BarChart>
       </div>
     </div>
