@@ -1,4 +1,5 @@
 const API_KEY = "e453502d7e2f31ded447961d9d1f121c";
+const API_KEY_STATISTICS ="AIzaSyCIEwl5Zgwu02erH2Za2V3ZFNuRgKQFEDU";
 
 function fetchActorById(id) {
   return `/person?id=${id}`;
@@ -40,7 +41,8 @@ function getBoxOfficeByYear(year) {
   return `/box-offices?year=${year}`;
 }
 function getYearlyStatistics() {
-  return `/box-office-total?fbclid=IwAR34Dn6THLxjau6comG_6ZJCWnlJqTRTbdPMdGGrQqPUATxiXTHh7LnPgJI`;
+
+  return `/statistics/total?key=${API_KEY_STATISTICS}&fbclid=IwAR32-c4VaLEDhJUV9HU6aeNse65n1fKm7FS42Uf1Q_SZTYfrD4rEHvLBU9w`;
 }
 
 const requests = {
