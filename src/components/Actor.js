@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getActorById } from "../store/reducers/personReducer.js";
+import { getPersonById } from "../store/reducers/personReducer.js";
 import styles from "../styles/Person.module.css";
-import MovieItem from "./Actors/MovieItemForActor";
+import MovieItem from "./Person/MovieItemForPerson";
 
 const Actor = () => {
   const { actor } = useSelector((state) => state.person);
@@ -13,7 +13,7 @@ const Actor = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getActorById({ id }));
+    dispatch(getPersonById({ id }));
   }, []);
 
   return (

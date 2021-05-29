@@ -12,7 +12,8 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./styles/App.css";
 import NotFound from "./pages/404";
 import Statistics from "./pages/Statistics";
-import Actor from "./components/Actor";
+import Person from "./pages/Person";
+
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -39,7 +40,7 @@ function App() {
                 <Route path="/statistics" component={Statistics} />
                 <Route path="/network/:id" component={Network} />
                 <Route path="/movie/:id" component={Movie} />
-                <Route path="/person/:id" component={Actor} />
+                <Route path="/person/:id" component={Person} />
                 <Route path="/*" component={NotFound} />
               </Switch>
             </CSSTransition>
