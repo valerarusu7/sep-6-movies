@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const PersonItem = ({ styles, element }) => {
   return (
-    <div key={element.id} className={styles.personItem}>
+    <div className={styles.personItem}>
       <Link to={`/person/${element.id}`}>
         <img
           className={styles.personImg}

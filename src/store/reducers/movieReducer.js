@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "../requests/axios";
 import requests from "../requests/requests";
 import heroku_axios from "../requests/heroku_axios";
+import gc_axios from "../requests/gc_axios";
 
 /************** STATE **************/
 const initialState = {
@@ -13,6 +14,8 @@ const initialState = {
   networkTVShows: [], //Indicates the fetched networks TVShows
   showResults: 0, // Inidcates TV Shows results
   table_data: [],
+  reviews: [],
+  have_review: null,
 };
 
 /************** STATE SLICE **************/
@@ -57,6 +60,15 @@ const moviesSlice = createSlice({
     setTableData(state, action) {
       state.table_data = action.payload;
     },
+    setReviews(state, action) {
+      state.reviews = action.payload;
+    },
+    setReview(state, action) {
+      state.reviews.push(action.payload);
+    },
+    setHaveReview(state, action) {
+      state.have_review = action.payload;
+    },
     moviesReset() {
       return initialState;
     },
@@ -77,6 +89,9 @@ export const {
   moviesSetShowResults,
   setTableData,
   moviesReset,
+  setReviews,
+  setReview,
+  setHaveReview,
 } = moviesSlice.actions;
 
 /************** THUNKS **************/
@@ -185,14 +200,50 @@ export const addCompareMovieById = (id, data) => {
 export const getBoxOfficeByYear = (year) => {
   return (dispatch) => {
     dispatch(moviesSetLoading(true));
-    heroku_axios
+    gc_axios
       .get(requests.getBoxOfficeByYear(year))
       .then((table) => {
+        console.log(table);
         dispatch(setTableData(table.data.box_office_movies));
         dispatch(moviesSetLoading(false));
       })
       .catch((error) => {
         dispatch(moviesSetLoading(false));
+        console.log(error);
+      });
+  };
+};
+
+export const getReviews = (user_id, movie_id) => {
+  return (dispatch) => {
+    gc_axios
+      .get(requests.getReviews(user_id, movie_id))
+      .then((reviews) => {
+        dispatch(setHaveReview(reviews.data.have_review));
+        dispatch(setReviews(reviews.data.reviews));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
+
+export const addReview = (user_id, movie_id, title, comment, rating) => {
+  return (dispatch) => {
+    const review = {
+      user_id: user_id,
+      movie_id: movie_id,
+      title: title,
+      comment: comment,
+      stars: rating,
+    };
+    gc_axios
+      .post(requests.setReview(), review)
+      .then((response) => {
+        dispatch(setReview(response.data));
+        dispatch(setHaveReview(true));
+      })
+      .catch((error) => {
         console.log(error);
       });
   };

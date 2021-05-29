@@ -30,7 +30,7 @@ export const signIn = () => {
     auth
       .signInWithPopup(provider)
       .then((result) => {
-        console.log(result);
+        console.log(result.user);
         dispatch(authSetUser(result.user));
       })
       .catch((error) => console.log(error));
