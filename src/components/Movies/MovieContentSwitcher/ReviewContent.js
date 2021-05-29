@@ -4,7 +4,6 @@ import Divider from "@material-ui/core/Divider";
 import InputArea from "./InputArea";
 import Avatar from "@material-ui/core/Avatar";
 import Rating from "@material-ui/lab/Rating";
-import { AiFillExclamationCircle } from "react-icons/ai";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   noReviews: {
     textAlign: "center",
-    fontSize: "2em",
+    fontSize: "1.5em",
   },
 }));
 
