@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Avatar } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAdditionalUserInfo,
-  updateAdditionalUserInfo,
-} from "../store/reducers/userReducer";
+import { updateAdditionalUserInfo } from "../store/reducers/userReducer";
 import styles from "../styles/Profile.module.css";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
@@ -19,10 +16,6 @@ const Profile = () => {
   const [bio, setBio] = useState(additionalUserInfo.bio);
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAdditionalUserInfo(user.uid));
-  }, []);
 
   const getName = () => {
     return additionalUserInfo.nickname !== null

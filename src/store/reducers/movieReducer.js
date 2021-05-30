@@ -239,7 +239,9 @@ export const addReview = (
   movie_name,
   title,
   comment,
-  rating
+  rating,
+  nickname,
+  color
 ) => {
   return (dispatch) => {
     const review = {
@@ -253,6 +255,8 @@ export const addReview = (
     gc_axios
       .post(requests.setReview(), review)
       .then((response) => {
+        response.data["nickname"] = nickname;
+        response.data["color"] = color;
         dispatch(setReview(response.data));
         dispatch(setHaveReview(true));
       })

@@ -28,6 +28,7 @@ export default function InputArea({ uid, movie_id, movie_name }) {
   const [rating, setRating] = useState(5);
   const [errorMessage, setErrorMessage] = useState("");
   const { have_review } = useSelector((state) => state.movies);
+  const { additionalUserInfo } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
@@ -36,7 +37,18 @@ export default function InputArea({ uid, movie_id, movie_name }) {
     setTitle("");
     setComment("");
     setRating(5);
-    dispatch(addReview(uid, movie_id, movie_name, title, comment, rating));
+    dispatch(
+      addReview(
+        uid,
+        movie_id,
+        movie_name,
+        title,
+        comment,
+        rating,
+        additionalUserInfo.nickname,
+        additionalUserInfo.color
+      )
+    );
   };
 
   const checkInputFields = () => {
