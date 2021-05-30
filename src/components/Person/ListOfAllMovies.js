@@ -7,6 +7,9 @@ import TimelineContent from "@material-ui/lab/TimelineContent";
 import TimelineDot from "@material-ui/lab/TimelineDot";
 import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent";
 import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import { Link } from "react-router-dom";
+
 
 const AllMovies = ({ person, styles }) => {
   return (
@@ -15,6 +18,7 @@ const AllMovies = ({ person, styles }) => {
         ? person.all_movies.map((movie) => (
             <div className={styles.history}>
               <Timeline className={styles.timeline} s align="alternate">
+    <Link className={styles.click} to={`/movie/${movie.id}`} key={movie.id}>
                 <TimelineItem>
                   <TimelineOppositeContent>
                     <Typography className={styles.time}>
@@ -26,11 +30,24 @@ const AllMovies = ({ person, styles }) => {
                     <TimelineConnector />
                   </TimelineSeparator>
                   <TimelineContent>
-                    <Typography className={styles.history}>
-                      {movie.original_title}
-                    </Typography>
+                    <Paper className={styles.paper}>
+                      <Typography variant="h6" component="h1">
+                        <div className={styles.paper}>
+                          <div className={styles.papertext}>
+                            {movie.original_title}
+                          </div>
+                          <div>
+                            <img
+                              className={styles.timelineimage}
+                              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                              alt={person.details.id}
+                            />
+                          </div>
+                        </div>
+                      </Typography>
+                    </Paper>
                   </TimelineContent>
-                </TimelineItem>
+                </TimelineItem> </Link>
               </Timeline>
             </div>
           ))
