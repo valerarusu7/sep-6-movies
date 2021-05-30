@@ -12,7 +12,7 @@ const Biography = ({ person, styles }) => {
         <section>
           <div className={styles.biography}>
             <p>
-              <strong> Biography</strong>
+              <strong>Biography </strong>
               {person.details.biography}
             </p>
           </div>
