@@ -5,6 +5,7 @@
   background: rgb(31, 32, 48);
   font-weight: lighter;
   color: white;
+  overflow-y: auto;
 }
 
 .horizontal {
