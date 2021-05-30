@@ -1,4 +1,6 @@
 import React from "react";
+import { AiOutlineStar } from "react-icons/ai";
+
 
 const PersonInfo = ({ person, styles }) => {
 
@@ -28,12 +30,18 @@ const PersonInfo = ({ person, styles }) => {
                                 <bdi>Birthday: </bdi>
                             </strong>
                             {person.details.birthday}
-                        </p>
+                        </p>average_movies_rating
                         <p class="full">
                             <strong>
                                 <bdi>Place of Birth: </bdi>
                             </strong>
                             {person.details.place_of_birth}
+                        </p>
+                        <p class="full">
+                            <strong>
+                                <bdi>Average Rating: </bdi>
+                            </strong>
+                            {person.average_movies_rating} / 10  <AiOutlineStar size={13} style={{ marginBottom: 0 , margintop: 25 }} />
                         </p>
                     </section>
                 </section>
