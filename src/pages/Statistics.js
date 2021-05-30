@@ -17,9 +17,9 @@ const Statistics = ({}) => {
       case 2:
         component = <BoxOffice styles={styles} />;
         break;
-        case 3:
-          component = <YearlyChart styles={styles} />;
-          break;
+      case 3:
+        component = <YearlyChart styles={styles} />;
+        break;
       default:
         component = <div>another screen</div>;
     }

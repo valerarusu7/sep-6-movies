@@ -9,7 +9,6 @@ import Icon from "../components/Person/Icon";
 import TopMovies from "../components/Person/TopMovies";
 import AllMovies from "../components/Person/ListOfAllMovies";
 
-
 const Person = () => {
   const { person } = useSelector((state) => state.person);
   const personLoading = useSelector((state) => state.person.loading);
@@ -44,8 +43,9 @@ const Person = () => {
           </div>
         </div>
       ) : null}
-              <div className={styles.list}>
-    <h2>Timeline of movies</h2></div>
+      <div className={styles.list}>
+        <h2>Timeline of movies</h2>
+      </div>
       <AllMovies person={person} styles={styles} />
     </div>
   );

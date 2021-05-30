@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { auth, provider } from "../../firebase/firebase";
+import gc_axios from "../requests/gc_axios";
+import requests from "../requests/requests";
 
 /************** STATE **************/
 const initialState = {
@@ -30,7 +32,10 @@ export const signIn = () => {
     auth
       .signInWithPopup(provider)
       .then((result) => {
-        console.log(result.user);
+        var isNewUser = result.additionalUserInfo.isNewUser;
+        if (isNewUser) {
+          dispatch(createAdditionalUserInfo(result.user.uid));
+        }
         dispatch(authSetUser(result.user));
       })
       .catch((error) => console.log(error));
@@ -45,5 +50,13 @@ export const signOut = () => {
         dispatch(authReset());
       })
       .catch((error) => console.log(error));
+  };
+};
+
+const createAdditionalUserInfo = (user_id) => {
+  return () => {
+    gc_axios.post(requests.postAdditionalUserInfo(user_id)).catch((error) => {
+      console.log(error);
+    });
   };
 };

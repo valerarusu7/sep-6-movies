@@ -13,9 +13,6 @@
   display: none;
 }
 
-.header {
-}
-
 .inner__container {
   display: flex;
   height: 380px;
@@ -234,8 +231,6 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-
-.chart{
+.chart {
   background-color: #eeeeee;
-
 }

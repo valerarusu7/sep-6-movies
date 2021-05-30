@@ -4,7 +4,7 @@ import requests from "../requests/requests";
 
 /************** STATE **************/
 const initialState = {
-person:null
+  person: null,
 };
 
 /************** STATE SLICE **************/
@@ -14,19 +14,15 @@ const personSlice = createSlice({
   reducers: {
     setPerson(state, action) {
       state.person = action.payload;
-    }
+    },
   },
 });
 
 /************** EXPORTED ACTIONS & REDUCERS **************/
 export default personSlice.reducer;
-export const {
-  setPerson,
-} = personSlice.actions;
+export const { setPerson } = personSlice.actions;
 
 /************** THUNKS **************/
-
-
 
 export const getPersonById = ({ id }) => {
   return (dispatch) => {
@@ -44,4 +40,3 @@ export const getPersonById = ({ id }) => {
       });
   };
 };
-

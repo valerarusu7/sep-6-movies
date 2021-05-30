@@ -62,10 +62,6 @@ html {
   z-index: 2;
 }
 
-p {
-  text-align: justify;
-}
-
 #gradient {
   position: absolute;
   background-color: #151424;

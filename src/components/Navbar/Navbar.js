@@ -23,12 +23,14 @@ const Navbar = () => {
     <div className={styles.nav}>
       <div className={styles.nav__links}>
         <div className={styles.nav__avatar}>
-          <Avatar
-            src={user.photoURL}
-            alt={user.displayName}
-            style={{ marginRight: "10px" }}
-          />
-          <div>{user.displayName}</div>
+          <Link to="/profile" className={styles.profileLink}>
+            <Avatar
+              src={user.photoURL}
+              alt={user.displayName}
+              style={{ marginRight: "10px" }}
+            />
+            <div>{user.displayName}</div>
+          </Link>
         </div>
         <div className={styles.nav_basic}>
           <NavbarLink to="/" exact page="Home" Icon={AiFillHome} />

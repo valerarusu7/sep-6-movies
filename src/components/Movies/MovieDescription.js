@@ -27,7 +27,7 @@ const MovieDescription = ({ movie, data, styles }) => {
           <span>Compare </span> <BsArrowRight size="25px" />
         </div>
       </div>
-      <p>{movie.overview}</p>
+      <p style={{ textAlign: "justify" }}>{movie.overview}</p>
     </>
   );
 };

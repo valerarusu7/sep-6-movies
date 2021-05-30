@@ -45,9 +45,14 @@ function getReviews(user_id, movie_id) {
   return `/reviews?key=${GC_API_KEY}&user_id=${user_id}&movie_id=${movie_id}`;
 }
 
+function postAdditionalUserInfo(user_id) {
+  return `/new/user?key=${GC_API_KEY}&user_id=${user_id}`;
+}
+
 function setReview() {
   return `/review?key=${GC_API_KEY}`;
 }
+
 function getYearlyStatistics() {
   return `/statistics/total?key=${GC_API_KEY}`;
 }
@@ -65,6 +70,7 @@ const requests = {
   getReviews,
   setReview,
   getYearlyStatistics,
+  postAdditionalUserInfo,
 };
 
 export default requests;
