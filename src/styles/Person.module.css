@@ -171,7 +171,7 @@
 }
 
 .timeline{
-width: 300px;
+width: max-content;
   margin-left: calc(50vw - 275px);
   margin-right: calc(50vw - 275px)
 }
@@ -180,4 +180,34 @@ width: 300px;
   margin-top: 100px;
   color: white;
   text-align-last: center;
+}
+
+.paper{
+  padding: '6px 16px';
+  width: 160px;
+  height :max-content;
+  background-color: #161424;
+  color: white;
+}
+
+.papertext{
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.timelineimage{
+  width: 140px;
+  margin-left: 10px;
+  height: auto;
+  position: center ;
+}
+.papertext{
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.click{
+  color: #161424;
 }
