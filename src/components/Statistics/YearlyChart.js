@@ -28,7 +28,6 @@ const YearlyChart = ({ styles }) => {
     );
     array.push(data);
   }
-  console.log(array);
 
   return (
     <div

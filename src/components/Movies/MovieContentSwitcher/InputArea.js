@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function InputArea({ user_id, movie_id }) {
+export default function InputArea({ uid, movie_id, movie_name }) {
   const classes = useStyles();
   const [title, setTitle] = useState("");
   const [comment, setComment] = useState("");
@@ -36,7 +36,7 @@ export default function InputArea({ user_id, movie_id }) {
     setTitle("");
     setComment("");
     setRating(5);
-    dispatch(addReview(user_id, movie_id, title, comment, rating));
+    dispatch(addReview(uid, movie_id, movie_name, title, comment, rating));
   };
 
   const checkInputFields = () => {

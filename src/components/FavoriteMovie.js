@@ -5,7 +5,7 @@ import { MdDragHandle } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../store/store";
 import { removeFavoriteMovie } from "../firebase/utils";
-import { moviesSetFavoriteMovies } from "../store/reducers/userReducer";
+import { setFavoriteMovies } from "../store/reducers/userReducer";
 import { Link } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 
@@ -18,7 +18,7 @@ const FavoriteMovie = ({ item, index }) => {
     let state = store.getState();
     let newMovies = [...state.user.favoriteMovies];
     newMovies.splice(item.id, 1);
-    dispatch(moviesSetFavoriteMovies(newMovies));
+    dispatch(setFavoriteMovies(newMovies));
   }
 
   return (

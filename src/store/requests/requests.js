@@ -41,12 +41,16 @@ function getBoxOfficeByYear(year) {
   return `/statistics?key=${GC_API_KEY}&year=${year}`;
 }
 
-function getReviews(user_id, movie_id) {
-  return `/reviews?key=${GC_API_KEY}&user_id=${user_id}&movie_id=${movie_id}`;
+function getReviews(uid, movie_id) {
+  return `/reviews?key=${GC_API_KEY}&user_id=${uid}&movie_id=${movie_id}`;
 }
 
-function postAdditionalUserInfo(user_id) {
-  return `/new/user?key=${GC_API_KEY}&user_id=${user_id}`;
+function postAdditionalUserInfo(uid) {
+  return `/new/user?key=${GC_API_KEY}&user_id=${uid}`;
+}
+
+function getAdditionalUserInfo(uid) {
+  return `/user/info?key=${GC_API_KEY}&user_id=${uid}`;
 }
 
 function setReview() {
@@ -71,6 +75,7 @@ const requests = {
   setReview,
   getYearlyStatistics,
   postAdditionalUserInfo,
+  getAdditionalUserInfo,
 };
 
 export default requests;

@@ -1,0 +1,35 @@
+.container {
+  width: calc(100% - 250px);
+  position: relative;
+  left: 250px;
+  color: white;
+}
+
+.background {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.header {
+  width: 90%;
+  height: 200px;
+  margin-left: 5%;
+  display: flex;
+  align-items: center;
+}
+
+.avatarContent {
+  width: 25%;
+}
+
+.avatarPicture {
+  width: 100px;
+}
+
+.otherContent {
+  width: 75%;
+}

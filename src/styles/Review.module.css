@@ -1,0 +1,54 @@
+.root {
+  width: 90%;
+  height: 400px;
+  margin: 5%;
+  background: rgb(31, 32, 48);
+  font-weight: lighter;
+  color: white;
+}
+
+.horizontal {
+  width: auto;
+  display: flex;
+  padding-top: 20px;
+}
+
+.avatarContent {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.avatar {
+  width: 3.5vw;
+  height: 3.5vw;
+}
+
+.secondPart {
+  width: 89%;
+}
+
+.horizontalTwo {
+  width: auto;
+  display: flex;
+}
+
+.rating {
+  margin-left: auto;
+  color: red !important;
+}
+
+.date {
+  color: grey;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.nickname {
+  color: grey;
+}
+
+.noReviews {
+  text-align: center;
+  font-size: 1.5em;
+}

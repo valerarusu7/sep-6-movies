@@ -6,6 +6,7 @@ import requests from "../requests/requests";
 /************** STATE **************/
 const initialState = {
   user: null, // Indicates the user auth data
+  dateCreation: null,
 };
 
 /************** STATE SLICE **************/
@@ -19,12 +20,15 @@ const authSlice = createSlice({
     authReset() {
       return initialState;
     },
+    setDateCreation(state, action) {
+      state.dateCreation = action.payload;
+    },
   },
 });
 
 /************** EXPORTED ACTIONS & REDUCERS **************/
 export default authSlice.reducer;
-export const { authSetUser, authReset } = authSlice.actions;
+export const { authSetUser, authReset, setDateCreation } = authSlice.actions;
 
 /************** THUNKS **************/
 export const signIn = () => {
@@ -37,6 +41,7 @@ export const signIn = () => {
           dispatch(createAdditionalUserInfo(result.user.uid));
         }
         dispatch(authSetUser(result.user));
+        dispatch(setDateCreation(result.user.metadata.creationTime));
       })
       .catch((error) => console.log(error));
   };
@@ -53,9 +58,9 @@ export const signOut = () => {
   };
 };
 
-const createAdditionalUserInfo = (user_id) => {
+const createAdditionalUserInfo = (uid) => {
   return () => {
-    gc_axios.post(requests.postAdditionalUserInfo(user_id)).catch((error) => {
+    gc_axios.post(requests.postAdditionalUserInfo(uid)).catch((error) => {
       console.log(error);
     });
   };

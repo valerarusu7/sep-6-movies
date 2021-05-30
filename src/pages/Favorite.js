@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FavoriteMovie from "../components/FavoriteMovie";
 import { updateOrderMovie } from "../firebase/utils";
 import {
-  moviesSetFavoriteMovies,
+  setFavoriteMovies,
   getFavoriteMovies,
 } from "../store/reducers/userReducer";
 import styles from "../styles/FavoriteMovie.module.css";
@@ -41,7 +41,7 @@ const Favorite = () => {
       updateOrderMovie(user, movie);
       reorderedMovies.push(movie);
     });
-    dispatch(moviesSetFavoriteMovies(reorderedMovies));
+    dispatch(setFavoriteMovies(reorderedMovies));
   }
 
   function onDragEnd(result) {
@@ -56,7 +56,7 @@ const Favorite = () => {
       result.destination.index
     );
 
-    dispatch(moviesSetFavoriteMovies(newMovies));
+    dispatch(setFavoriteMovies(newMovies));
   }
 
   return (
