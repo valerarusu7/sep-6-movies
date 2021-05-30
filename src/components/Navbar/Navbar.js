@@ -27,9 +27,11 @@ const Navbar = () => {
             <Avatar
               src={user.photoURL}
               alt={user.displayName}
-              style={{ marginRight: "10px" }}
+              style={{ width: "3vw", height: "3vw" }}
             />
-            <div>{user.displayName}</div>
+            <div style={{ marginTop: "3px", color: "white" }}>
+              {user.displayName}
+            </div>
           </Link>
         </div>
         <div className={styles.nav_basic}>

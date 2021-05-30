@@ -4,6 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Rating from "@material-ui/lab/Rating";
 import styles from "../../styles/Review.module.css";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function ReviewContent({ reviews, user_info }) {
   const { user } = useSelector((state) => state.auth);
@@ -42,9 +43,14 @@ export default function ReviewContent({ reviews, user_info }) {
                       />
                     </div>
                     <div className={styles.horizontalTwo}>
-                      <span className={styles.nickname}>
-                        {review.movie_name}
-                      </span>
+                      <Link
+                        to={`/movie/${review.movie_id}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <span className={styles.nickname}>
+                          {review.movie_name}
+                        </span>
+                      </Link>
                       <span className={styles.date}>{review.posting_date}</span>
                     </div>
 

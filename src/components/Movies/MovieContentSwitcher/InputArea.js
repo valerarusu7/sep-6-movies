@@ -97,7 +97,7 @@ export default function InputArea({ uid, movie_id, movie_name }) {
           onChange={(event, newValue) => {
             setRating(newValue);
           }}
-          style={{ marginRight: "20px", marginLeft: "auto" }}
+          style={{ marginRight: "20px", marginLeft: "auto", color: "red" }}
         />
         <Button
           variant="contained"

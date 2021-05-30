@@ -6,6 +6,7 @@ import requests from "../requests/requests";
 /************** STATE **************/
 const initialState = {
   favoriteMovies: [], // Indicates the favorite movies
+  reviews: [],
   additionalUserInfo: null,
 };
 
@@ -17,6 +18,9 @@ const userSlice = createSlice({
     setFavoriteMovies(state, action) {
       state.favoriteMovies = action.payload;
     },
+    setUserReviews(state, action) {
+      state.reviews = action.payload;
+    },
     setAdditionalUserInfo(state, action) {
       state.additionalUserInfo = action.payload;
     },
@@ -25,7 +29,8 @@ const userSlice = createSlice({
 
 /************** EXPORTED ACTIONS & REDUCERS **************/
 export default userSlice.reducer;
-export const { setFavoriteMovies, setAdditionalUserInfo } = userSlice.actions;
+export const { setFavoriteMovies, setUserReviews, setAdditionalUserInfo } =
+  userSlice.actions;
 
 /************** THUNKS **************/
 export const getFavoriteMovies = (uid) => {
@@ -52,7 +57,32 @@ export const getAdditionalUserInfo = (uid) => {
     gc_axios
       .get(requests.getAdditionalUserInfo(uid))
       .then((response) => {
-        dispatch(setAdditionalUserInfo(response.data));
+        dispatch(setUserReviews(response.data.reviews));
+        dispatch(setAdditionalUserInfo(response.data.user_info));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
+
+export const updateAdditionalUserInfo = (uid, nickname, bio, color) => {
+  const newData = {
+    nickname: nickname,
+    bio: bio,
+    color: color,
+  };
+
+  const putData = {
+    user_id: uid,
+    nickname: nickname,
+    bio: bio,
+  };
+  return (dispatch) => {
+    gc_axios
+      .put(requests.putAdditionalUserInfo(), putData)
+      .then(() => {
+        dispatch(setAdditionalUserInfo(newData));
       })
       .catch((error) => {
         console.log(error);

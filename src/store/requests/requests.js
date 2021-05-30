@@ -61,6 +61,10 @@ function getYearlyStatistics() {
   return `/statistics/total?key=${GC_API_KEY}`;
 }
 
+function putAdditionalUserInfo() {
+  return `/user?key=${GC_API_KEY}`;
+}
+
 const requests = {
   fetchPersonById,
   fetchMovieById,
@@ -76,6 +80,7 @@ const requests = {
   getYearlyStatistics,
   postAdditionalUserInfo,
   getAdditionalUserInfo,
+  putAdditionalUserInfo,
 };
 
 export default requests;

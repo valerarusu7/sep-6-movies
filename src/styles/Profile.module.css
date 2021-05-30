@@ -26,10 +26,27 @@
   width: 25%;
 }
 
-.avatarPicture {
-  width: 100px;
+.textField {
+  width: 90%;
+  background: rgb(31, 32, 48);
+}
+
+.reviewTitle {
+  margin-left: 5%;
+  font-weight: normal;
 }
 
 .otherContent {
   width: 75%;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.lowerContent {
+  margin-left: 5%;
+  width: 90%;
+  display: flex;
+  margin-top: 30px;
 }
