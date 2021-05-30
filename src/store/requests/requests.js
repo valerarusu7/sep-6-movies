@@ -1,7 +1,7 @@
 const TMDB_API_KEY = "e453502d7e2f31ded447961d9d1f121c";
 const GC_API_KEY = "AIzaSyCIEwl5Zgwu02erH2Za2V3ZFNuRgKQFEDU";
 
-function fetchActorById(id) {
+function fetchPersonById(id) {
   return `/person?id=${id}`;
 }
 
@@ -48,9 +48,12 @@ function getReviews(user_id, movie_id) {
 function setReview() {
   return `/review?key=${GC_API_KEY}`;
 }
+function getYearlyStatistics() {
+  return `/statistics/total?key=${GC_API_KEY}`;
+}
 
 const requests = {
-  fetchActorById,
+  fetchPersonById,
   fetchMovieById,
   fetchNetworkCompanies,
   fetchNetworkMovies,
@@ -61,6 +64,7 @@ const requests = {
   getBoxOfficeByYear,
   getReviews,
   setReview,
+  getYearlyStatistics,
 };
 
 export default requests;

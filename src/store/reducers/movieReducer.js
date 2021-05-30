@@ -16,6 +16,7 @@ const initialState = {
   table_data: [],
   reviews: [],
   have_review: null,
+  statistics: [],
 };
 
 /************** STATE SLICE **************/
@@ -69,6 +70,9 @@ const moviesSlice = createSlice({
     setHaveReview(state, action) {
       state.have_review = action.payload;
     },
+    setStatistics(state, action) {
+      state.statistics = action.payload;
+    },
     moviesReset() {
       return initialState;
     },
@@ -88,6 +92,7 @@ export const {
   moviesSetNetworkTVShows,
   moviesSetShowResults,
   setTableData,
+  setStatistics,
   moviesReset,
   setReviews,
   setReview,
@@ -244,6 +249,22 @@ export const addReview = (user_id, movie_id, title, comment, rating) => {
         dispatch(setHaveReview(true));
       })
       .catch((error) => {
+        console.log(error);
+      });
+  };
+};
+
+export const getYearlyStatistics = () => {
+  return (dispatch) => {
+    dispatch(moviesSetLoading(true));
+    gc_axios
+      .get(requests.getYearlyStatistics())
+      .then((result) => {
+        dispatch(setTableData(result.data.box_office_movies_total));
+        dispatch(moviesSetLoading(false));
+      })
+      .catch((error) => {
+        dispatch(moviesSetLoading(false));
         console.log(error);
       });
   };
