@@ -203,7 +203,7 @@ p {
   flex-direction: column;
 }
 
-.verticalListStyle {
+.horizontalListStyle {
   max-width: 90%;
   overflow-x: auto;
   padding-bottom: 20px;

@@ -15,17 +15,17 @@ function removeDuplicates(originalArray, prop) {
   return newArray;
 }
 
-function VerticalList({ list, styles }) {
+function HorizontalList({ list, styles }) {
   var uniqueArray = removeDuplicates(list, "id");
   const listElement = uniqueArray.map((element) => {
     return (
-      <>
+      <div key={element.id} style={{ display: "inline-flex" }}>
         <PersonItem styles={styles} element={element} />
-      </>
+      </div>
     );
   });
 
-  return <div className={styles.verticalListStyle}>{listElement}</div>;
+  return <div className={styles.horizontalListStyle}>{listElement}</div>;
 }
 
-export default VerticalList;
+export default HorizontalList;

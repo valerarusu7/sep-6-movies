@@ -1,5 +1,5 @@
-const API_KEY = "e453502d7e2f31ded447961d9d1f121c";
-const API_KEY_STATISTICS ="AIzaSyCIEwl5Zgwu02erH2Za2V3ZFNuRgKQFEDU";
+const TMDB_API_KEY = "e453502d7e2f31ded447961d9d1f121c";
+const GC_API_KEY = "AIzaSyCIEwl5Zgwu02erH2Za2V3ZFNuRgKQFEDU";
 
 function fetchPersonById(id) {
   return `/person?id=${id}`;
@@ -14,22 +14,22 @@ function fetchMoviesByType(type, page) {
 }
 
 function fetchNetworkCompanies(id) {
-  return `/network/${id}?api_key=${API_KEY}`;
+  return `/network/${id}?api_key=${TMDB_API_KEY}`;
 }
 
 function fetchNetworkMovies(id) {
-  return `/discover/movie?api_key=${API_KEY}&with_networks=${id}`;
+  return `/discover/movie?api_key=${TMDB_API_KEY}&with_networks=${id}`;
 }
 
 function fetchNetworkTvShows(id) {
-  return `/discover/tv?api_key=${API_KEY}&with_networks=${id}`;
+  return `/discover/tv?api_key=${TMDB_API_KEY}&with_networks=${id}`;
 }
 
 function querySearch(text, year) {
   if (year) {
-    return `search/movie?api_key=${API_KEY}&language=en-US&query=${text}&page=1&include_adult=false&year=${year}`;
+    return `search/movie?api_key=${TMDB_API_KEY}&language=en-US&query=${text}&page=1&include_adult=false&year=${year}`;
   } else {
-    return `search/movie?api_key=${API_KEY}&language=en-US&query=${text}&page=1&include_adult=false`;
+    return `search/movie?api_key=${TMDB_API_KEY}&language=en-US&query=${text}&page=1&include_adult=false`;
   }
 }
 
@@ -38,11 +38,18 @@ function addCompareMovie(id) {
 }
 
 function getBoxOfficeByYear(year) {
-  return `/box-offices?year=${year}`;
+  return `/statistics?key=${GC_API_KEY}&year=${year}`;
+}
+
+function getReviews(user_id, movie_id) {
+  return `/reviews?key=${GC_API_KEY}&user_id=${user_id}&movie_id=${movie_id}`;
+}
+
+function setReview() {
+  return `/review?key=${GC_API_KEY}`;
 }
 function getYearlyStatistics() {
-
-  return `/statistics/total?key=${API_KEY_STATISTICS}&fbclid=IwAR32-c4VaLEDhJUV9HU6aeNse65n1fKm7FS42Uf1Q_SZTYfrD4rEHvLBU9w`;
+  return `/statistics/total?key=${GC_API_KEY}`;
 }
 
 const requests = {
@@ -55,7 +62,9 @@ const requests = {
   fetchMoviesByType,
   addCompareMovie,
   getBoxOfficeByYear,
-  getYearlyStatistics
+  getReviews,
+  setReview,
+  getYearlyStatistics,
 };
 
 export default requests;

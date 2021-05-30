@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { addFavoriteMovie, removeFavoriteMovie } from "../firebase/utils";
-import { getMovieById } from "../store/reducers/movieReducer";
+import { getMovieById, getReviews } from "../store/reducers/movieReducer";
 import { moviesSetFavoriteMovies } from "../store/reducers/userReducer";
 import { store } from "../store/store";
 import styles from "../styles/Movie.module.css";
@@ -14,20 +14,24 @@ import Loading from "../components/Loading";
 import MovieCredits from "../components/Movies/MovieCredits";
 import MovieItem from "../components/Movies/MovieItem";
 import MovieVideo from "../components/Movies/MovieVideo";
+import ReviewContent from "../components/Movies/MovieContentSwitcher/ReviewContent";
 
 const Movie = () => {
-  const { user } = useSelector((state) => state.auth);
   const [isFavorite, setIsFavorite] = useState(false);
   const [activeContent, setActiveContent] = useState(1);
-  const { movie } = useSelector((state) => state.movies);
+
+  const { user } = useSelector((state) => state.auth);
+  const { movie, reviews } = useSelector((state) => state.movies);
   const { favoriteMovies } = useSelector((state) => state.user);
   const movieLoading = useSelector((state) => state.movies.loading);
+
   const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
     isFavoriteMovie();
     dispatch(getMovieById({ id }));
+    dispatch(getReviews(user.uid, id));
   }, []);
 
   function addMovie() {
@@ -129,7 +133,9 @@ const Movie = () => {
         );
         break;
       case 4:
-        component = <div />;
+        component = (
+          <ReviewContent reviews={reviews} user_id={user.uid} movie_id={id} />
+        );
         break;
       default:
         component = <div />;
