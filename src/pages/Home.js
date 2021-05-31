@@ -11,6 +11,7 @@ const Home = () => {
   const { movies, sliderMovies, loading } = useSelector(
     (state) => state.movies
   );
+  const { user } = useSelector((state) => state.auth);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 

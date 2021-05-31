@@ -21,13 +21,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function InputArea({ user_id, movie_id }) {
+export default function InputArea({ uid, movie_id, movie_name }) {
   const classes = useStyles();
   const [title, setTitle] = useState("");
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(5);
   const [errorMessage, setErrorMessage] = useState("");
   const { have_review } = useSelector((state) => state.movies);
+  const { additionalUserInfo } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
@@ -36,7 +37,18 @@ export default function InputArea({ user_id, movie_id }) {
     setTitle("");
     setComment("");
     setRating(5);
-    dispatch(addReview(user_id, movie_id, title, comment, rating));
+    dispatch(
+      addReview(
+        uid,
+        movie_id,
+        movie_name,
+        title,
+        comment,
+        rating,
+        additionalUserInfo.nickname,
+        additionalUserInfo.color
+      )
+    );
   };
 
   const checkInputFields = () => {
@@ -97,7 +109,7 @@ export default function InputArea({ user_id, movie_id }) {
           onChange={(event, newValue) => {
             setRating(newValue);
           }}
-          style={{ marginRight: "20px", marginLeft: "auto" }}
+          style={{ marginRight: "20px", marginLeft: "auto", color: "red" }}
         />
         <Button
           variant="contained"

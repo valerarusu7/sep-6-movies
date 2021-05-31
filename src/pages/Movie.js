@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { addFavoriteMovie, removeFavoriteMovie } from "../firebase/utils";
 import { getMovieById, getReviews } from "../store/reducers/movieReducer";
-import { moviesSetFavoriteMovies } from "../store/reducers/userReducer";
+import { setFavoriteMovies } from "../store/reducers/userReducer";
 import { store } from "../store/store";
 import styles from "../styles/Movie.module.css";
 import movieItemStyles from "../styles/MoviesCategory.module.css";
@@ -15,6 +15,7 @@ import MovieCredits from "../components/Movies/MovieCredits";
 import MovieItem from "../components/Movies/MovieItem";
 import MovieVideo from "../components/Movies/MovieVideo";
 import ReviewContent from "../components/Movies/MovieContentSwitcher/ReviewContent";
+import InputArea from "../components/Movies/MovieContentSwitcher/InputArea";
 
 const Movie = () => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -50,7 +51,7 @@ const Movie = () => {
     };
     data.push(favoriteMovie);
     addFavoriteMovie(user, movie.details, index);
-    dispatch(moviesSetFavoriteMovies(data));
+    dispatch(setFavoriteMovies(data));
     setIsFavorite(true);
   }
 
@@ -59,7 +60,7 @@ const Movie = () => {
     console.log(data);
     var filteredData = data.filter((x) => x.id !== movie.details.id);
     removeFavoriteMovie(user, movie.details);
-    dispatch(moviesSetFavoriteMovies(filteredData));
+    dispatch(setFavoriteMovies(filteredData));
     setIsFavorite(false);
   }
 
@@ -134,7 +135,14 @@ const Movie = () => {
         break;
       case 4:
         component = (
-          <ReviewContent reviews={reviews} user_id={user.uid} movie_id={id} />
+          <div>
+            <ReviewContent reviews={reviews} />
+            <InputArea
+              uid={user.uid}
+              movie_id={id}
+              movie_name={movie.details.title}
+            />
+          </div>
         );
         break;
       default:

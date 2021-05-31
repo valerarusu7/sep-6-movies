@@ -4,6 +4,7 @@ html {
 
 ::-webkit-scrollbar {
   height: 10px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -60,10 +61,6 @@ html {
   left: 300px;
   color: white;
   z-index: 2;
-}
-
-p {
-  text-align: justify;
 }
 
 #gradient {

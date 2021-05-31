@@ -20,9 +20,9 @@ const StatisticsHeader = ({ styles, onClick }) => {
           name="Box Offices"
           onClick={onClick(2)}
         />
-          <HeaderCategory
+        <HeaderCategory
           styles={styles}
-          Icon={ RiBarChartBoxLine}
+          Icon={RiBarChartBoxLine}
           name="Chart"
           onClick={onClick(3)}
         />

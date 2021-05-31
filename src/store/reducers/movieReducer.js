@@ -219,10 +219,10 @@ export const getBoxOfficeByYear = (year) => {
   };
 };
 
-export const getReviews = (user_id, movie_id) => {
+export const getReviews = (uid, movie_id) => {
   return (dispatch) => {
     gc_axios
-      .get(requests.getReviews(user_id, movie_id))
+      .get(requests.getReviews(uid, movie_id))
       .then((reviews) => {
         dispatch(setHaveReview(reviews.data.have_review));
         dispatch(setReviews(reviews.data.reviews));
@@ -233,11 +233,21 @@ export const getReviews = (user_id, movie_id) => {
   };
 };
 
-export const addReview = (user_id, movie_id, title, comment, rating) => {
+export const addReview = (
+  uid,
+  movie_id,
+  movie_name,
+  title,
+  comment,
+  rating,
+  nickname,
+  color
+) => {
   return (dispatch) => {
     const review = {
-      user_id: user_id,
+      user_id: uid,
       movie_id: movie_id,
+      movie_name: movie_name,
       title: title,
       comment: comment,
       stars: rating,
@@ -245,6 +255,8 @@ export const addReview = (user_id, movie_id, title, comment, rating) => {
     gc_axios
       .post(requests.setReview(), review)
       .then((response) => {
+        response.data["nickname"] = nickname;
+        response.data["color"] = color;
         dispatch(setReview(response.data));
         dispatch(setHaveReview(true));
       })

@@ -2,13 +2,16 @@ import React from "react";
 import Divider from "@material-ui/core/Divider";
 import Avatar from "@material-ui/core/Avatar";
 import Rating from "@material-ui/lab/Rating";
-import styles from "../../../styles/Review.module.css";
+import styles from "../../styles/Review.module.css";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-export default function ReviewContent({ reviews, nickname }) {
-  const getName = (review) => {
-    return review.nickname !== null ? review.nickname : "Anonymous";
+export default function ReviewContent({ reviews, user_info }) {
+  const { user } = useSelector((state) => state.auth);
+
+  const getName = () => {
+    return user_info.nickname !== null ? user_info.nickname : user.displayName;
   };
-
   return (
     <div className={styles.root}>
       {reviews.length === 0 ? (
@@ -17,14 +20,14 @@ export default function ReviewContent({ reviews, nickname }) {
         <>
           {reviews.map((review) => {
             return (
-              <div key={review.user_id}>
+              <div key={review.movie_id}>
                 <div className={styles.horizontal}>
                   <div className={styles.avatarContent}>
                     <Avatar
-                      alt={getName(review)}
+                      alt={getName()}
                       src="/static/images/avatar/1.jpg"
                       className={styles.avatar}
-                      style={{ background: `${review.color}` }}
+                      style={{ background: `${user_info.color}` }}
                     />
                   </div>
                   <div className={styles.secondPart}>
@@ -40,7 +43,14 @@ export default function ReviewContent({ reviews, nickname }) {
                       />
                     </div>
                     <div className={styles.horizontalTwo}>
-                      <span className={styles.nickname}>{getName(review)}</span>
+                      <Link
+                        to={`/movie/${review.movie_id}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <span className={styles.nickname}>
+                          {review.movie_name}
+                        </span>
+                      </Link>
                       <span className={styles.date}>{review.posting_date}</span>
                     </div>
 
