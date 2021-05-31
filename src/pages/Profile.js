@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Avatar } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { updateAdditionalUserInfo } from "../store/reducers/userReducer";
 import styles from "../styles/Profile.module.css";
-import Button from "@material-ui/core/Button";
-import SaveIcon from "@material-ui/icons/Save";
 import ReviewContent from "../components/Profile/ReviewContent";
 import TextField from "@material-ui/core/TextField";
 import background from "../assets/background.jpg";
 import { getAdditionalUserInfo } from "../store/reducers/userReducer";
 import Loading from "../components/Loading";
+import SaveButton from "../components/Profile/SaveButton";
 
 const Profile = () => {
   const { additionalUserInfo, reviews, loading } = useSelector(
     (state) => state.user
   );
   const { user, dateCreation } = useSelector((state) => state.auth);
-  const [nickname, setNickname] = useState(additionalUserInfo.nickname);
-  const [bio, setBio] = useState(additionalUserInfo.bio);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [nickname, setNickname] = useState();
+  const [bio, setBio] = useState();
   const dispatch = useDispatch();
 
   const getName = () => {
@@ -29,26 +26,11 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getAdditionalUserInfo(user.uid));
-  }, []);
-
-  const handleChanges = () => {
-    if (nickname === null && bio === null) {
-      console.log("No save happened");
-    } else if (nickname === null) {
-      sendChanges(user.displayName);
-    } else if (nickname.length < 3) {
-      setErrorMessage("Nickname should be at least 3 characters");
-    } else {
-      sendChanges(nickname);
+    if (!loading) {
+      setNickname(additionalUserInfo.nickname);
+      setBio(additionalUserInfo.bio);
     }
-  };
-
-  const sendChanges = (name) => {
-    setErrorMessage("");
-    dispatch(
-      updateAdditionalUserInfo(user.uid, name, bio, additionalUserInfo.color)
-    );
-  };
+  }, []);
 
   return (
     <>
@@ -117,19 +99,13 @@ const Profile = () => {
             />
             <h1 className={styles.reviewTitle}>My reviews</h1>
             <ReviewContent reviews={reviews} user_info={additionalUserInfo} />
-            <div className={styles.lowerContent}>
-              <span className={styles.errorMessage}>{errorMessage}</span>
-              <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                onClick={() => handleChanges()}
-                startIcon={<SaveIcon />}
-                style={{ marginLeft: "auto" }}
-              >
-                Save changes
-              </Button>
-            </div>
+            <SaveButton
+              styles={styles}
+              additionalUserInfo={additionalUserInfo}
+              user={user}
+              nickname={nickname}
+              bio={bio}
+            />
           </div>
         </div>
       ) : (

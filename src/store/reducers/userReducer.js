@@ -9,6 +9,7 @@ const initialState = {
   reviews: [],
   additionalUserInfo: null,
   loading: null,
+  savedSuccessfully: null,
 };
 
 /************** STATE SLICE **************/
@@ -31,6 +32,9 @@ const userSlice = createSlice({
     setLoading(state, action) {
       state.loading = action.payload;
     },
+    setSavedSuccessfully(state, action) {
+      state.savedSuccessfully = action.payload;
+    },
   },
 });
 
@@ -42,6 +46,7 @@ export const {
   setAdditionalUserInfo,
   userReset,
   setLoading,
+  setSavedSuccessfully,
 } = userSlice.actions;
 
 /************** THUNKS **************/
@@ -98,6 +103,7 @@ export const updateAdditionalUserInfo = (uid, nickname, bio, color) => {
       .put(requests.putAdditionalUserInfo(), putData)
       .then(() => {
         dispatch(setAdditionalUserInfo(newData));
+        dispatch(setSavedSuccessfully(true));
       })
       .catch((error) => {
         console.log(error);
