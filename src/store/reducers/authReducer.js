@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { auth, provider } from "../../firebase/firebase";
 import gc_axios from "../requests/gc_axios";
 import requests from "../requests/requests";
+import { getAdditionalUserInfo, userReset } from "./userReducer";
 
 /************** STATE **************/
 const initialState = {
@@ -39,6 +40,8 @@ export const signIn = () => {
         var isNewUser = result.additionalUserInfo.isNewUser;
         if (isNewUser) {
           dispatch(createAdditionalUserInfo(result.user.uid));
+        } else {
+          dispatch(getAdditionalUserInfo(result.user.uid));
         }
         dispatch(authSetUser(result.user));
         dispatch(setDateCreation(result.user.metadata.creationTime));
@@ -53,15 +56,19 @@ export const signOut = () => {
       .signOut()
       .then(() => {
         dispatch(authReset());
+        dispatch(userReset());
       })
       .catch((error) => console.log(error));
   };
 };
 
 const createAdditionalUserInfo = (uid) => {
-  return () => {
-    gc_axios.post(requests.postAdditionalUserInfo(uid)).catch((error) => {
-      console.log(error);
-    });
+  return (dispatch) => {
+    gc_axios
+      .post(requests.postAdditionalUserInfo(uid))
+      .then(() => dispatch(getAdditionalUserInfo(uid)))
+      .catch((error) => {
+        console.log(error);
+      });
   };
 };

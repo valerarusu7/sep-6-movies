@@ -50,3 +50,13 @@
   display: flex;
   margin-top: 30px;
 }
+
+.loading {
+  display: flex;
+  width: calc(100% - 250px);
+  position: relative;
+  left: 250px;
+  place-items: center;
+  justify-content: center;
+  height: 100vh;
+}

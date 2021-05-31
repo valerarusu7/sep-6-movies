@@ -6,7 +6,6 @@ import style from "../styles/Home.module.css";
 import Slider from "../components/Slider";
 import Searchbar from "../components/Search/Searchbar";
 import { getMoviesByType } from "../store/reducers/movieReducer";
-import { getAdditionalUserInfo } from "../store/reducers/userReducer";
 
 const Home = () => {
   const { movies, sliderMovies, loading } = useSelector(
@@ -20,7 +19,6 @@ const Home = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setPage(1);
     dispatch(getMoviesByType("trending", 1));
-    dispatch(getAdditionalUserInfo(user.uid));
   }, []);
 
   const handleChange = (event, value) => {

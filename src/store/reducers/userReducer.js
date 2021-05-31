@@ -8,6 +8,7 @@ const initialState = {
   favoriteMovies: [], // Indicates the favorite movies
   reviews: [],
   additionalUserInfo: null,
+  loading: null,
 };
 
 /************** STATE SLICE **************/
@@ -24,13 +25,24 @@ const userSlice = createSlice({
     setAdditionalUserInfo(state, action) {
       state.additionalUserInfo = action.payload;
     },
+    userReset() {
+      return initialState;
+    },
+    setLoading(state, action) {
+      state.loading = action.payload;
+    },
   },
 });
 
 /************** EXPORTED ACTIONS & REDUCERS **************/
 export default userSlice.reducer;
-export const { setFavoriteMovies, setUserReviews, setAdditionalUserInfo } =
-  userSlice.actions;
+export const {
+  setFavoriteMovies,
+  setUserReviews,
+  setAdditionalUserInfo,
+  userReset,
+  setLoading,
+} = userSlice.actions;
 
 /************** THUNKS **************/
 export const getFavoriteMovies = (uid) => {
@@ -54,14 +66,17 @@ export const getFavoriteMovies = (uid) => {
 
 export const getAdditionalUserInfo = (uid) => {
   return (dispatch) => {
+    dispatch(setLoading(true));
     gc_axios
       .get(requests.getAdditionalUserInfo(uid))
       .then((response) => {
         dispatch(setUserReviews(response.data.reviews));
         dispatch(setAdditionalUserInfo(response.data.user_info));
+        dispatch(setLoading(false));
       })
       .catch((error) => {
         console.log(error);
+        dispatch(setLoading(false));
       });
   };
 };
