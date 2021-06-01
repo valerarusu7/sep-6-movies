@@ -2,8 +2,22 @@ import React from "react";
 import DescriptionItem from "./DescriptionItem";
 import MovieGenres from "./MovieGenres";
 import { BsArrowRight } from "react-icons/bs";
+import { setCompareMovies } from "../../store/reducers/movieReducer";
+import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import moment from "moment";
 
 const MovieDescription = ({ movie, data, styles }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  function compareMovie() {
+    let movies = [];
+    movies.push(movie);
+    dispatch(setCompareMovies(movies));
+    history.push("/statistics");
+  }
+
   return (
     <>
       <h1>{movie.title}</h1>
@@ -23,9 +37,15 @@ const MovieDescription = ({ movie, data, styles }) => {
           header="Revenue:"
           value={`${movie.revenue.toLocaleString()} $`}
         />
-        <div className={styles.compareArrow}>
-          <span>Compare </span> <BsArrowRight size="25px" />
-        </div>
+        {moment(movie.release_date).isBefore(Date.now()) ? (
+          <div className={styles.compareArrow} onClick={() => compareMovie()}>
+            <span>Compare </span> <BsArrowRight size="25px" />
+          </div>
+        ) : moment(movie.first_air_date).isBefore(Date.now()) ? (
+          <div className={styles.compareArrow} onClick={() => compareMovie()}>
+            <span>Compare </span> <BsArrowRight size="25px" />
+          </div>
+        ) : null}
       </div>
       <p style={{ textAlign: "justify" }}>{movie.overview}</p>
     </>
