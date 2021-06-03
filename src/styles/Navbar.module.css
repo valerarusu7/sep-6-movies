@@ -16,6 +16,11 @@
   color: white;
   flex-direction: column;
   position: fixed;
+  overflow-y: scroll;
+}
+
+.nav::-webkit-scrollbar {
+  display: none;
 }
 
 .nav__links {
